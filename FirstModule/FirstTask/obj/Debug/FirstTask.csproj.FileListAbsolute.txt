@@ -1,0 +1,10 @@
+c:\users\semen_shchedrin\documents\visual studio 2013\Projects\FirstModule\FirstTask\bin\Debug\FirstTask.exe.config
+c:\users\semen_shchedrin\documents\visual studio 2013\Projects\FirstModule\FirstTask\bin\Debug\FirstTask.exe
+c:\users\semen_shchedrin\documents\visual studio 2013\Projects\FirstModule\FirstTask\bin\Debug\FirstTask.pdb
+c:\users\semen_shchedrin\documents\visual studio 2013\Projects\FirstModule\FirstTask\obj\Debug\FirstTask.exe
+c:\users\semen_shchedrin\documents\visual studio 2013\Projects\FirstModule\FirstTask\obj\Debug\FirstTask.pdb
+c:\users\semen_shchedrin\documents\visual studio 2013\Projects\FirstModule\FirstTask\bin\Debug\nunit.framework.dll
+c:\users\semen_shchedrin\documents\visual studio 2013\Projects\FirstModule\FirstTask\bin\Debug\nunit.framework.xml
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FirstModule\FirstTask\bin\Debug\FirstTask.exe.config
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FirstModule\FirstTask\obj\Debug\FirstTask.exe
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FirstModule\FirstTask\obj\Debug\FirstTask.pdb
