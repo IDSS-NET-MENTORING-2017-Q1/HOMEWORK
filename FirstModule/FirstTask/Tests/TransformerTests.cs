@@ -7,14 +7,23 @@ namespace FirstTask.Tests
 	[TestFixture]
 	public class TransformerTests
 	{
+		private Transformer _transformer;
+
+		[OneTimeSetUp]
+		public void Init()
+		{
+			_transformer = new Transformer();
+		}
+
 		[Test]
 		public void VisitAndConvert_TransformsIncreasingByOneToIncrement()
 		{
 			// Arrange
+			_transformer.Parameters.Clear();
 			Expression<Func<int, int>> sourceExpression = (a) => a + 1;
 
 			// Act
-			var resultExpression = new Transformer().VisitAndConvert(sourceExpression, "Main");
+			var resultExpression = _transformer.VisitAndConvert(sourceExpression, "Main");
 
 			// Assert
 			Assert.IsNotNull(resultExpression, "Result should not be null!");
@@ -28,10 +37,11 @@ namespace FirstTask.Tests
 		public void VisitAndConvert_TransformsDecreasingByOneToDecrement()
 		{
 			// Arrange
+			_transformer.Parameters.Clear();
 			Expression<Func<int, int>> sourceExpression = (a) => a - 1;
 
 			// Act
-			var resultExpression = new Transformer().VisitAndConvert(sourceExpression, "Main");
+			var resultExpression = _transformer.VisitAndConvert(sourceExpression, "Main");
 
 			// Assert
 			Assert.IsNotNull(resultExpression, "Result should not be null!");
@@ -45,10 +55,11 @@ namespace FirstTask.Tests
 		public void VisitAndConvert_DoNothingForOtherAdditions()
 		{
 			// Arrange
+			_transformer.Parameters.Clear();
 			Expression<Func<int, int>> sourceExpression = (a) => a + 5;
 
 			// Act
-			var resultExpression = new Transformer().VisitAndConvert(sourceExpression, "Main");
+			var resultExpression = _transformer.VisitAndConvert(sourceExpression, "Main");
 
 			// Assert
 			Assert.IsNotNull(resultExpression, "Result should not be null!");
@@ -62,10 +73,11 @@ namespace FirstTask.Tests
 		public void VisitAndConvert_DoNothingForOtherSubstractions()
 		{
 			// Arrange
+			_transformer.Parameters.Clear();
 			Expression<Func<int, int>> sourceExpression = (a) => a - 5;
 
 			// Act
-			var resultExpression = new Transformer().VisitAndConvert(sourceExpression, "Main");
+			var resultExpression = _transformer.VisitAndConvert(sourceExpression, "Main");
 
 			// Assert
 			Assert.IsNotNull(resultExpression, "Result should not be null!");
@@ -73,6 +85,23 @@ namespace FirstTask.Tests
 			Assert.IsInstanceOf<BinaryExpression>(resultExpression.Body, "Result's body should be a binary expression!");
 			Assert.AreEqual(ExpressionType.Subtract, resultExpression.Body.NodeType,
 				"Result's body should be a substraction expression!");
+		}
+
+		[Test]
+		public void VisitAndConvert_ReplacesParametersWithConstants()
+		{
+			// Arrange
+			_transformer.Parameters.Clear();
+			_transformer.Parameters.Add("a", 8);
+			_transformer.Parameters.Add("b", 5);
+			Expression<Func<int, int, int>> sourceExpression = (a, b) => a - b;
+
+			// Act
+			var resultExpression = _transformer.VisitAndConvert(sourceExpression, "Main");
+
+			// Assert
+			Assert.IsNotNull(resultExpression, "Result should not be null!");
+			Assert.IsInstanceOf<LambdaExpression>(resultExpression, "Result should be a lambda expression!");
 		}
 	}
 }
