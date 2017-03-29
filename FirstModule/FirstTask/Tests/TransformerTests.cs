@@ -28,9 +28,9 @@ namespace FirstTask.Tests
 			// Assert
 			Assert.IsNotNull(resultExpression, "Result should not be null!");
 			Assert.IsInstanceOf<LambdaExpression>(resultExpression, "Result should be a lambda expression!");
-			Assert.IsInstanceOf<UnaryExpression>(resultExpression.Body, "Result's body should be an unary expression!");
+			Assert.IsInstanceOf<UnaryExpression>(resultExpression.Body, "Body should be an unary expression!");
 			Assert.AreEqual(ExpressionType.Increment, resultExpression.Body.NodeType,
-				"Result's body should be an increment expression!");
+				"Body should be an increment expression!");
 		}
 
 		[Test]
@@ -46,9 +46,9 @@ namespace FirstTask.Tests
 			// Assert
 			Assert.IsNotNull(resultExpression, "Result should not be null!");
 			Assert.IsInstanceOf<LambdaExpression>(resultExpression, "Result should be a lambda expression!");
-			Assert.IsInstanceOf<UnaryExpression>(resultExpression.Body, "Result's body should be an unary expression!");
+			Assert.IsInstanceOf<UnaryExpression>(resultExpression.Body, "Body should be an unary expression!");
 			Assert.AreEqual(ExpressionType.Decrement, resultExpression.Body.NodeType,
-				"Result's body should be an decrement expression!");
+				"Body should be an decrement expression!");
 		}
 
 		[Test]
@@ -64,9 +64,9 @@ namespace FirstTask.Tests
 			// Assert
 			Assert.IsNotNull(resultExpression, "Result should not be null!");
 			Assert.IsInstanceOf<LambdaExpression>(resultExpression, "Result should be a lambda expression!");
-			Assert.IsInstanceOf<BinaryExpression>(resultExpression.Body, "Result's body should be a binary expression!");
+			Assert.IsInstanceOf<BinaryExpression>(resultExpression.Body, "Body should be a binary expression!");
 			Assert.AreEqual(ExpressionType.Add, resultExpression.Body.NodeType,
-				"Result's body should be an addition expression!");
+				"Body should be an addition expression!");
 		}
 
 		[Test]
@@ -82,9 +82,9 @@ namespace FirstTask.Tests
 			// Assert
 			Assert.IsNotNull(resultExpression, "Result should not be null!");
 			Assert.IsInstanceOf<LambdaExpression>(resultExpression, "Result should be a lambda expression!");
-			Assert.IsInstanceOf<BinaryExpression>(resultExpression.Body, "Result's body should be a binary expression!");
+			Assert.IsInstanceOf<BinaryExpression>(resultExpression.Body, "Body should be a binary expression!");
 			Assert.AreEqual(ExpressionType.Subtract, resultExpression.Body.NodeType,
-				"Result's body should be a substraction expression!");
+				"Body should be a substraction expression!");
 		}
 
 		[Test]
@@ -102,6 +102,11 @@ namespace FirstTask.Tests
 			// Assert
 			Assert.IsNotNull(resultExpression, "Result should not be null!");
 			Assert.IsInstanceOf<LambdaExpression>(resultExpression, "Result should be a lambda expression!");
+			Assert.IsInstanceOf<BinaryExpression>(resultExpression.Body, "Body should be a binary expression!");
+
+			var binaryBody = resultExpression.Body as BinaryExpression;
+			Assert.IsInstanceOf<BinaryExpression>(binaryBody.Left, "Left should be a constant expression!");
+			Assert.IsInstanceOf<BinaryExpression>(binaryBody.Right, "Right should be a constant expression!");
 		}
 	}
 }

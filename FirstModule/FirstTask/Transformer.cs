@@ -14,30 +14,34 @@ namespace FirstTask
 
 		protected override Expression VisitBinary(BinaryExpression node)
 		{
-			if (node.Left.NodeType != ExpressionType.Parameter || node.Right.NodeType != ExpressionType.Constant ||
-			    !((ConstantExpression) node.Right).Value.Equals(1))
-				return base.VisitBinary(node);
-
-
-			switch (node.NodeType)
+			if (node.Left.NodeType == ExpressionType.Parameter &&
+				node.Right.NodeType == ExpressionType.Constant &&
+				((ConstantExpression)node.Right).Value.Equals(1))
 			{
-				case ExpressionType.Add:
-					return Expression.Increment(node.Left);
-				case ExpressionType.Subtract:
-					return Expression.Decrement(node.Left);
+				switch (node.NodeType)
+				{
+					case ExpressionType.Add:
+						return Expression.Increment(node.Left);
+					case ExpressionType.Subtract:
+						return Expression.Decrement(node.Left);
+				}
 			}
 
-			return base.VisitBinary(node);
-		}
+			Expression resultLeft, resultRight;
+			var sourceLeft = node.Left as ParameterExpression;
+			var sourceRight = node.Right as ParameterExpression;
 
-		protected override Expression VisitParameter(ParameterExpression node)
-		{
-			if (_parameters.ContainsKey(node.Name))
-			{
-				var value = _parameters[node.Name];
-				return Expression.Constant(value);
-			}
-			return base.VisitParameter(node);
+			if (sourceLeft != null && _parameters.ContainsKey(sourceLeft.Name))
+				resultLeft = Expression.Constant(_parameters[sourceLeft.Name]);
+			else
+				resultLeft = sourceLeft;
+
+			if (sourceRight != null && _parameters.ContainsKey(sourceRight.Name))
+				resultRight = Expression.Constant(_parameters[sourceRight.Name]);
+			else
+				resultRight = sourceRight;
+
+			return Expression.MakeBinary(node.NodeType, resultLeft, resultRight);
 		}
 	}
 }
