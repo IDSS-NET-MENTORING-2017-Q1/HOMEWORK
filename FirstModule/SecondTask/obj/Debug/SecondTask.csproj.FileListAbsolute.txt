@@ -1,0 +1,7 @@
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FirstModule\SecondTask\bin\Debug\SecondTask.exe.config
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FirstModule\SecondTask\bin\Debug\SecondTask.exe
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FirstModule\SecondTask\bin\Debug\SecondTask.pdb
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FirstModule\SecondTask\bin\Debug\nunit.framework.dll
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FirstModule\SecondTask\bin\Debug\nunit.framework.xml
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FirstModule\SecondTask\obj\Debug\SecondTask.exe
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FirstModule\SecondTask\obj\Debug\SecondTask.pdb
