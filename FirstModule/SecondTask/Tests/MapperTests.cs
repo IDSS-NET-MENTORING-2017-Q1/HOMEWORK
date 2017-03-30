@@ -11,10 +11,10 @@ namespace SecondTask.Tests
 	public class MapperTests
 	{
 		[Test]
-		public void TestMethod()
+		public void Map_MapsOneClassToAnother()
 		{
-			var expectedAge = 20;
-			var expectedName = "Cool Foo";
+			const int expectedAge = 20;
+			const string expectedName = "Cool Foo";
 			var mapGenerator = new MappingGenerator();
 			var mapper = mapGenerator.Generate<Foo, Bar>();
 
