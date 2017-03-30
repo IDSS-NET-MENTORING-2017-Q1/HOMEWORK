@@ -14,19 +14,6 @@ namespace FirstTask
 
 		protected override Expression VisitBinary(BinaryExpression node)
 		{
-			if (node.Left.NodeType == ExpressionType.Parameter &&
-				node.Right.NodeType == ExpressionType.Constant &&
-				((ConstantExpression)node.Right).Value.Equals(1))
-			{
-				switch (node.NodeType)
-				{
-					case ExpressionType.Add:
-						return Expression.Increment(node.Left);
-					case ExpressionType.Subtract:
-						return Expression.Decrement(node.Left);
-				}
-			}
-
 			Expression resultLeft, resultRight;
 			var sourceLeft = node.Left as ParameterExpression;
 			var sourceRight = node.Right as ParameterExpression;
@@ -40,6 +27,25 @@ namespace FirstTask
 				resultRight = Expression.Constant(_parameters[sourceRight.Name]);
 			else
 				resultRight = sourceRight;
+
+			if (resultLeft is ConstantExpression && resultRight is ConstantExpression)
+				return Expression.MakeBinary(node.NodeType, resultLeft, resultRight);
+
+			if (node.Left.NodeType == ExpressionType.Parameter &&
+				node.Right.NodeType == ExpressionType.Constant &&
+				((ConstantExpression)node.Right).Value.Equals(1))
+			{
+				switch (node.NodeType)
+				{
+					case ExpressionType.Add:
+						return Expression.Increment(node.Left);
+					case ExpressionType.Subtract:
+						return Expression.Decrement(node.Left);
+				}
+			}
+
+			if (resultLeft == null || resultRight == null)
+				return base.VisitBinary(node);
 
 			return Expression.MakeBinary(node.NodeType, resultLeft, resultRight);
 		}

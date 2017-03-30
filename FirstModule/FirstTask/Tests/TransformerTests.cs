@@ -105,8 +105,8 @@ namespace FirstTask.Tests
 			Assert.IsInstanceOf<BinaryExpression>(resultExpression.Body, "Body should be a binary expression!");
 
 			var binaryBody = resultExpression.Body as BinaryExpression;
-			Assert.IsInstanceOf<BinaryExpression>(binaryBody.Left, "Left should be a constant expression!");
-			Assert.IsInstanceOf<BinaryExpression>(binaryBody.Right, "Right should be a constant expression!");
+			Assert.IsInstanceOf<ConstantExpression>(binaryBody.Left, "Left should be a constant expression!");
+			Assert.IsInstanceOf<ConstantExpression>(binaryBody.Right, "Right should be a constant expression!");
 		}
 	}
 }
