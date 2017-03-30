@@ -1,0 +1,10 @@
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FirstModule\ThirdTask\bin\Debug\ThirdTask.exe.config
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FirstModule\ThirdTask\bin\Debug\ThirdTask.exe
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FirstModule\ThirdTask\bin\Debug\ThirdTask.pdb
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FirstModule\ThirdTask\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FirstModule\ThirdTask\bin\Debug\nunit.framework.dll
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FirstModule\ThirdTask\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FirstModule\ThirdTask\bin\Debug\nunit.framework.xml
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FirstModule\ThirdTask\obj\Debug\ThirdTask.csprojResolveAssemblyReference.cache
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FirstModule\ThirdTask\obj\Debug\ThirdTask.exe
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FirstModule\ThirdTask\obj\Debug\ThirdTask.pdb
