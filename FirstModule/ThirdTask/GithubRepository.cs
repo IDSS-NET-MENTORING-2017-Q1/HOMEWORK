@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using ThirdTask.Attributes;
 
 namespace ThirdTask
 {
@@ -14,6 +15,11 @@ namespace ThirdTask
 		[JsonProperty("url")]
 		public string Url { get; set; }
 		[JsonProperty("language")]
+		[GithubFacet(Prefix = "language:")]
 		public string Language { get; set; }
+		[JsonProperty("stars")]
+		[GithubFacet(Prefix = "stars:")]
+		[GithubSorter(Name = "stars")]
+		public int Stars { get; set; }
 	}
 }

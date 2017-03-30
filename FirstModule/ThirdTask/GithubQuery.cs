@@ -7,7 +7,7 @@ using Newtonsoft.Json.Linq;
 
 namespace ThirdTask
 {
-	public class GithubQuery<T> : IQueryable<T>
+	public class GithubQuery<T> : IOrderedQueryable<T>
 	{
 		private Expression _expression;
 		private Type _elementType;

@@ -9,10 +9,10 @@ using Newtonsoft.Json.Linq;
 namespace ThirdTask.Tests
 {
 	[TestFixture]
-	public class QueryTests
+	public class GithubQueryTests
 	{
 		[Test]
-		public void Get_ReturnsResponse()
+		public void RestClient_Get_ReturnsResponse()
 		{
 			var restClient = new RestClient();
 			var result = restClient.Get<GithubResponse>("https://api.github.com/search/repositories?q=tetris+language:assembly&sort=stars&order=desc");
@@ -20,16 +20,17 @@ namespace ThirdTask.Tests
 		}
 
 		[Test]
-		public void UsersSearch_ReturnsUsersList()
+		public void GithubQuery_RepositoriesSearch_ReturnsRepositoriesList()
 		{
 			var restClient = new RestClient();
 			var githubClient = new GithubClient(restClient);
 			var provider = new GithubQueryProvider(githubClient);
-			var users = new GithubQuery<GithubRepository>(provider);
+			var repositories = new GithubQuery<GithubRepository>(provider);
 
-			foreach (var user in users.Where(e => e.Name == "EPRUIZHW0249"))
+
+			foreach (var repository in repositories.Where(e => e.Name == "tetris" && e.Language == "assembly").OrderBy(e => e.Stars))
 			{
-				Console.WriteLine("{0} {1}", user.FullName, user.Url);
+				Console.WriteLine("{0} {1}", repository.FullName, repository.Url);
 			}
 		}
 	}

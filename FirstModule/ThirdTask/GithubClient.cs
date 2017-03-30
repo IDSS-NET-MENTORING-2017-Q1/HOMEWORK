@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json.Linq;
 
 namespace ThirdTask
 {
 	public class GithubClient
 	{
 		private readonly string _baseUrl = "https://api.github.com";
-		private readonly string _usersSearchUrl = "/search/repositories";
+		private readonly string _repositoriesUrl = "/search/repositories";
 		private readonly RestClient _restClient;
 
 		public string BaseUrl
@@ -15,9 +14,9 @@ namespace ThirdTask
 			get { return _baseUrl; }
 		}
 
-		public string UsersSearchUrl
+		public string RepositoriesUrl
 		{
-			get { return _usersSearchUrl; }
+			get { return _repositoriesUrl; }
 		}
 
 		public GithubClient(RestClient restClient)
@@ -27,7 +26,7 @@ namespace ThirdTask
 
 		public IEnumerable<GithubRepository> SearchRepositories(string queryString)
 		{
-			var url = _baseUrl + _usersSearchUrl + "?" + queryString;
+			var url = _baseUrl + _repositoriesUrl + "?" + queryString;
 			return _restClient.Get<GithubResponse>(url).Items.Select(o => o);
 		}
 	}

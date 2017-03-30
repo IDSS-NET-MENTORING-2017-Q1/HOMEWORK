@@ -32,7 +32,7 @@ namespace ThirdTask
 		{
 			var translator = new GithubTranslator();
 			var queryString = translator.Translate(expression);
-			return (TResult)_client.SearchRepositories(queryString);
+			return (TResult) _client.SearchRepositories(queryString);
 		}
 	}
 }
