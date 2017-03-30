@@ -91,45 +91,65 @@ namespace FirstTask.Tests
 		public void VisitAndConvert_ReplacesParametersWithConstantsInBinaries()
 		{
 			// Arrange
+			var expectedResult = 3;
 			_transformer.Parameters.Clear();
 			_transformer.Parameters.Add("a", 8);
 			_transformer.Parameters.Add("b", 5);
 			Expression<Func<int, int, int>> sourceExpression = (a, b) => a - b;
 
 			// Act
-			var resultExpression = _transformer.VisitAndConvert(sourceExpression, "Main");
+			var resultExpression = _transformer.Visit(sourceExpression) as Expression<Func<int>>;
 
 			// Assert
 			Assert.IsNotNull(resultExpression, "Result should not be null!");
 			Assert.IsInstanceOf<LambdaExpression>(resultExpression, "Result should be a lambda expression!");
 			Assert.IsInstanceOf<BinaryExpression>(resultExpression.Body, "Body should be a binary expression!");
 
+			// Act
 			var binaryBody = resultExpression.Body as BinaryExpression;
+
+			// Assert
 			Assert.IsNotNull(binaryBody, "Body should be a binary expression!");
 			Assert.IsInstanceOf<ConstantExpression>(binaryBody.Left, "Left should be a constant expression!");
 			Assert.IsInstanceOf<ConstantExpression>(binaryBody.Right, "Right should be a constant expression!");
+
+			// Act
+			var actualResult = resultExpression.Compile().Invoke();
+
+			// Assert
+			Assert.AreEqual(expectedResult, actualResult, "Compiled function result is wrong!");
 		}
 
 		[Test]
 		public void VisitAndConvert_ReplacesParametersWithConstantsInUnaries()
 		{
 			// Arrange
+			var expectedResult = 9;
 			_transformer.Parameters.Clear();
 			_transformer.Parameters.Add("a", 8);
-			Expression<Func<int, int, int>> sourceExpression = (a, b) => a + 1;
+			Expression<Func<int, int>> sourceExpression = (a) => a + 1;
 
 			// Act
-			var resultExpression = _transformer.VisitAndConvert(sourceExpression, "Main");
+			var resultExpression = _transformer.Visit(sourceExpression) as Expression<Func<int>>;
 
 			// Assert
 			Assert.IsNotNull(resultExpression, "Result should not be null!");
 			Assert.IsInstanceOf<LambdaExpression>(resultExpression, "Result should be a lambda expression!");
 			Assert.IsInstanceOf<BinaryExpression>(resultExpression.Body, "Body should be a binary expression!");
 
+			// Act
 			var binaryBody = resultExpression.Body as BinaryExpression;
+
+			// Assert
 			Assert.IsNotNull(binaryBody, "Body should be a binary expression!");
 			Assert.IsInstanceOf<ConstantExpression>(binaryBody.Left, "Left should be a constant expression!");
 			Assert.IsInstanceOf<ConstantExpression>(binaryBody.Right, "Right should be a constant expression!");
+
+			// Act
+			var actualResult = resultExpression.Compile().Invoke();
+
+			// Assert
+			Assert.AreEqual(expectedResult, actualResult, "Compiled function result is wrong!");
 		}
 	}
 }

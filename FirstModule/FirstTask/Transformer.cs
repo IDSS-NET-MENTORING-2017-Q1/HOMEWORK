@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
+using NUnit.Framework;
 
 namespace FirstTask
 {
@@ -10,6 +12,17 @@ namespace FirstTask
 		public Dictionary<string, object> Parameters
 		{
 			get { return _parameters; }
+		}
+
+		protected override Expression VisitLambda<T>(Expression<T> node)
+		{
+			if (!node.Parameters.Any(o => _parameters.ContainsKey(o.Name)))
+				return base.VisitLambda(node);
+
+			var body = Visit(node.Body);
+			var parameters = node.Parameters.Where(o => !_parameters.ContainsKey(o.Name));
+
+			return Expression.Lambda(body, node.Name, parameters);
 		}
 
 		protected override Expression VisitUnary(UnaryExpression node)
