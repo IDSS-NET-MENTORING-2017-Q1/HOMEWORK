@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using NUnit.Framework;
 
 namespace FirstTask
 {
@@ -36,7 +35,7 @@ namespace FirstTask
 					case ExpressionType.Increment:
 						return Expression.Add(
 							Expression.Constant(paramValue),
- 							Expression.Constant(1)
+							Expression.Constant(1)
 						);
 					case ExpressionType.Decrement:
 						return Expression.Subtract(
@@ -69,8 +68,8 @@ namespace FirstTask
 				return Expression.MakeBinary(node.NodeType, leftExp, rightExp);
 
 			if (node.Left.NodeType == ExpressionType.Parameter &&
-				node.Right.NodeType == ExpressionType.Constant &&
-				((ConstantExpression)node.Right).Value.Equals(1))
+			    node.Right.NodeType == ExpressionType.Constant &&
+			    ((ConstantExpression) node.Right).Value.Equals(1))
 			{
 				switch (node.NodeType)
 				{
