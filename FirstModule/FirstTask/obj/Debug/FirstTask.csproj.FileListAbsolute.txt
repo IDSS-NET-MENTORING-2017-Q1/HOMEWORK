@@ -12,7 +12,6 @@ C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FirstMo
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FirstModule\FirstTask\bin\Debug\FirstTask.pdb
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FirstModule\FirstTask\bin\Debug\nunit.framework.dll
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FirstModule\FirstTask\bin\Debug\nunit.framework.xml
-C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FirstModule\FirstTask\obj\Debug\FirstTask.csprojResolveAssemblyReference.cache
 C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\FirstModule\FirstTask\bin\Debug\FirstTask.exe.config
 C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\FirstModule\FirstTask\bin\Debug\FirstTask.exe
 C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\FirstModule\FirstTask\bin\Debug\FirstTask.pdb
