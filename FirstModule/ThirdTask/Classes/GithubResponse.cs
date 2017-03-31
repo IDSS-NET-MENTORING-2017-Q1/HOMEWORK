@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace ThirdTask
+namespace ThirdTask.Classes
 {
 	[JsonObject]
 	public class GithubResponse

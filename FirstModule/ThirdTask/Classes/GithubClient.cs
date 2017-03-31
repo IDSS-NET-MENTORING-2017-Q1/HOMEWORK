@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace ThirdTask
+namespace ThirdTask.Classes
 {
 	public class GithubClient
 	{

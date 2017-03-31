@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace ThirdTask
+namespace ThirdTask.Classes
 {
 	public class GithubQueryProvider : IQueryProvider
 	{

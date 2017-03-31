@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ThirdTask.Attributes
+namespace ThirdTask.Enums
 {
-	public class GithubFacetAttribute : Attribute
+	public enum ProcessingOperation
 	{
-		public string Pattern { get; set; }
+		None = 0,
+		Filtering = 1,
+		Sorting = 2
 	}
 }

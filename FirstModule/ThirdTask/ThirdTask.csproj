@@ -51,15 +51,16 @@
   <ItemGroup>
     <Compile Include="Attributes\GithubFacetAttribute.cs" />
     <Compile Include="Attributes\GithubSorterAttribute.cs" />
-    <Compile Include="GithubClient.cs" />
-    <Compile Include="GithubQuery.cs" />
-    <Compile Include="GithubQueryProvider.cs" />
-    <Compile Include="GithubResponse.cs" />
-    <Compile Include="GithubTranslator.cs" />
-    <Compile Include="GithubRepository.cs" />
+    <Compile Include="Classes\GithubClient.cs" />
+    <Compile Include="Classes\GithubQuery.cs" />
+    <Compile Include="Classes\GithubQueryProvider.cs" />
+    <Compile Include="Classes\GithubResponse.cs" />
+    <Compile Include="Classes\GithubTranslator.cs" />
+    <Compile Include="Classes\GithubRepository.cs" />
+    <Compile Include="Enums\ProcessingOperation.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RestClient.cs" />
+    <Compile Include="Classes\RestClient.cs" />
     <Compile Include="Tests\GithubQueryTests.cs" />
   </ItemGroup>
   <ItemGroup>

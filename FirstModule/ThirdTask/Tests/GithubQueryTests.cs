@@ -1,10 +1,6 @@
 ﻿using NUnit.Framework;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
+using ThirdTask.Classes;
 
 namespace ThirdTask.Tests
 {
@@ -15,8 +11,11 @@ namespace ThirdTask.Tests
 		public void RestClient_Get_ReturnsResponse()
 		{
 			var restClient = new RestClient();
-			var result = restClient.Get<GithubResponse>("https://api.github.com/search/repositories?q=tetris+language:assembly&sort=stars&order=desc");
+			var result =
+				restClient.Get<GithubResponse>(
+					"https://api.github.com/search/repositories?q=tetris+language:assembly&sort=stars&order=desc");
 			Assert.IsNotNull(result, "Result should not be null!");
+			Assert.Greater(result.TotalCount, 0, "Result count should be greater than zero!");
 		}
 
 		[Test]
@@ -27,10 +26,15 @@ namespace ThirdTask.Tests
 			var provider = new GithubQueryProvider(githubClient);
 			var repositories = new GithubQuery<GithubRepository>(provider);
 
+			var filteredRepositories =
+				repositories.Where(e => e.Name == "tetris" && e.Language == "assembly").OrderBy(e => e.Stars).ToList();
 
-			foreach (var repository in repositories.Where(e => e.Name == "tetris" && e.Language == "assembly").OrderBy(e => e.Stars))
+			Assert.IsNotNull(filteredRepositories, "Filtered list should not be null!");
+			Assert.Greater(filteredRepositories.Count, 0, "Filtered list should not be empty!");
+			for (int i = 0; i < filteredRepositories.Count - 1; i++)
 			{
-				Console.WriteLine("{0} {1}", repository.FullName, repository.Url);
+				Assert.GreaterOrEqual(filteredRepositories[i + 1].Stars, filteredRepositories[i].Stars,
+					"Items should be ordered by stars!");
 			}
 		}
 	}

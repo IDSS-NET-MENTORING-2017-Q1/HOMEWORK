@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections;
 using System.IO;
 using System.Net;
-using System.Net.Security;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using System.Web;
 using Newtonsoft.Json;
 
-namespace ThirdTask
+namespace ThirdTask.Classes
 {
 	public class RestClient
 	{
