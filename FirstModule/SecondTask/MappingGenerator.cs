@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SecondTask
 {
@@ -20,7 +18,7 @@ namespace SecondTask
 			var initializationExpressions = new List<Expression>()
 			{
 				Expression.Assign(resultParam,
-							Expression.New(typeof(TDestination)))
+					Expression.New(typeof(TDestination)))
 			};
 
 			var sourceProperties = typeof(TSource).GetProperties();
@@ -46,7 +44,7 @@ namespace SecondTask
 
 			var mapFunc = Expression.Lambda<Func<TSource, TDestination>>(
 				Expression.Block(
-					new [] { resultParam },
+					new[] {resultParam},
 					initializationExpressions
 				),
 				sourceParam
