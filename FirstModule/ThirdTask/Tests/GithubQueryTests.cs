@@ -15,13 +15,13 @@ namespace ThirdTask.Tests
 		public void RestClient_GetWithHeaders_ReturnsResponse()
 		{
 			// Arrange
-			var restClient = new RestClient();
-			restClient.Headers.Add("User-Agent",
+			var client = new RestClient();
+			client.Headers.Add("User-Agent",
 				"Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US; rv:1.9.2.6) Gecko/20100625 Firefox/3.6.6 (.NET CLR 3.5.30729)");
 
 			// Act
 			var result =
-				restClient.Get<GithubResponse>(
+				client.Get<GithubResponse>(
 					"https://api.github.com/search/repositories?q=tetris+language:assembly&sort=stars&order=desc");
 
 			// Assert
@@ -33,10 +33,10 @@ namespace ThirdTask.Tests
 		public void RestClient_GetWithoutHeaders_ThrowsAnException()
 		{
 			// Arrange
-			var restClient = new RestClient();
+			var client = new RestClient();
 
 			// Assert
-			Assert.Throws<WebException>(() => restClient.Get<GithubResponse>(
+			Assert.Throws<WebException>(() => client.Get<GithubResponse>(
 				"https://api.github.com/search/repositories?q=tetris+language:assembly&sort=stars&order=desc"));
 		}
 
@@ -48,8 +48,8 @@ namespace ThirdTask.Tests
 			const string expectedUrl =
 				"https://api.github.com/search/repositories?q=tetris in:name+language:assembly&sort=stars&order=asc";
 
-			var mockRestClient = new Mock<IRestClient>();
-			mockRestClient.Setup(rc => rc.Get<GithubResponse>(expectedUrl)).Returns(
+			var mockRest = new Mock<IRestClient>();
+			mockRest.Setup(rc => rc.Get<GithubResponse>(expectedUrl)).Returns(
 				new GithubResponse()
 				{
 					TotalCount = 3,
@@ -86,10 +86,10 @@ namespace ThirdTask.Tests
 				}
 			);
 
-			var githubClient = new GithubClient(mockRestClient.Object);
+			var client = new GithubClient(mockRest.Object);
 
 			// Act
-			var result = githubClient.SearchRepositories("q=tetris in:name+language:assembly&sort=stars&order=asc");
+			var result = client.SearchRepositories("q=tetris in:name+language:assembly&sort=stars&order=asc");
 
 			// Assert
 			Assert.IsNotNull(result, "Result should not be null!");
@@ -99,9 +99,10 @@ namespace ThirdTask.Tests
 		[Test]
 		public void GithubQuery_RepositoriesSearch_ReturnsRepositoriesList()
 		{
-			var exprectedQuery = "q=tetris in:name+language:assembly&sort=stars&order=asc";
-			var mockGithubClient = new Mock<IGithubClient>();
-			mockGithubClient.Setup(g => g.SearchRepositories(exprectedQuery)).Returns(new List<GithubRepository>()
+			// Arrange
+			const string expectedQuery = "q=tetris in:name+language:assembly&sort=stars&order=asc";
+			var mockGithub = new Mock<IGithubClient>();
+			mockGithub.Setup(g => g.SearchRepositories(expectedQuery)).Returns(new List<GithubRepository>()
 			{
 				new GithubRepository()
 						{
@@ -132,15 +133,17 @@ namespace ThirdTask.Tests
 						}
 			});
 
-			var provider = new GithubQueryProvider(mockGithubClient.Object);
+			var provider = new GithubQueryProvider(mockGithub.Object);
 			var repositories = new GithubQuery<GithubRepository>(provider);
 
+			// Act
 			var filteredRepositories =
 				repositories.Where(e => e.Name == "tetris" && e.Language == "assembly").OrderBy(e => e.Stars).ToList();
 
+			// Assert
 			Assert.IsNotNull(filteredRepositories, "Filtered list should not be null!");
 			Assert.Greater(filteredRepositories.Count, 0, "Filtered list should not be empty!");
-			for (int i = 0; i < filteredRepositories.Count - 1; i++)
+			for (var i = 0; i < filteredRepositories.Count - 1; i++)
 			{
 				Assert.GreaterOrEqual(filteredRepositories[i + 1].Stars, filteredRepositories[i].Stars,
 					"Items should be ordered by stars!");
