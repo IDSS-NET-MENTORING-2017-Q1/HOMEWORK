@@ -18,3 +18,7 @@ C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\FirstModule\T
 C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\FirstModule\ThirdTask\obj\Debug\ThirdTask.exe
 C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\FirstModule\ThirdTask\obj\Debug\ThirdTask.pdb
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FirstModule\ThirdTask\obj\Debug\ThirdTask.csprojResolveAssemblyReference.cache
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FirstModule\ThirdTask\bin\Debug\Castle.Core.dll
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FirstModule\ThirdTask\bin\Debug\Moq.dll
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FirstModule\ThirdTask\bin\Debug\Castle.Core.xml
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FirstModule\ThirdTask\bin\Debug\Moq.xml

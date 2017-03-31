@@ -1,31 +1,43 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using Newtonsoft.Json;
+using ThirdTask.Interfaces;
 
 namespace ThirdTask.Classes
 {
-	public class RestClient
+	public class RestClient : IRestClient
 	{
+		private readonly Dictionary<string, string> _headers = new Dictionary<string, string>();
+
+		public Dictionary<string, string> Headers
+		{
+			get { return _headers; }
+		}
+
 		public TResult Get<TResult>(string url)
 		{
 			TResult result;
-			
+
 			ServicePointManager.ServerCertificateValidationCallback += (send, certificate, chain, sslPolicyErrors) => true;
 
 			try
 			{
-				using (WebClient webClient = new WebClient())
+				using (var webClient = new WebClient())
 				{
-					webClient.Headers["User-Agent"] = "Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US; rv:1.9.2.6) Gecko/20100625 Firefox/3.6.6 (.NET CLR 3.5.30729)";
+					foreach (var header in _headers)
+					{
+						webClient.Headers[header.Key] = header.Value;
+					}
 
 					var stream = webClient.OpenRead(new Uri(url));
 					if (stream == null)
 						throw new HttpException();
-					
-					using (StreamReader textReader = new StreamReader(stream))
+
+					using (var textReader = new StreamReader(stream))
 					{
 						var response = textReader.ReadToEnd();
 						result = JsonConvert.DeserializeObject<TResult>(response);
@@ -49,15 +61,18 @@ namespace ThirdTask.Classes
 
 			try
 			{
-				using (WebClient webClient = new WebClient())
+				using (var webClient = new WebClient())
 				{
-					webClient.Headers["User-Agent"] = "Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US; rv:1.9.2.6) Gecko/20100625 Firefox/3.6.6 (.NET CLR 3.5.30729)";
+					foreach (var header in _headers)
+					{
+						webClient.Headers[header.Key] = header.Value;
+					}
 
 					var stream = await webClient.OpenReadTaskAsync(new Uri(url));
 					if (stream == null)
 						throw new HttpException();
 
-					using (StreamReader textReader = new StreamReader(stream))
+					using (var textReader = new StreamReader(stream))
 					{
 						var response = await textReader.ReadToEndAsync();
 						result = JsonConvert.DeserializeObject<TResult>(response);

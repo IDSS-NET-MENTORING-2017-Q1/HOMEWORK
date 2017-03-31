@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
+using ThirdTask.Interfaces;
 
 namespace ThirdTask.Classes
 {
 	public class GithubQueryProvider : IQueryProvider
 	{
-		private readonly GithubClient _client;
+		private readonly IGithubClient _client;
 
-		public GithubQueryProvider(GithubClient githubClient)
+		public GithubQueryProvider(IGithubClient githubClient)
 		{
 			_client = githubClient;
 		}

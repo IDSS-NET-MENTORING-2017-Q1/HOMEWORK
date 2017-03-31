@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using ThirdTask.Interfaces;
 
 namespace ThirdTask.Classes
 {
-	public class GithubClient
+	public class GithubClient : IGithubClient
 	{
 		private readonly string _baseUrl = "https://api.github.com";
 		private readonly string _repositoriesUrl = "/search/repositories";
-		private readonly RestClient _restClient;
+		private readonly IRestClient _restClient;
 
 		public string BaseUrl
 		{
@@ -19,7 +20,7 @@ namespace ThirdTask.Classes
 			get { return _repositoriesUrl; }
 		}
 
-		public GithubClient(RestClient restClient)
+		public GithubClient(IRestClient restClient)
 		{
 			_restClient = restClient;
 		}

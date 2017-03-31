@@ -5,10 +5,11 @@ using System.Linq.Expressions;
 using System.Text;
 using ThirdTask.Attributes;
 using ThirdTask.Enums;
+using ThirdTask.Interfaces;
 
 namespace ThirdTask.Classes
 {
-	public class GithubTranslator : ExpressionVisitor
+	public class GithubTranslator : ExpressionVisitor, IGithubTranslator
 	{
 		private readonly Dictionary<string, ProcessingOperation> _supportedMethods = new Dictionary
 			<string, ProcessingOperation>()
