@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="Books"
+    targetNamespace="http://tempuri.org/Books.xsd"
+    elementFormDefault="qualified"
+    xmlns:b="http://tempuri.org/Books.xsd"
+    xmlns:mstns="http://tempuri.org/Books.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:simpleType name="isbn">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="(ISBN ){0,1}\d{1}\-\d{3}\-\d{5}\-\d{1}"></xs:pattern>
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:simpleType name="genre">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Computer" />
+      <xs:enumeration value="Fantasy" />
+      <xs:enumeration value="Romance" />
+      <xs:enumeration value="Horror" />
+      <xs:enumeration value="Science Fiction" />
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:complexType name="catalog">
+    <xs:sequence>
+      <xs:element name="book" type="b:book" minOccurs="1" maxOccurs="unbounded"></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="book">
+    <xs:all>
+      <xs:element name="isbn" type="b:isbn" minOccurs="0"></xs:element>
+      <xs:element name="author" type="xs:string"></xs:element>
+      <xs:element name="title" type="xs:string"></xs:element>
+      <xs:element name="genre" type="b:genre"></xs:element>
+      <xs:element name="publisher" type="xs:string"></xs:element>
+      <xs:element name="publish_date" type="xs:date"></xs:element>
+      <xs:element name="description" type="xs:string"></xs:element>
+      <xs:element name="registration_date" type="xs:date"></xs:element>
+    </xs:all>
+    <xs:attribute name="id" type="xs:string"></xs:attribute>
+  </xs:complexType>
+  
+  <xs:element name="catalog" type="b:catalog">
+    <xs:unique name="identity">
+      <xs:selector xpath="b:book" />
+      <xs:field xpath="@id"></xs:field>
+    </xs:unique>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,10 @@
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SecondModule\FirstTask\bin\Debug\FirstTask.exe.config
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SecondModule\FirstTask\bin\Debug\FirstTask.exe
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SecondModule\FirstTask\bin\Debug\FirstTask.pdb
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SecondModule\FirstTask\bin\Debug\Library.dll
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SecondModule\FirstTask\bin\Debug\Library.pdb
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SecondModule\FirstTask\obj\Debug\FirstTask.csprojResolveAssemblyReference.cache
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SecondModule\FirstTask\obj\Debug\FirstTask.exe
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SecondModule\FirstTask\obj\Debug\FirstTask.pdb
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SecondModule\FirstTask\bin\Debug\Samples\Books.xml
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SecondModule\FirstTask\bin\Debug\Schemas\Books.xsd
