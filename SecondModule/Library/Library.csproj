@@ -40,7 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Validation\ValidationError.cs" />
-    <Compile Include="Validation\ValidationStatus.cs" />
+    <Compile Include="Validation\ValidationResult.cs" />
     <Compile Include="Validation\Validator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -54,7 +54,10 @@
     <Folder Include="Transformation\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Samples\Books.xml">
+    <Content Include="Samples\Incorrect.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Samples\Correct.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

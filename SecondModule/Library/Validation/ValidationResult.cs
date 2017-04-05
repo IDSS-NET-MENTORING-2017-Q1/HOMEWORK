@@ -2,12 +2,12 @@
 
 namespace Library.Validation
 {
-	public class ValidationStatus
+	public class ValidationResult
 	{
 		public bool Status { get; set; }
 		public List<ValidationError> Errors { get; set; }
 
-		public ValidationStatus()
+		public ValidationResult()
 		{
 			Status = true;
 			Errors = new List<ValidationError>();

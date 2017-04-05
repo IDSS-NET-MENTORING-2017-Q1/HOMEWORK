@@ -14,12 +14,12 @@ namespace Library.Validation
 		    get { return _schemas; }
 	    }
 
-	    public ValidationStatus Validate(string filePath)
+	    public ValidationResult Validate(string filePath)
 	    {
 			if (_schemas.Count <= 0)
 				throw new ArgumentException("There are no schemas to validate!");
 
-			var result = new ValidationStatus();
+			var result = new ValidationResult();
 			var settings = new XmlReaderSettings();
 
 		    foreach (var schema in _schemas)
@@ -33,7 +33,8 @@ namespace Library.Validation
 					result.Errors.Add(new ValidationError()
 					{
 						Message = e.Message,
-						LineNumber = e.Exception.LineNumber
+						LineNumber = e.Exception.LineNumber,
+						LinePosition = e.Exception.LinePosition
 					});
 				};
 

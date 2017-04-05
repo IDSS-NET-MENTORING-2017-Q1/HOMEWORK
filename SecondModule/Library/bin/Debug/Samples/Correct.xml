@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <catalog xmlns="http://tempuri.org/Books.xsd">
   <book id="bk101">
-    <isbn>0-596-00103-7T</isbn>
+    <isbn>0-596-00103-7</isbn>
     <author>Löwy, Juval</author>
     <title>COM and .NET Component Services</title>
     <genre>Computer</genre>

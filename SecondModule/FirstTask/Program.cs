@@ -21,11 +21,12 @@ namespace FirstTask
 			}
 			else
 			{
-				Console.WriteLine("You have some errors in your file:");
-				foreach (var validationError in result.Errors)
+				Console.WriteLine("You have some errors in your file!");
+				foreach (var error in result.Errors)
 				{
-					Console.WriteLine("Line number is {0}. Error message: {1}",
-						validationError.LineNumber, validationError.Message);
+					Console.WriteLine("Line number is {0}. Line position: {1}",
+						error.LineNumber, error.LinePosition);
+					Console.WriteLine(error.Message);
 				}
 			}
 

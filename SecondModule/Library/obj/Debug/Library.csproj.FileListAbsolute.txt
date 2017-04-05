@@ -4,3 +4,11 @@ C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SecondM
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SecondModule\Library\obj\Debug\Library.pdb
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SecondModule\Library\bin\Debug\Samples\Books.xml
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SecondModule\Library\bin\Debug\Schemas\Books.xsd
+C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\SecondModule\Library\bin\Debug\Samples\Incorrect.xml
+C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\SecondModule\Library\bin\Debug\Samples\Correct.xml
+C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\SecondModule\Library\bin\Debug\Schemas\Books.xsd
+C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\SecondModule\Library\bin\Debug\Library.dll
+C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\SecondModule\Library\bin\Debug\Library.pdb
+C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\SecondModule\Library\obj\Debug\Library.csprojResolveAssemblyReference.cache
+C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\SecondModule\Library\obj\Debug\Library.dll
+C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\SecondModule\Library\obj\Debug\Library.pdb
