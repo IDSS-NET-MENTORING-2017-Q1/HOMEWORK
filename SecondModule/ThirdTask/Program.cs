@@ -1,7 +1,8 @@
-﻿using System;
+﻿using Library.Transformation;
+using System;
 using System.IO;
-using Library.Transformation;
-namespace SecondTask
+
+namespace ThirdTask
 {
 	class Program
 	{
@@ -17,7 +18,7 @@ namespace SecondTask
 					Console.WriteLine("There is no such xml!");
 			}
 
-			string stylesheetPath = "Transformation/RSS.xslt";
+			string stylesheetPath = "Transformation/Report.xslt";
 
 			Console.WriteLine("Paste path to your destination here:");
 			var destinationPath = Console.ReadLine();
