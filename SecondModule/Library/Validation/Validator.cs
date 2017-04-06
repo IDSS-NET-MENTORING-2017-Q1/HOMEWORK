@@ -5,27 +5,27 @@ using System.Xml.Schema;
 
 namespace Library.Validation
 {
-    public class Validator
-    {
+	public class Validator
+	{
 		private readonly Dictionary<string, string> _schemas = new Dictionary<string, string>();
 
-	    public Dictionary<string, string> Schemas
-	    {
-		    get { return _schemas; }
-	    }
+		public Dictionary<string, string> Schemas
+		{
+			get { return _schemas; }
+		}
 
-	    public ValidationResult Validate(string filePath)
-	    {
+		public ValidationResult Validate(string filePath)
+		{
 			if (_schemas.Count <= 0)
 				throw new ArgumentException("There are no schemas to validate!");
 
 			var result = new ValidationResult();
 			var settings = new XmlReaderSettings();
 
-		    foreach (var schema in _schemas)
+			foreach (var schema in _schemas)
 			{
 				settings.Schemas.Add(schema.Key, schema.Value);
-		    }
+			}
 			settings.ValidationEventHandler +=
 				delegate(object sender, ValidationEventArgs e)
 				{
@@ -46,7 +46,7 @@ namespace Library.Validation
 				while (reader.Read()) { }
 			}
 
-		    return result;
-	    }
-    }
+			return result;
+		}
+	}
 }
