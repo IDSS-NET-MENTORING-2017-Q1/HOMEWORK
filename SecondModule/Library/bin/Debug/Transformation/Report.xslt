@@ -33,18 +33,18 @@
   </xsl:template>
 
   <xsl:template match="b:catalog">
-    <xsl:apply-templates />
+    <xsl:for-each select="//b:genre">
+      <xsl:variable name="preceding" select="preceding::genre/."></xsl:variable>
+      <xsl:call-template name="process-genre" />
+    </xsl:for-each>
 
     <h2>
       Total count: <xsl:value-of select="count(b:book)"/>
     </h2>
   </xsl:template>
 
-  <xsl:template match="b:book">
-    <xsl:apply-templates />
-  </xsl:template>
 
-  <xsl:template match="b:genre">
+  <xsl:template name="process-genre">
     <xsl:variable name="genre" select="text()"></xsl:variable>
     <h2>
       <xsl:value-of select="$genre"/>
