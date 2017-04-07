@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using Library.Transformation;
+
 namespace SecondTask
 {
 	class Program

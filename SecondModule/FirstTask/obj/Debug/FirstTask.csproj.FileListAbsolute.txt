@@ -24,3 +24,5 @@ C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SecondM
 C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\SecondModule\FirstTask\bin\Debug\Transformation\Report.xslt
 C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\SecondModule\FirstTask\bin\Debug\Transformation\RSS.xslt
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SecondModule\FirstTask\bin\Debug\Transformation\Report.xslt
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SecondModule\FirstTask\bin\Debug\nunit.framework.dll
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SecondModule\FirstTask\bin\Debug\nunit.framework.xml

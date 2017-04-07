@@ -24,3 +24,5 @@ C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SecondM
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SecondModule\ThirdTask\obj\Debug\ThirdTask.csprojResolveAssemblyReference.cache
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SecondModule\ThirdTask\obj\Debug\ThirdTask.exe
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SecondModule\ThirdTask\obj\Debug\ThirdTask.pdb
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SecondModule\ThirdTask\bin\Debug\nunit.framework.dll
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SecondModule\ThirdTask\bin\Debug\nunit.framework.xml
