@@ -11,3 +11,16 @@ C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\SecondModule\
 C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\SecondModule\ThirdTask\obj\Debug\ThirdTask.exe
 C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\SecondModule\ThirdTask\obj\Debug\ThirdTask.pdb
 C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\SecondModule\ThirdTask\bin\Debug\Transformation\Report.xslt
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SecondModule\ThirdTask\bin\Debug\Samples\Incorrect.xml
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SecondModule\ThirdTask\bin\Debug\Samples\Correct.xml
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SecondModule\ThirdTask\bin\Debug\Transformation\Report.xslt
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SecondModule\ThirdTask\bin\Debug\Transformation\RSS.xslt
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SecondModule\ThirdTask\bin\Debug\Schemas\Books.xsd
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SecondModule\ThirdTask\bin\Debug\ThirdTask.exe.config
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SecondModule\ThirdTask\bin\Debug\ThirdTask.exe
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SecondModule\ThirdTask\bin\Debug\ThirdTask.pdb
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SecondModule\ThirdTask\bin\Debug\Library.dll
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SecondModule\ThirdTask\bin\Debug\Library.pdb
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SecondModule\ThirdTask\obj\Debug\ThirdTask.csprojResolveAssemblyReference.cache
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SecondModule\ThirdTask\obj\Debug\ThirdTask.exe
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SecondModule\ThirdTask\obj\Debug\ThirdTask.pdb

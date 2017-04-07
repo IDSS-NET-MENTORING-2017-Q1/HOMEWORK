@@ -20,12 +20,21 @@
     <html>
       <head>
         <title>
-          <xsl:value-of select="func:GetDate()"/>
+          Report (<xsl:value-of select="func:GetDate()"/>)
         </title>
+        <style>
+          table {
+            width: 100%;
+            text-align: center;
+          }
+          td, th {
+            border: 1px solid black;
+          }
+        </style>
       </head>
       <body>
         <h1>
-          <xsl:value-of select="func:GetDate()"/>
+          Report (<xsl:value-of select="func:GetDate()"/>)
         </h1>
         <xsl:apply-templates />
       </body>
@@ -33,18 +42,17 @@
   </xsl:template>
 
   <xsl:template match="b:catalog">
-    <xsl:apply-templates />
+    <xsl:for-each select="//b:genre[not(preceding::b:genre/. = .)]">
+      <xsl:call-template name="process-genre" />
+    </xsl:for-each>
 
     <h2>
       Total count: <xsl:value-of select="count(b:book)"/>
     </h2>
   </xsl:template>
 
-  <xsl:template match="b:book">
-    <xsl:apply-templates />
-  </xsl:template>
 
-  <xsl:template match="b:genre">
+  <xsl:template name="process-genre">
     <xsl:variable name="genre" select="text()"></xsl:variable>
     <h2>
       <xsl:value-of select="$genre"/>
@@ -75,7 +83,7 @@
       <tr>
         <th></th>
         <th></th>
-        <th></th>
+        <th>Books count:</th>
         <th>
           <xsl:value-of select="count(//b:book[b:genre/text() = $genre])"/>
         </th>
