@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.InteropServices;
 
 namespace FirstTask
 {
@@ -10,7 +9,7 @@ namespace FirstTask
 			var powerManager = new PowerManager();
 			var powerInfo = powerManager.GetPowerInfo();
 
-			Console.WriteLine(powerInfo.TimeRemaining);
+			Console.WriteLine("", powerInfo.TimeRemaining);
 			Console.ReadLine();
 		}
 	}

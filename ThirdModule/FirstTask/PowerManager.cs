@@ -49,11 +49,13 @@ namespace FirstTask
 
 		public bool SetHibernationMode(bool enabled)
 		{
+			var inputBuffer = new IntPtr((enabled) ? 1 : 0);
+
 			uint result = CallNtPowerInformation(
 				SystemReserveHiberFile,
-				enabled,
+				inputBuffer,
 				Marshal.SizeOf(typeof(bool)),
-				IntPtr.Zero,
+				out SYSTEM_POWER_INFORMATION powerInfo,
 				0
 			);
 

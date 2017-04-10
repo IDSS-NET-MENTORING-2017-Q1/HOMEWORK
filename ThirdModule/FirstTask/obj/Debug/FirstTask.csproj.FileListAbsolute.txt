@@ -4,3 +4,8 @@ C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\ThirdMo
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\ThirdModule\FirstTask\obj\Debug\FirstTask.csprojResolveAssemblyReference.cache
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\ThirdModule\FirstTask\obj\Debug\FirstTask.exe
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\ThirdModule\FirstTask\obj\Debug\FirstTask.pdb
+C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\ThirdModule\FirstTask\bin\Debug\FirstTask.exe.config
+C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\ThirdModule\FirstTask\bin\Debug\FirstTask.exe
+C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\ThirdModule\FirstTask\bin\Debug\FirstTask.pdb
+C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\ThirdModule\FirstTask\obj\Debug\FirstTask.exe
+C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\ThirdModule\FirstTask\obj\Debug\FirstTask.pdb
