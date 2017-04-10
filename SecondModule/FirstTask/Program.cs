@@ -1,5 +1,6 @@
 ﻿using System;
 using Library.Validation;
+using System.IO;
 
 namespace FirstTask
 {
@@ -7,8 +8,15 @@ namespace FirstTask
 	{
 		static void Main(string[] args)
 		{
-			Console.WriteLine("Paste path to your file here:");
-			var filePath = Console.ReadLine();
+			string filePath = string.Empty;
+			while (!File.Exists(filePath))
+			{
+				Console.WriteLine("Paste path to your xml here:");
+				filePath = Console.ReadLine();
+
+				if (!File.Exists(filePath))
+					Console.WriteLine("There is no such xml!");
+			}
 
 			var validator = new Validator();
 			validator.Schemas.Add("http://tempuri.org/Books.xsd", "Schemas/Books.xsd");
