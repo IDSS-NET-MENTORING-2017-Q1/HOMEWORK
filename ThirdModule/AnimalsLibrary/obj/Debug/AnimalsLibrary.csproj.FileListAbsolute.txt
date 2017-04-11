@@ -1,0 +1,4 @@
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\ThirdModule\AnimalsLibrary\bin\Debug\AnimalsLibrary.dll
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\ThirdModule\AnimalsLibrary\bin\Debug\AnimalsLibrary.pdb
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\ThirdModule\AnimalsLibrary\obj\Debug\AnimalsLibrary.dll
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\ThirdModule\AnimalsLibrary\obj\Debug\AnimalsLibrary.pdb
