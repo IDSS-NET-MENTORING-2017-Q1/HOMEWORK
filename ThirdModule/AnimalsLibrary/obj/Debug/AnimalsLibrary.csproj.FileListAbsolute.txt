@@ -2,3 +2,8 @@ C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\ThirdMo
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\ThirdModule\AnimalsLibrary\bin\Debug\AnimalsLibrary.pdb
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\ThirdModule\AnimalsLibrary\obj\Debug\AnimalsLibrary.dll
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\ThirdModule\AnimalsLibrary\obj\Debug\AnimalsLibrary.pdb
+C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\ThirdModule\AnimalsLibrary\bin\Debug\AnimalsLibrary.dll
+C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\ThirdModule\AnimalsLibrary\bin\Debug\AnimalsLibrary.pdb
+C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\ThirdModule\AnimalsLibrary\obj\Debug\AnimalsLibrary.csprojResolveAssemblyReference.cache
+C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\ThirdModule\AnimalsLibrary\obj\Debug\AnimalsLibrary.dll
+C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\ThirdModule\AnimalsLibrary\obj\Debug\AnimalsLibrary.pdb

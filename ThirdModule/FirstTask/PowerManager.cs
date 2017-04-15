@@ -13,7 +13,7 @@ namespace FirstTask
 			public byte CoolingMode;
 		}
 
-		[DllImport("powrprof.dll")]
+		[DllImport("powrprof.dll", SetLastError = true)]
 		protected static extern uint CallNtPowerInformation(
 			int InformationLevel,
 			IntPtr lpInputBuffer,
@@ -22,7 +22,7 @@ namespace FirstTask
 			int nOutputBufferSize
 		);
 
-		[DllImport("powrprof.dll")]
+		[DllImport("powrprof.dll", SetLastError = true)]
 		protected static extern uint CallNtPowerInformation(
 			int InformationLevel,
 			IntPtr lpInputBuffer,
@@ -31,7 +31,7 @@ namespace FirstTask
 			int nOutputBufferSize
 		);
 
-		[DllImport("powrprof.dll")]
+		[DllImport("powrprof.dll", SetLastError = true)]
 		protected static extern uint SetSuspendState(
 			bool Hibernate,
 			bool ForceCritical,
@@ -55,7 +55,7 @@ namespace FirstTask
 			}
 			else
 			{
-				throw new InvalidOperationException("Unexpected error has occured!");
+				throw new InvalidOperationException("Error code is: " + Marshal.GetLastWin32Error().ToString());
 			}
 		}
 
@@ -86,7 +86,7 @@ namespace FirstTask
 			}
 			else
 			{
-				throw new InvalidOperationException("Unexpected error has occured!");
+				throw new InvalidOperationException("Error code is: " + Marshal.GetLastWin32Error().ToString());
 			}
 		}
 
@@ -94,14 +94,12 @@ namespace FirstTask
 		{
 			var inputBuffer = new IntPtr((enabled) ? 1 : 0);
 			SYSTEM_POWER_INFORMATION result;
-
-
 			uint status = CallNtPowerInformation(
 				(int) PowerInfoTypes.SystemReserveHiberFile,
 				inputBuffer,
 				Marshal.SizeOf(typeof(int)),
 				out result,
-				0
+				Marshal.SizeOf(typeof(SYSTEM_POWER_INFORMATION))
 			);
 
 			if (status == (uint) ExecutionStatuses.Success)
@@ -110,7 +108,7 @@ namespace FirstTask
 			}
 			else
 			{
-				throw new InvalidOperationException("Unexpected error has occured!");
+				throw new InvalidOperationException("Error code is: " + Marshal.GetLastWin32Error().ToString());
 			}
 		}
 
@@ -121,9 +119,6 @@ namespace FirstTask
 				forceCritical,
 				disableWakeEvent
 			);
-
-			if (status != (uint) ExecutionStatuses.Success)
-				throw new InvalidOperationException("Unexpected error has occured!");
 		}
 	}
 }
