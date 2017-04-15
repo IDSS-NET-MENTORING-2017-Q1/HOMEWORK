@@ -6,3 +6,4 @@ C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\ThirdModule\A
 C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\ThirdModule\AnimalsLibrary\bin\Debug\AnimalsLibrary.pdb
 C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\ThirdModule\AnimalsLibrary\obj\Debug\AnimalsLibrary.dll
 C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\ThirdModule\AnimalsLibrary\obj\Debug\AnimalsLibrary.pdb
+C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\ThirdModule\AnimalsLibrary\obj\Debug\AnimalsLibrary.csprojResolveAssemblyReference.cache

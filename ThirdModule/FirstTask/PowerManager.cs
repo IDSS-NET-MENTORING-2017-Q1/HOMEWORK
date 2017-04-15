@@ -101,9 +101,9 @@ namespace FirstTask
 
 		public bool SetHibernationMode(bool enabled)
 		{
-			int hiberParam = enabled ? 1 : 0;
+			int enabledParam = enabled ? 1 : 0;
 			var pointer = Marshal.AllocHGlobal(sizeof(int));
-			Marshal.WriteInt32(pointer, hiberParam);
+			Marshal.WriteInt32(pointer, enabledParam);
 
 			uint status = CallNtPowerInformation(
 				(int) PowerInfoTypes.SystemReserveHiberFile,
