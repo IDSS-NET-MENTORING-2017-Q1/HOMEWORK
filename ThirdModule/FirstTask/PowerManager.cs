@@ -25,6 +25,15 @@ namespace FirstTask
 		[DllImport("powrprof.dll", SetLastError = true)]
 		protected static extern uint CallNtPowerInformation(
 			int InformationLevel,
+			bool lpInputBuffer,
+			int nInputBufferSize,
+			IntPtr lpOutputBuffer,
+			int nOutputBufferSize
+		);
+
+		[DllImport("powrprof.dll", SetLastError = true)]
+		protected static extern uint CallNtPowerInformation(
+			int InformationLevel,
 			IntPtr lpInputBuffer,
 			int nInputBufferSize,
 			out long lpOutputBuffer,
@@ -92,14 +101,12 @@ namespace FirstTask
 
 		public bool SetHibernationMode(bool enabled)
 		{
-			var inputBuffer = new IntPtr((enabled) ? 1 : 0);
-			SYSTEM_POWER_INFORMATION result;
 			uint status = CallNtPowerInformation(
 				(int) PowerInfoTypes.SystemReserveHiberFile,
-				inputBuffer,
-				Marshal.SizeOf(typeof(int)),
-				out result,
-				Marshal.SizeOf(typeof(SYSTEM_POWER_INFORMATION))
+				enabled,
+				Marshal.SizeOf(typeof(bool)),
+				IntPtr.Zero,
+				0
 			);
 
 			if (status == (uint) ExecutionStatuses.Success)
