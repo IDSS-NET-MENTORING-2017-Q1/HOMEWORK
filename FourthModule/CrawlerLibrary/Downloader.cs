@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace CrawlerLibrary
@@ -26,8 +27,10 @@ namespace CrawlerLibrary
 			{
 				client.DefaultRequestHeaders.Add(header.Key, header.Value);
 			}
+			
+			byte[] response = await client.GetByteArrayAsync(url).ConfigureAwait(false);
 
-			return await client.GetStringAsync(url).ConfigureAwait(false);
+			return Encoding.UTF8.GetString(response);
 		}
 
 	}
