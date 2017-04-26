@@ -22,7 +22,7 @@ namespace CrawlerLibrary
 			".mp3", ".wav"
 		};
 
-		private Regex _urlRegex = new Regex(@"^http(s)?:\/\/[a-z_0-9\/\-\.\?=]+$", RegexOptions.IgnoreCase);
+		private Regex _urlRegex = new Regex(@"^http(s)?:\/\/[a-z_0-9\/\-\.\?=&]+$", RegexOptions.IgnoreCase);
 
 		private Parser _parser;
 		private Searcher _searcher;

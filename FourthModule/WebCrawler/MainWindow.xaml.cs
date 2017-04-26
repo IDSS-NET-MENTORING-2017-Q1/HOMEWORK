@@ -15,7 +15,7 @@ namespace WebCrawler
 		private CancellationTokenSource _cancellationSource;
 		private readonly Crawler _crawler;
 
-		private readonly Regex _urlRegex = new Regex(@"^http(s)?:\/\/[a-z_0-9\/\-\.\?=]+$", RegexOptions.IgnoreCase);
+		private readonly Regex _urlRegex = new Regex(@"^http(s)?:\/\/[a-z_0-9\/\-\.\?=&]+$", RegexOptions.IgnoreCase);
 		private readonly Regex _levelRegex = new Regex(@"^[0-9]+$", RegexOptions.IgnoreCase);
 
 		public MainWindow()
