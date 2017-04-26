@@ -28,14 +28,89 @@ namespace CrawlerLibrary
 		private Searcher _searcher;
 		private Downloader _downloader;
 
-		public int NestingLevel { get => _nestingLevel; set => _nestingLevel = value; }
-		public string SearchPhrase { get => _searchPhrase; set => _searchPhrase = value; }
+		public int NestingLevel
+		{
+			get { return _nestingLevel; }
+			set { _nestingLevel = value; }
+		}
 
-		public Parser Parser { get => _parser; set => _parser = value; }
-		public Searcher Searcher { get => _searcher; set => _searcher = value; }
-		public Downloader Downloader { get => _downloader; set => _downloader = value; }
-		public IEnumerable<string> BlockedExtensions { get => _blockedExtensions; set => _blockedExtensions = value; }
-		public Regex UrlRegex { get => _urlRegex; set => _urlRegex = value; }
+		public string SearchPhrase
+		{
+			get
+			{
+				return _searchPhrase;
+			}
+
+			set
+			{
+				_searchPhrase = value;
+			}
+		}
+
+		public IEnumerable<string> BlockedExtensions
+		{
+			get
+			{
+				return _blockedExtensions;
+			}
+
+			set
+			{
+				_blockedExtensions = value;
+			}
+		}
+
+		public Regex UrlRegex
+		{
+			get
+			{
+				return _urlRegex;
+			}
+
+			set
+			{
+				_urlRegex = value;
+			}
+		}
+
+		public Parser Parser
+		{
+			get
+			{
+				return _parser;
+			}
+
+			set
+			{
+				_parser = value;
+			}
+		}
+
+		public Searcher Searcher
+		{
+			get
+			{
+				return _searcher;
+			}
+
+			set
+			{
+				_searcher = value;
+			}
+		}
+
+		public Downloader Downloader
+		{
+			get
+			{
+				return _downloader;
+			}
+
+			set
+			{
+				_downloader = value;
+			}
+		}
 
 		protected void HandleCertificates()
 		{
