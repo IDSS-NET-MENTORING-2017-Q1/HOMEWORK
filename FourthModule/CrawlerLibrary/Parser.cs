@@ -4,9 +4,9 @@ using System.Xml.XPath;
 
 namespace CrawlerLibrary
 {
-	public class Parser
+	public static class Parser
 	{
-		public IEnumerable<string> GetUrls(string xml)
+		public static IEnumerable<string> GetUrls(string xml)
 		{
 			List<string> urls = new List<string>();
 			HtmlDocument document = new HtmlDocument();

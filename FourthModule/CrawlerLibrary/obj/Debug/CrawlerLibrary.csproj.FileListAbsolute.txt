@@ -5,3 +5,4 @@ C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\FourthModule\
 C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\FourthModule\CrawlerLibrary\bin\Debug\HtmlAgilityPack.dll
 C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\FourthModule\CrawlerLibrary\bin\Debug\HtmlAgilityPack.pdb
 C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\FourthModule\CrawlerLibrary\bin\Debug\HtmlAgilityPack.xml
+C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\FourthModule\CrawlerLibrary\obj\Debug\CrawlerLibrary.csprojResolveAssemblyReference.cache

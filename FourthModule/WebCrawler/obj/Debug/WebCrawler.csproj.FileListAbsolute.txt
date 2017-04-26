@@ -17,3 +17,5 @@ C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\FourthModule\
 C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\FourthModule\WebCrawler\bin\Debug\HtmlAgilityPack.dll
 C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\FourthModule\WebCrawler\bin\Debug\HtmlAgilityPack.pdb
 C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\FourthModule\WebCrawler\bin\Debug\HtmlAgilityPack.xml
+C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\FourthModule\WebCrawler\bin\Debug\WebCrawler.exe.CodeAnalysisLog.xml
+C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\FourthModule\WebCrawler\bin\Debug\WebCrawler.exe.lastcodeanalysissucceeded

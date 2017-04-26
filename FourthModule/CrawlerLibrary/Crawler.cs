@@ -6,7 +6,6 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
-using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -23,8 +22,8 @@ namespace CrawlerLibrary
 			".mp3", ".wav"
 		};
 
-		private Parser _parser;
-		private Searcher _searcher;
+		private readonly IList<string> _results = new List<string>();
+		
 		private Downloader _downloader;
 
 		public int NestingLevel
@@ -59,32 +58,6 @@ namespace CrawlerLibrary
 			}
 		}
 
-		public Parser Parser
-		{
-			get
-			{
-				return _parser;
-			}
-
-			set
-			{
-				_parser = value;
-			}
-		}
-
-		public Searcher Searcher
-		{
-			get
-			{
-				return _searcher;
-			}
-
-			set
-			{
-				_searcher = value;
-			}
-		}
-
 		public Downloader Downloader
 		{
 			get
@@ -98,7 +71,15 @@ namespace CrawlerLibrary
 			}
 		}
 
-		protected void HandleCertificates()
+		public IList<string> Results
+		{
+			get
+			{
+				return _results;
+			}
+		}
+
+		protected static void HandleCertificates()
 		{
 			ServicePointManager.ServerCertificateValidationCallback += (object sender, X509Certificate cert, X509Chain chain, SslPolicyErrors error) =>
 			{
@@ -110,7 +91,7 @@ namespace CrawlerLibrary
 												 | SecurityProtocolType.Ssl3;
 		}
 
-		protected bool ValidateUrl(string url)
+		protected static bool ValidateUrl(string url)
 		{
 			Uri uriResult;
 			return Uri.TryCreate(url, UriKind.Absolute, out uriResult)
@@ -122,51 +103,31 @@ namespace CrawlerLibrary
 			HandleCertificates();
 		}
 
-		public Crawler(Parser parser, Searcher searcher, Downloader downloader) : this()
+		public Crawler(Downloader downloader) : this()
 		{
-			_parser = parser;
-			_searcher = searcher;
 			_downloader = downloader;
 		}
 
-		public IEnumerable<string> Crawl(string url)
+		public async Task CrawlAsync(Uri url, CancellationToken token)
 		{
-			return Crawl(0, url);
+			_results.Clear();
+			await CrawlAsync(0, url, token).ConfigureAwait(false);
 		}
 
-		public IEnumerable<string> Crawl(int level, string url)
+		public async Task CrawlAsync(string url, CancellationToken token)
 		{
-			List<string> result = new List<string>();
-			string pageMarkup = _downloader.DownloadPage(url);
-			if (_searcher.FindPhrase(pageMarkup, _searchPhrase))
-			{
-				result.Add(url);
-			}
-
-			if (level + 1 <= _nestingLevel)
-			{
-				IEnumerable<string> nestedUrls = _parser.GetUrls(pageMarkup).AsParallel()
-					.Where(parsedUrl => {
-						return ValidateUrl(parsedUrl) && !_blockedExtensions.Any(extension => parsedUrl.EndsWith(extension));
-					});
-				Parallel.ForEach(nestedUrls, (nestedUrl) =>
-				{
-					result.AddRange(Crawl(level + 1, nestedUrl).Where(resultUrl => !string.IsNullOrWhiteSpace(resultUrl)));
-				});
-			}
-
-			return result;
+			Uri uri = new Uri(url);
+			await CrawlAsync(uri, token).ConfigureAwait(false);
 		}
 
-		public async Task<IEnumerable<string>> CrawlAsync(string url, CancellationToken token)
+		public async Task CrawlAsync(int level, string url, CancellationToken token)
 		{
-			return await CrawlAsync(0, url, token).ConfigureAwait(false);
+			Uri uri = new Uri(url);
+			await CrawlAsync(level, uri, token).ConfigureAwait(false);
 		}
 
-		public async Task<IEnumerable<string>> CrawlAsync(int level, string url, CancellationToken token)
+		public async Task CrawlAsync(int level, Uri url, CancellationToken token)
 		{
-			List<string> result = new List<string>();
-
 			string pageMarkup;
 			try
 			{
@@ -175,21 +136,21 @@ namespace CrawlerLibrary
 			catch (HttpRequestException ex)
 			{
 				Debug.WriteLine(ex.Message);
-				return null;
+				return;
 			}
 
 			token.ThrowIfCancellationRequested();
 
-			if (_searcher.FindPhrase(pageMarkup, _searchPhrase))
+			if (Searcher.FindPhrase(pageMarkup, _searchPhrase))
 			{
-				result.Add(url);
+				_results.Add(url.AbsoluteUri);
 			}
 
 			token.ThrowIfCancellationRequested();
 
 			if (level + 1 <= _nestingLevel)
 			{
-				IEnumerable<string> nestedUrls = _parser.GetUrls(pageMarkup).AsParallel()
+				IEnumerable<string> nestedUrls = Parser.GetUrls(pageMarkup).AsParallel()
 					.Where(parsedUrl => {
 						return ValidateUrl(parsedUrl) && !_blockedExtensions.Any(g => parsedUrl.EndsWith(g));
 					}); ;
@@ -199,19 +160,11 @@ namespace CrawlerLibrary
 				IEnumerable<Task> crawlTasks = nestedUrls.Select(nestedUrl =>
 				{
 					token.ThrowIfCancellationRequested();
-					return CrawlAsync(level + 1, nestedUrl, token).ContinueWith(crawl =>
-					{
-						if (crawl.Result != null)
-						{
-							result.AddRange(crawl.Result.Where(resultUrl => !string.IsNullOrWhiteSpace(resultUrl)));
-						}
-					});
+					return CrawlAsync(level + 1, nestedUrl, token);
 				});
 
 				await Task.WhenAll(crawlTasks).ConfigureAwait(false);
 			}
-
-			return result;
 		}
 	}
 }

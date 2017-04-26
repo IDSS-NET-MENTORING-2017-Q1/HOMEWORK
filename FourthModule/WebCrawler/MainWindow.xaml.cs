@@ -20,8 +20,6 @@ namespace WebCrawler
 		public MainWindow()
 		{
 			_crawler = new Crawler(
-				new Parser(),
-				new Searcher(),
 				new Downloader()
 			);
 
@@ -72,7 +70,8 @@ namespace WebCrawler
 			
 			try
 			{
-				LbResults.ItemsSource = await _crawler.CrawlAsync(sourceUrl, _cancellationSource.Token).ConfigureAwait(true);
+				await _crawler.CrawlAsync(sourceUrl, _cancellationSource.Token).ConfigureAwait(true);
+				LbResults.ItemsSource = _crawler.Results;
 			}
 			catch (OperationCanceledException ex)
 			{
