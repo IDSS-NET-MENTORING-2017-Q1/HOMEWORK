@@ -14,8 +14,7 @@ namespace WebCrawler
 	{
 		private CancellationTokenSource _cancellationSource;
 		private readonly Crawler _crawler;
-
-		private readonly Regex _urlRegex = new Regex(@"^http(s)?:\/\/[a-z_0-9\/\-\.\?=&]+$", RegexOptions.IgnoreCase);
+		
 		private readonly Regex _levelRegex = new Regex(@"^[0-9]+$", RegexOptions.IgnoreCase);
 
 		public MainWindow()
@@ -33,7 +32,11 @@ namespace WebCrawler
 
 		private bool ValidateInput()
 		{
-			return _urlRegex.IsMatch(TxtUrl.Text) && _levelRegex.IsMatch(TxtNestingLevel.Text) && !string.IsNullOrWhiteSpace(TxtPhrase.Text);
+			Uri uriResult;
+			bool validUrl = Uri.TryCreate(TxtUrl.Text, UriKind.Absolute, out uriResult)
+				&& (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
+
+			return validUrl && _levelRegex.IsMatch(TxtNestingLevel.Text) && !string.IsNullOrWhiteSpace(TxtPhrase.Text);
 		}
 
 		private void SwitchButtons(bool started)

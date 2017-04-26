@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
@@ -21,8 +22,6 @@ namespace CrawlerLibrary
 			".png", ".jpg", ".jpeg", ".bmp", ".gif", ".svg",
 			".mp3", ".wav"
 		};
-
-		private Regex _urlRegex = new Regex(@"^http(s)?:\/\/[a-z_0-9\/\-\.\?=&]+$", RegexOptions.IgnoreCase);
 
 		private Parser _parser;
 		private Searcher _searcher;
@@ -57,19 +56,6 @@ namespace CrawlerLibrary
 			set
 			{
 				_blockedExtensions = value;
-			}
-		}
-
-		public Regex UrlRegex
-		{
-			get
-			{
-				return _urlRegex;
-			}
-
-			set
-			{
-				_urlRegex = value;
 			}
 		}
 
@@ -124,6 +110,13 @@ namespace CrawlerLibrary
 												 | SecurityProtocolType.Ssl3;
 		}
 
+		protected bool ValidateUrl(string url)
+		{
+			Uri uriResult;
+			return Uri.TryCreate(url, UriKind.Absolute, out uriResult)
+				&& (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
+		}
+
 		public Crawler()
 		{
 			HandleCertificates();
@@ -154,7 +147,7 @@ namespace CrawlerLibrary
 			{
 				IEnumerable<string> nestedUrls = _parser.GetUrls(pageMarkup).AsParallel()
 					.Where(parsedUrl => {
-						return _urlRegex.IsMatch(parsedUrl) && !_blockedExtensions.Any(extension => parsedUrl.EndsWith(extension));
+						return ValidateUrl(parsedUrl) && !_blockedExtensions.Any(extension => parsedUrl.EndsWith(extension));
 					});
 				Parallel.ForEach(nestedUrls, (nestedUrl) =>
 				{
@@ -198,7 +191,7 @@ namespace CrawlerLibrary
 			{
 				IEnumerable<string> nestedUrls = _parser.GetUrls(pageMarkup).AsParallel()
 					.Where(parsedUrl => {
-						return _urlRegex.IsMatch(parsedUrl) && !_blockedExtensions.Any(g => parsedUrl.EndsWith(g));
+						return ValidateUrl(parsedUrl) && !_blockedExtensions.Any(g => parsedUrl.EndsWith(g));
 					}); ;
 
 				token.ThrowIfCancellationRequested();
