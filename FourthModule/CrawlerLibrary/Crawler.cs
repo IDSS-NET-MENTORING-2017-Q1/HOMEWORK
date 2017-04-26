@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Text.RegularExpressions;
@@ -76,13 +77,13 @@ namespace CrawlerLibrary
 
 			if (level + 1 <= _nestingLevel)
 			{
-				IEnumerable<string> nestedUrls = _parser.GetUrls(pageMarkup)
+				IEnumerable<string> nestedUrls = _parser.GetUrls(pageMarkup).AsParallel()
 					.Where(parsedUrl => {
 						return _urlRegex.IsMatch(parsedUrl) && !_blockedExtensions.Any(extension => parsedUrl.EndsWith(extension));
 					});
 				Parallel.ForEach(nestedUrls, (nestedUrl) =>
 				{
-					result.AddRange(Crawl(level + 1, nestedUrl));
+					result.AddRange(Crawl(level + 1, nestedUrl).Where(resultUrl => !string.IsNullOrWhiteSpace(resultUrl)));
 				});
 			}
 
@@ -91,7 +92,7 @@ namespace CrawlerLibrary
 
 		public async Task<IEnumerable<string>> CrawlAsync(string url, CancellationToken token)
 		{
-			return await CrawlAsync(0, url, token);
+			return await CrawlAsync(0, url, token).ConfigureAwait(false);
 		}
 
 		public async Task<IEnumerable<string>> CrawlAsync(int level, string url, CancellationToken token)
@@ -101,9 +102,9 @@ namespace CrawlerLibrary
 			string pageMarkup;
 			try
 			{
-				pageMarkup = await _downloader.DownloadPageAsync(url, token);
+				pageMarkup = await _downloader.DownloadPageAsync(url).ConfigureAwait(false);
 			}
-			catch (WebException ex)
+			catch (HttpRequestException ex)
 			{
 				Debug.WriteLine(ex.Message);
 				return null;
@@ -120,7 +121,7 @@ namespace CrawlerLibrary
 
 			if (level + 1 <= _nestingLevel)
 			{
-				IEnumerable<string> nestedUrls = _parser.GetUrls(pageMarkup)
+				IEnumerable<string> nestedUrls = _parser.GetUrls(pageMarkup).AsParallel()
 					.Where(parsedUrl => {
 						return _urlRegex.IsMatch(parsedUrl) && !_blockedExtensions.Any(g => parsedUrl.EndsWith(g));
 					}); ;
@@ -134,12 +135,12 @@ namespace CrawlerLibrary
 					{
 						if (crawl.Result != null)
 						{
-							result.AddRange(crawl.Result);
+							result.AddRange(crawl.Result.Where(resultUrl => !string.IsNullOrWhiteSpace(resultUrl)));
 						}
 					});
 				});
 
-				await Task.WhenAll(crawlTasks);
+				await Task.WhenAll(crawlTasks).ConfigureAwait(false);
 			}
 
 			return result;

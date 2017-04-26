@@ -1,6 +1,5 @@
 ﻿using CrawlerLibrary;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -26,6 +25,9 @@ namespace WebCrawler
 				new Searcher(),
 				new Downloader()
 			);
+
+			_crawler.Downloader.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36");
+
 			InitializeComponent();
 		}
 
@@ -67,11 +69,7 @@ namespace WebCrawler
 			
 			try
 			{
-				IEnumerable<string> urls = await _crawler.CrawlAsync(sourceUrl, _cancellationSource.Token);
-				Dispatcher.Invoke(() =>
-				{
-					LbResults.ItemsSource = urls;
-				});
+				LbResults.ItemsSource = await _crawler.CrawlAsync(sourceUrl, _cancellationSource.Token).ConfigureAwait(true);
 			}
 			catch (OperationCanceledException ex)
 			{

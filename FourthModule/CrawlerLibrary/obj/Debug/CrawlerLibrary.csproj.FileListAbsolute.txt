@@ -1,6 +1,5 @@
 C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\FourthModule\CrawlerLibrary\bin\Debug\CrawlerLibrary.dll
 C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\FourthModule\CrawlerLibrary\bin\Debug\CrawlerLibrary.pdb
-C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\FourthModule\CrawlerLibrary\obj\Debug\CrawlerLibrary.csprojResolveAssemblyReference.cache
 C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\FourthModule\CrawlerLibrary\obj\Debug\CrawlerLibrary.dll
 C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\FourthModule\CrawlerLibrary\obj\Debug\CrawlerLibrary.pdb
 C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\FourthModule\CrawlerLibrary\bin\Debug\HtmlAgilityPack.dll
