@@ -36,7 +36,11 @@
         <ListBox Name="LbResults" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="8">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Label Content="{Binding}"></Label>
+                    <Label>
+                        <Hyperlink NavigateUri="{Binding}" RequestNavigate="Hyperlink_RequestNavigate">
+                            <TextBlock Text="{Binding}" />
+                        </Hyperlink>
+                    </Label>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>

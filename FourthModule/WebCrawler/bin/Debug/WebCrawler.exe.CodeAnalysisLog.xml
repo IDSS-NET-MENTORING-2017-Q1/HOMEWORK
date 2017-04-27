@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="c:\program files (x86)\microsoft visual studio\2017\community\team tools\static analysis tools\fxcop\Xml\CodeAnalysisReport.xsl"?>
-<FxCopReport Version="15.0">
+<?xml-stylesheet type="text/xsl" href="c:\program files (x86)\microsoft visual studio 12.0\team tools\static analysis tools\fxcop\Xml\CodeAnalysisReport.xsl"?>
+<FxCopReport Version="12.0">
  <Targets>
-  <Target Name="C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\FourthModule\WebCrawler\bin\Debug\WebCrawler.exe">
+  <Target Name="C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FourthModule\WebCrawler\bin\Debug\WebCrawler.exe">
    <Modules>
     <Module Name="webcrawler.exe">
      <Messages>
-      <Message TypeName="AssembliesShouldHaveValidStrongNames" Category="Microsoft.Design" CheckId="CA2210" Status="Active" Created="2017-04-26 21:16:15Z" FixCategory="NonBreaking">
+      <Message TypeName="AssembliesShouldHaveValidStrongNames" Category="Microsoft.Design" CheckId="CA2210" Status="Active" Created="2017-04-27 08:24:11Z" FixCategory="NonBreaking">
        <Issue Name="NoStrongName" Certainty="95" Level="CriticalError">Sign 'WebCrawler.exe' with a strong name key.</Issue>
       </Message>
      </Messages>
@@ -23,7 +23,7 @@
    <Url>http://msdn.microsoft.com/library/ms182127.aspx</Url>
    <Email>[none]</Email>
    <MessageLevel Certainty="95">CriticalError</MessageLevel>
-   <File Name="designrules.dll" Version="15.0.0.0" />
+   <File Name="designrules.dll" Version="12.0.0.0" />
   </Rule>
  </Rules>
  <Localized>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
@@ -22,7 +23,7 @@ namespace CrawlerLibrary
 			".mp3", ".wav"
 		};
 
-		private readonly IList<string> _results = new List<string>();
+		private readonly ObservableCollection<string> _results = new ObservableCollection<string>();
 		
 		private Downloader _downloader;
 
@@ -71,7 +72,7 @@ namespace CrawlerLibrary
 			}
 		}
 
-		public IList<string> Results
+		public ObservableCollection<string> Results
 		{
 			get
 			{
@@ -108,30 +109,30 @@ namespace CrawlerLibrary
 			_downloader = downloader;
 		}
 
-		public async Task CrawlAsync(Uri url, CancellationToken token)
+		public async Task CrawlAsync(Uri url, bool configureAwait, CancellationToken token)
 		{
 			_results.Clear();
-			await CrawlAsync(0, url, token).ConfigureAwait(false);
+			await CrawlAsync(0, url, configureAwait, token).ConfigureAwait(configureAwait);
 		}
 
-		public async Task CrawlAsync(string url, CancellationToken token)
+		public async Task CrawlAsync(string url, bool configureAwait, CancellationToken token)
 		{
 			Uri uri = new Uri(url);
-			await CrawlAsync(uri, token).ConfigureAwait(false);
+			await CrawlAsync(uri, configureAwait, token).ConfigureAwait(configureAwait);
 		}
 
-		public async Task CrawlAsync(int level, string url, CancellationToken token)
+		public async Task CrawlAsync(int level, string url, bool configureAwait, CancellationToken token)
 		{
 			Uri uri = new Uri(url);
-			await CrawlAsync(level, uri, token).ConfigureAwait(false);
+			await CrawlAsync(level, uri, configureAwait, token).ConfigureAwait(configureAwait);
 		}
 
-		public async Task CrawlAsync(int level, Uri url, CancellationToken token)
+		public async Task CrawlAsync(int level, Uri url, bool configureAwait, CancellationToken token)
 		{
 			string pageMarkup;
 			try
 			{
-				pageMarkup = await _downloader.DownloadPageAsync(url).ConfigureAwait(false);
+				pageMarkup = await _downloader.DownloadPageAsync(url).ConfigureAwait(configureAwait);
 			}
 			catch (HttpRequestException ex)
 			{
@@ -154,16 +155,12 @@ namespace CrawlerLibrary
 					.Where(parsedUrl => {
 						return ValidateUrl(parsedUrl) && !_blockedExtensions.Any(g => parsedUrl.EndsWith(g));
 					}); ;
-
-				token.ThrowIfCancellationRequested();
-
-				IEnumerable<Task> crawlTasks = nestedUrls.Select(nestedUrl =>
+				
+				foreach (string nestedUrl in nestedUrls)
 				{
 					token.ThrowIfCancellationRequested();
-					return CrawlAsync(level + 1, nestedUrl, token);
-				});
-
-				await Task.WhenAll(crawlTasks).ConfigureAwait(false);
+					await CrawlAsync(level + 1, nestedUrl, configureAwait, token).ConfigureAwait(configureAwait);
+				}
 			}
 		}
 	}

@@ -10,8 +10,14 @@ namespace CrawlerLibrary
     {
 		private readonly Dictionary<string, string> _headers = new Dictionary<string, string>();
 
-		public Dictionary<string, string> Headers => _headers;
-
+		public Dictionary<string, string> Headers
+		{
+			get
+			{
+				return _headers;
+			}
+		}
+		
 		public async Task<string> DownloadPageAsync(string url)
 		{
 			Uri uri = new Uri(url);

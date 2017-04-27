@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows;
+using System.Windows.Documents;
 
 namespace WebCrawler
 {
@@ -14,7 +15,7 @@ namespace WebCrawler
 	{
 		private CancellationTokenSource _cancellationSource;
 		private readonly Crawler _crawler;
-		
+				
 		private readonly Regex _levelRegex = new Regex(@"^[0-9]+$", RegexOptions.IgnoreCase);
 
 		public MainWindow()
@@ -26,6 +27,8 @@ namespace WebCrawler
 			_crawler.Downloader.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36");
 
 			InitializeComponent();
+
+			LbResults.ItemsSource = _crawler.Results;
 		}
 
 		private bool ValidateInput()
@@ -70,8 +73,8 @@ namespace WebCrawler
 			
 			try
 			{
-				await _crawler.CrawlAsync(sourceUrl, _cancellationSource.Token).ConfigureAwait(true);
-				LbResults.ItemsSource = _crawler.Results;
+				bool configureAwait = true;
+				await _crawler.CrawlAsync(sourceUrl, configureAwait, _cancellationSource.Token).ConfigureAwait(configureAwait);
 			}
 			catch (OperationCanceledException ex)
 			{
@@ -85,6 +88,12 @@ namespace WebCrawler
 		{
 			_cancellationSource.Cancel();
 			SwitchButtons(false);
+		}
+
+		private void Hyperlink_RequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
+		{
+			Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
+			e.Handled = true;
 		}
 	}
 }

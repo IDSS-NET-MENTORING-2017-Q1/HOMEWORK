@@ -6,3 +6,11 @@ C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\FourthModule\
 C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\FourthModule\CrawlerLibrary\bin\Debug\HtmlAgilityPack.pdb
 C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\FourthModule\CrawlerLibrary\bin\Debug\HtmlAgilityPack.xml
 C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\FourthModule\CrawlerLibrary\obj\Debug\CrawlerLibrary.csprojResolveAssemblyReference.cache
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FourthModule\CrawlerLibrary\bin\Debug\CrawlerLibrary.dll
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FourthModule\CrawlerLibrary\bin\Debug\CrawlerLibrary.pdb
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FourthModule\CrawlerLibrary\bin\Debug\HtmlAgilityPack.dll
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FourthModule\CrawlerLibrary\bin\Debug\HtmlAgilityPack.pdb
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FourthModule\CrawlerLibrary\bin\Debug\HtmlAgilityPack.xml
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FourthModule\CrawlerLibrary\obj\Debug\CrawlerLibrary.dll
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FourthModule\CrawlerLibrary\obj\Debug\CrawlerLibrary.pdb
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FourthModule\CrawlerLibrary\obj\Debug\CrawlerLibrary.csprojResolveAssemblyReference.cache
