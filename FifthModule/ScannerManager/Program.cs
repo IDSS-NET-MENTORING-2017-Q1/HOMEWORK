@@ -24,20 +24,27 @@ namespace FifthModule
 			var tempPath = ConfigurationManager.AppSettings["tempPath"];
 			var corruptedPath = ConfigurationManager.AppSettings["corruptedPath"];
 
-			var logTarget = new FileTarget(logPath);
+			var fileTarget = new FileTarget {
+				Name = "Default",
+				FileName = logPath,
+				Layout = "${date} ${message} ${onexception:inner=${exception:format=toString}}"
+			};
 
 			var logConfig = new LoggingConfiguration();
-			logConfig.AddTarget(logTarget);
-			logConfig.AddRuleForAllLevels(logTarget);
+			logConfig.AddTarget(fileTarget);
+			logConfig.AddRuleForAllLevels(fileTarget);
 
 			var logFactory = new LogFactory(logConfig);
 
 			HostFactory.Run(
 				conf =>
 				{
-					conf.Service<ScannerManager>(
-						() => new ScannerManager(inputPath, outputPath, tempPath, corruptedPath))
-						.UseNLog(logFactory);
+					conf.Service<ScannerManager>(callback => {
+						callback.ConstructUsing(() => new ScannerManager(inputPath, outputPath, tempPath, corruptedPath));
+						callback.WhenStarted(service => service.Start());
+						callback.WhenStopped(service => service.Stop());
+					}).UseNLog(logFactory);
+
 					conf.StartAutomaticallyDelayed();
 					conf.SetServiceName("StreamingScannerService");
 					conf.SetDisplayName("Streaming Scanner Service");

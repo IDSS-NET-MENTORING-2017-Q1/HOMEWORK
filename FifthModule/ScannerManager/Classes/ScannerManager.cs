@@ -5,7 +5,7 @@ using Topshelf;
 
 namespace FifthModule.Classes
 {
-	public class ScannerManager : ServiceControl
+	public class ScannerManager
 	{
 		private FileManager _fileManager;
 		private BarcodeManager _barcodeManager;
@@ -114,7 +114,7 @@ namespace FifthModule.Classes
 			_fileCreated.Set();
 		}
 
-		public bool Start(HostControl hostControl)
+		public bool Start()
 		{
 			_worker.Start();
 			_watcher.EnableRaisingEvents = true;
@@ -122,7 +122,7 @@ namespace FifthModule.Classes
 			return true;
 		}
 
-		public bool Stop(HostControl hostControl)
+		public bool Stop()
 		{
 			_watcher.EnableRaisingEvents = false;
 			_stopRequested.Set();

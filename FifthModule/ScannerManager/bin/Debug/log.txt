@@ -1,0 +1,75 @@
+2017/05/04 23:36:00.526 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/04 23:36:00.559 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/04 23:36:00.585 Running as a console application, creating the console host. 
+2017/05/04 23:36:00.655 Starting up as a console application 
+2017/05/04 23:36:00.680 The StreamingScannerService service is now running, press Control+C to exit. 
+2017/05/04 23:48:19.882 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/04 23:48:19.897 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/04 23:48:19.913 Started by the Windows services process 
+2017/05/04 23:48:19.913 Running as a service, creating service host. 
+2017/05/04 23:48:19.928 Starting as a Windows service 
+2017/05/04 23:48:19.944 [Topshelf] Starting up as a windows service application 
+2017/05/04 23:48:19.944 [Topshelf] Starting 
+2017/05/04 23:48:19.944 [Topshelf] Current Directory: C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\FifthModule\ScannerManager\bin\Debug 
+2017/05/04 23:48:19.944 [Topshelf] Arguments:  
+2017/05/04 23:48:19.944 [Topshelf] Started 
+2017/05/04 23:53:59.767 The service threw an unhandled exception System.IO.IOException: The process cannot access the file because it is being used by another process.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.File.InternalMove(String sourceFileName, String destFileName, Boolean checkHost)
+   at System.IO.File.Move(String sourceFileName, String destFileName)
+   at FifthModule.Classes.FileManager.MoveTo(String source, String destination) in C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\FifthModule\ScannerManager\Classes\FileManager.cs:line 171
+   at FifthModule.Classes.FileManager.MoveToCorrupted(String fileName) in C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\FifthModule\ScannerManager\Classes\FileManager.cs:line 185
+   at FifthModule.Classes.ScannerManager.WorkProcess() in C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\FifthModule\ScannerManager\Classes\ScannerManager.cs:line 60
+   at System.Threading.ThreadHelper.ThreadStart_Context(Object state)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   at System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   at System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.ThreadHelper.ThreadStart()
+2017/05/05 00:05:43.273 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:05:43.297 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:05:43.318 Running as a console application, creating the console host. 
+2017/05/05 00:05:43.325 The StreamingScannerService service is running and must be stopped before running via the console 
+2017/05/05 00:07:42.396 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:07:42.419 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:07:42.440 Running as a console application, creating the console host. 
+2017/05/05 00:07:42.446 The StreamingScannerService service is running and must be stopped before running via the console 
+2017/05/05 00:20:33.627 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:20:33.650 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:20:33.671 Running as a console application, creating the console host. 
+2017/05/05 00:20:33.671 The StreamingScannerService service is running and must be stopped before running via the console 
+2017/05/05 00:20:53.622 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:20:53.643 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:20:53.665 Running as a console application, creating the console host. 
+2017/05/05 00:20:53.665 The StreamingScannerService service is running and must be stopped before running via the console 
+2017/05/05 00:21:15.827 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:21:15.843 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:21:15.874 Running as a console application, creating the console host. 
+2017/05/05 00:21:15.874 The StreamingScannerService service is running and must be stopped before running via the console 
