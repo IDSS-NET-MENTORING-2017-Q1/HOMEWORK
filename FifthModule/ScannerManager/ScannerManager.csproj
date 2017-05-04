@@ -7,8 +7,8 @@
     <ProjectGuid>{27C11F20-5673-4CBB-88AD-D894BC47465A}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FifthModule</RootNamespace>
-    <AssemblyName>FifthModule</AssemblyName>
+    <RootNamespace>ScannerManager</RootNamespace>
+    <AssemblyName>ScannerManager</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

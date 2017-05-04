@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("FifthModule")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("ScannerManager")]
+[assembly: AssemblyDescription("Manager for streaming scanner")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("EPAM Systems")]
-[assembly: AssemblyProduct("FifthModule")]
+[assembly: AssemblyProduct("ScannerManager")]
 [assembly: AssemblyCopyright("Copyright © EPAM Systems 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
