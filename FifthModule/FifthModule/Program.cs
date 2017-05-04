@@ -43,12 +43,12 @@ namespace FifthModule
 						() => new ScannerManager(inputPath, outputPath, tempPath, corruptedPath))
 						.UseNLog(logFactory);
 					conf.StartAutomaticallyDelayed();
+					conf.SetServiceName("StreamingScannerService");
 					conf.SetDisplayName("Streaming Scanner Service");
 					conf.RunAsLocalSystem();
 					conf.EnableServiceRecovery(recovery =>
 					{
-						recovery.SetResetPeriod(0);
-						recovery.RestartService(1);
+						recovery.RestartService(1).SetResetPeriod(0);
 					});
 				}
 			);

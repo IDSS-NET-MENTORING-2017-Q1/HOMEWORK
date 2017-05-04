@@ -139,11 +139,6 @@ namespace FifthModule.Classes
 			_corruptedPath = corruptedPath;
 		}
 
-		public bool IsImage(string fileName)
-		{
-			System.Web.MimeMapping.GetMimeMapping(filename).StartsWith("image/");
-		}
-
 		protected IEnumerable<string> GetFiles(string path)
 		{
 			return Directory.EnumerateFiles(path);
@@ -193,7 +188,19 @@ namespace FifthModule.Classes
 			return MoveTo(fileName, corruptedFile);		
 		}
 
-		public bool ClearTemp()
+		public bool Delete(string fileName)
+		{
+			if (!File.Exists(fileName))
+			{
+				return false;
+			}
+
+			File.Delete(fileName);
+
+			return true;
+		}
+
+		public void ClearTemp()
 		{
 			foreach (string fileName in GetTempFiles())
 			{

@@ -32,6 +32,8 @@ namespace FifthModule.Classes
 			{
 				return true;
 			}
+
+			return false;
 		}
 	}
 }

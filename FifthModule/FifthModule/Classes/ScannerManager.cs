@@ -46,7 +46,23 @@ namespace FifthModule.Classes
 
 					if (_fileManager.TryOpen(fileName, 3, 3000))
 					{
-						_fileManager.MoveToTemp(fileName);
+						try
+						{
+							if (_barcodeManager.IsBarcode(fileName))
+							{
+								_fileManager.Delete(fileName);
+								_documentManager.GeneratePdf();
+								_fileManager.ClearTemp();
+							}
+							else
+							{
+								_fileManager.MoveToTemp(fileName);
+							}
+						}
+						catch (Exception ex)
+						{
+							_fileManager.MoveToCorrupted(fileName);
+						}						
 					}
 				}
 			} while (WaitHandle.WaitAny(new WaitHandle[] {_stopRequested, _fileCreated}) != 0);
@@ -54,12 +70,12 @@ namespace FifthModule.Classes
 
 		protected void Init()
 		{
-			Init(null, null, null);
+			Init(null, null, null, null);
 		}
 
-		protected void Init(string inputPath, string outputPath, string tempPath)
+		protected void Init(string inputPath, string outputPath, string tempPath, string corruptedPath)
 		{
-			_fileManager = new FileManager(inputPath, outputPath, tempPath);
+			_fileManager = new FileManager(inputPath, outputPath, tempPath, corruptedPath);
 			_documentManager = new DocumentManager(_fileManager);
 			_barcodeManager = new BarcodeManager();
 
@@ -90,11 +106,11 @@ namespace FifthModule.Classes
 			CreateWatcherAndEvents();
 		}
 
-		public ScannerManager(string inputPath, string outputPath) : this(inputPath, outputPath, null) { }
+		public ScannerManager(string inputPath, string outputPath) : this(inputPath, outputPath, null, null) { }
 
-		public ScannerManager(string inputPath, string outputPath, string tempPath)
+		public ScannerManager(string inputPath, string outputPath, string tempPath, string corruptedPath)
 		{
-			Init(inputPath, outputPath, tempPath);
+			Init(inputPath, outputPath, tempPath, corruptedPath);
 		}
 
 		private void Watcher_Created(object sender, FileSystemEventArgs e)
@@ -106,6 +122,8 @@ namespace FifthModule.Classes
 		{
 			_worker.Start();
 			_watcher.EnableRaisingEvents = true;
+
+			return true;
 		}
 
 		public bool Stop(HostControl hostControl)
@@ -113,6 +131,8 @@ namespace FifthModule.Classes
 			_watcher.EnableRaisingEvents = false;
 			_stopRequested.Set();
 			_worker.Join();
+
+			return true;
 		}
 	}
 }
