@@ -17,25 +17,31 @@ namespace FifthModule
 	{
 		static void Main(string[] args)
 		{
-
-			string logPath = ConfigurationManager.AppSettings["logPath"];
+			var logPath = ConfigurationManager.AppSettings["logPath"];
 			if (string.IsNullOrWhiteSpace(logPath))
 			{
 				logPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "log.txt");
 			}
 
-			FileTarget logTarget = new FileTarget(logPath);
+			var inputPath = ConfigurationManager.AppSettings["inputPath"];
+			var outputPath = ConfigurationManager.AppSettings["outputPath"];
+			var tempPath = ConfigurationManager.AppSettings["tempPath"];
+			var corruptedPath = ConfigurationManager.AppSettings["corruptedPath"];
 
-			LoggingConfiguration logConfig = new LoggingConfiguration();
+			var logTarget = new FileTarget(logPath);
+
+			var logConfig = new LoggingConfiguration();
 			logConfig.AddTarget(logTarget);
 			logConfig.AddRuleForAllLevels(logTarget);
 
-			LogFactory logFactory = new LogFactory(logConfig);
+			var logFactory = new LogFactory(logConfig);
 
 			HostFactory.Run(
 				conf =>
 				{
-					conf.Service<StreamingScannerService>(() => new StreamingScannerService()).UseNLog(logFactory);
+					conf.Service<ScannerManager>(
+						() => new ScannerManager(inputPath, outputPath, tempPath, corruptedPath))
+						.UseNLog(logFactory);
 					conf.StartAutomaticallyDelayed();
 					conf.SetDisplayName("Streaming Scanner Service");
 					conf.RunAsLocalSystem();

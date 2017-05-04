@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace FifthModule.Classes
@@ -12,6 +13,7 @@ namespace FifthModule.Classes
 		private string _inputPath;
 		private string _outputPath;
 		private string _tempPath;
+		private string _corruptedPath;
 
 		public string InputPath
 		{
@@ -49,21 +51,51 @@ namespace FifthModule.Classes
 			}
 		}
 
+		public string CorruptedPath
+		{
+			get
+			{
+				return _corruptedPath;
+			}
+			set
+			{
+				_corruptedPath = value;
+			}
+		}
+
+		public bool TryOpen(string filePath, int retryCount, int interval) 
+		{
+			for (var i = 0; i < retryCount; i++) {
+				try 
+				{
+					var file = File.Open(filePath, FileMode.Open, FileAccess.Read, FileShare.None);
+					file.Close();
+					return true;
+				}
+				catch (Exception ex)
+				{
+					Thread.Sleep(interval);
+				}
+			}
+
+			return false;
+		}
+
 		public FileManager()
-			: this(null, null, null)
+			: this(null, null, null, null)
 		{
 
 		}
 
 		public FileManager(string inputPath, string outputPath)
-			: this(inputPath, outputPath, null)
+			: this(inputPath, outputPath, null, null)
 		{
 
 		}
 
-		public FileManager(string inputPath, string outputPath, string tempPath)
+		public FileManager(string inputPath, string outputPath, string tempPath, string corruptedPath)
 		{
-			string basePath = AppDomain.CurrentDomain.BaseDirectory;
+			var basePath = AppDomain.CurrentDomain.BaseDirectory;
 
 			if (string.IsNullOrWhiteSpace(inputPath))
 			{
@@ -92,9 +124,24 @@ namespace FifthModule.Classes
 				Directory.CreateDirectory(tempPath);
 			}
 
+			if (string.IsNullOrWhiteSpace(corruptedPath))
+			{
+				corruptedPath = Path.Combine(basePath, "corrupted");
+			}
+			if (!Directory.Exists(corruptedPath))
+			{
+				Directory.CreateDirectory(corruptedPath);
+			}
+
 			_inputPath = inputPath;
 			_outputPath = outputPath;
 			_tempPath = tempPath;
+			_corruptedPath = corruptedPath;
+		}
+
+		public bool IsImage(string fileName)
+		{
+			System.Web.MimeMapping.GetMimeMapping(filename).StartsWith("image/");
 		}
 
 		protected IEnumerable<string> GetFiles(string path)
@@ -117,18 +164,33 @@ namespace FifthModule.Classes
 			return GetFiles(_tempPath);
 		}
 
-		public bool MoveToTemp(string fileName)
+		public IEnumerable<string> GetCorruptedFiles()
 		{
-			string inputFile = Path.Combine(_inputPath, fileName);
-			string tempFile = Path.Combine(_tempPath, fileName);
+			return GetFiles(_corruptedPath);
+		}
 
-			if (!File.Exists(inputFile))
+		protected bool MoveTo(string source, string destination)
+		{
+			if (!File.Exists(source))
 			{
 				return false;
 			}
 
-			File.Move(inputFile, tempFile);
+			File.Move(source, destination);
+
 			return true;
+		}
+
+		public bool MoveToTemp(string fileName)
+		{
+			var tempFile = Path.Combine(_tempPath, fileName);
+			return MoveTo(fileName, tempFile);		
+		}
+
+		public bool MoveToCorrupted(string fileName)
+		{
+			var corruptedFile = Path.Combine(_corruptedPath, fileName);
+			return MoveTo(fileName, corruptedFile);		
 		}
 
 		public bool ClearTemp()
