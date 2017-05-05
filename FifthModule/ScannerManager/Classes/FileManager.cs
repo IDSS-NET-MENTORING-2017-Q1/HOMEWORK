@@ -173,27 +173,33 @@ namespace FifthModule.Classes
 			return true;
 		}
 
-		public bool MoveToTemp(string fileName)
+		protected string GenerateFileName(string originalName)
 		{
-			var tempFile = Path.Combine(_tempPath, Path.GetFileName(fileName));
+			var extension = Path.GetExtension(originalName);
+			return Guid.NewGuid().ToString() + extension;
+		}
+
+		public bool MoveToTemp(string sourcePath)
+		{
+			var tempFile = Path.Combine(_tempPath, GenerateFileName(sourcePath));
 			
-			return MoveTo(fileName, tempFile);		
+			return MoveTo(sourcePath, tempFile);		
 		}
 
-		public bool MoveToCorrupted(string fileName)
+		public bool MoveToCorrupted(string sourcePath)
 		{
-			var corruptedFile = Path.Combine(_corruptedPath, Path.GetFileName(fileName));
-			return MoveTo(fileName, corruptedFile);		
+			var corruptedFile = Path.Combine(_corruptedPath, GenerateFileName(sourcePath));
+			return MoveTo(sourcePath, corruptedFile);		
 		}
 
-		public bool Delete(string fileName)
+		public bool Delete(string sourcePath)
 		{
-			if (!File.Exists(fileName))
+			if (!File.Exists(sourcePath))
 			{
 				return false;
 			}
 
-			File.Delete(fileName);
+			File.Delete(sourcePath);
 
 			return true;
 		}

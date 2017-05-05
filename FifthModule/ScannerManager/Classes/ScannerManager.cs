@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Threading;
 using Topshelf;
@@ -47,26 +48,37 @@ namespace FifthModule.Classes
 							if (_barcodeManager.IsBarcode(fileName))
 							{
 								var sourceFiles = _fileManager.GetTempFiles();
-								var pdfDestination = Path.Combine(_fileManager.OutputPath, Guid.NewGuid().ToString() + ".pdf");
+								var pdfName = Path.Combine(_fileManager.OutputPath, Guid.NewGuid().ToString() + ".pdf");
+
+								Debug.WriteLine(string.Format("Generating resulting PDF...", fileName));
 
 								_fileManager.Delete(fileName);
-								_documentManager.GeneratePdf(pdfDestination, sourceFiles);
+								_documentManager.GeneratePdf(pdfName, sourceFiles);
 								_fileManager.ClearTemp();
 							}
 							else
 							{
+								Debug.WriteLine(string.Format("Moving {0} to temp folder...", fileName));
 								_fileManager.MoveToTemp(fileName);
 							}
 
 							continue;
 						}
-						catch (Exception ex) { }
+						catch (Exception ex) {
+							Debug.WriteLine("Exception has occured!");
+							Debug.WriteLine(ex.Message);
+						}
 
 						try
 						{
+							Debug.WriteLine(string.Format("Moving {0} to corrupted folder...", fileName));
 							_fileManager.MoveToCorrupted(fileName);
 						}
-						catch (Exception ex) { }
+						catch (Exception ex)
+						{
+							Debug.WriteLine("Exception has occured!");
+							Debug.WriteLine(ex.Message);
+						}
 					}
 				}
 			} while (WaitHandle.WaitAny(new WaitHandle[] {_stopRequested, _fileCreated}) != 0);

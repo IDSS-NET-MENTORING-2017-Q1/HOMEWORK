@@ -124,3 +124,431 @@
 [Success] Description Streaming Scanner Service
 [Success] ServiceName StreamingScannerService 
 2017/05/05 00:18:42.479 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:22:56.535 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:22:56.548 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:22:57.013 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:22:57.025 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:22:57.025 Attempting to install 'StreamingScannerService' 
+2017/05/05 00:22:57.054 Installing Streaming Scanner Service service 
+2017/05/05 00:22:57.975 Opening Registry 
+2017/05/05 00:22:57.975 Service path: "C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FifthModule\ScannerManager\bin\Debug\ScannerManager.exe" 
+2017/05/05 00:22:57.976 Image path: "C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FifthModule\ScannerManager\bin\Debug\ScannerManager.exe"  -displayname "Streaming Scanner Service" -servicename "StreamingScannerService" 
+2017/05/05 00:22:58.022 Closing Registry 
+2017/05/05 00:23:21.512 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:23:21.525 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:23:21.545 Started by the Windows services process 
+2017/05/05 00:23:21.545 Running as a service, creating service host. 
+2017/05/05 00:23:21.545 Starting as a Windows service 
+2017/05/05 00:23:21.545 [Topshelf] Starting up as a windows service application 
+2017/05/05 00:23:21.545 [Topshelf] Starting 
+2017/05/05 00:23:21.545 [Topshelf] Current Directory: C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FifthModule\ScannerManager\bin\Debug 
+2017/05/05 00:23:21.545 [Topshelf] Arguments:  
+2017/05/05 00:23:21.555 [Topshelf] Started 
+2017/05/05 00:25:47.215 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:25:47.227 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:25:47.656 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:25:47.669 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:25:47.669 Stopping StreamingScannerService 
+2017/05/05 00:25:47.681 [Topshelf] Stopping 
+2017/05/05 00:25:47.681 [Topshelf] Stopped 
+2017/05/05 00:25:47.930 The StreamingScannerService service was stopped. 
+2017/05/05 00:26:07.989 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:26:08.002 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:26:08.431 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:26:08.431 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:26:08.451 Uninstalling StreamingScannerService 
+2017/05/05 00:26:08.451 Uninstalling StreamingScannerService service 
+2017/05/05 00:32:08.551 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:32:08.563 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:32:08.996 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:32:09.009 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:32:09.009 Attempting to install 'StreamingScannerService' 
+2017/05/05 00:32:09.026 Installing Streaming Scanner Service service 
+2017/05/05 00:32:09.119 Opening Registry 
+2017/05/05 00:32:09.119 Service path: "C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FifthModule\ScannerManager\bin\Debug\ScannerManager.exe" 
+2017/05/05 00:32:09.119 Image path: "C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FifthModule\ScannerManager\bin\Debug\ScannerManager.exe"  -displayname "Streaming Scanner Service" -servicename "StreamingScannerService" 
+2017/05/05 00:32:09.119 Closing Registry 
+2017/05/05 00:32:44.557 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:32:44.570 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:32:44.590 Started by the Windows services process 
+2017/05/05 00:32:44.590 Running as a service, creating service host. 
+2017/05/05 00:32:44.590 Starting as a Windows service 
+2017/05/05 00:32:44.590 [Topshelf] Starting up as a windows service application 
+2017/05/05 00:32:44.590 [Topshelf] Starting 
+2017/05/05 00:32:44.590 [Topshelf] Current Directory: C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FifthModule\ScannerManager\bin\Debug 
+2017/05/05 00:32:44.590 [Topshelf] Arguments:  
+2017/05/05 00:32:44.601 [Topshelf] Started 
+2017/05/05 00:35:46.839 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:35:46.839 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:35:47.279 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:35:47.292 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:35:47.292 Stopping StreamingScannerService 
+2017/05/05 00:35:47.302 [Topshelf] Stopping 
+2017/05/05 00:35:47.302 [Topshelf] Stopped 
+2017/05/05 00:35:47.552 The StreamingScannerService service was stopped. 
+2017/05/05 00:35:51.813 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:35:51.826 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:35:52.233 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:35:52.246 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:35:52.246 Uninstalling StreamingScannerService 
+2017/05/05 00:35:52.260 Uninstalling StreamingScannerService service 
+2017/05/05 00:42:16.615 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:42:16.629 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:42:17.061 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:42:17.074 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:42:17.074 Attempting to install 'StreamingScannerService' 
+2017/05/05 00:42:17.090 Installing Streaming Scanner Service service 
+2017/05/05 00:42:17.188 Opening Registry 
+2017/05/05 00:42:17.188 Service path: "C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FifthModule\ScannerManager\bin\Debug\ScannerManager.exe" 
+2017/05/05 00:42:17.188 Image path: "C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FifthModule\ScannerManager\bin\Debug\ScannerManager.exe"  -displayname "Streaming Scanner Service" -servicename "StreamingScannerService" 
+2017/05/05 00:42:17.188 Closing Registry 
+2017/05/05 00:42:24.887 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:42:24.901 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:42:24.921 Started by the Windows services process 
+2017/05/05 00:42:24.921 Running as a service, creating service host. 
+2017/05/05 00:42:24.921 Starting as a Windows service 
+2017/05/05 00:42:24.921 [Topshelf] Starting up as a windows service application 
+2017/05/05 00:42:24.921 [Topshelf] Starting 
+2017/05/05 00:42:24.921 [Topshelf] Current Directory: C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FifthModule\ScannerManager\bin\Debug 
+2017/05/05 00:42:24.921 [Topshelf] Arguments:  
+2017/05/05 00:42:24.933 [Topshelf] Started 
+2017/05/05 00:45:59.542 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:45:59.554 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:45:59.981 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:45:59.994 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:46:00.002 Stopping StreamingScannerService 
+2017/05/05 00:46:00.005 [Topshelf] Stopping 
+2017/05/05 00:46:00.005 [Topshelf] Stopped 
+2017/05/05 00:46:00.255 The StreamingScannerService service was stopped. 
+2017/05/05 00:46:03.288 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:46:03.301 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:46:03.691 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:46:03.704 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:46:03.704 Uninstalling StreamingScannerService 
+2017/05/05 00:46:03.704 Uninstalling StreamingScannerService service 
+2017/05/05 00:46:15.665 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:46:15.677 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:46:16.117 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:46:16.130 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:46:16.130 Attempting to install 'StreamingScannerService' 
+2017/05/05 00:46:16.146 Installing Streaming Scanner Service service 
+2017/05/05 00:46:16.260 Opening Registry 
+2017/05/05 00:46:16.260 Service path: "C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FifthModule\ScannerManager\bin\Debug\ScannerManager.exe" 
+2017/05/05 00:46:16.260 Image path: "C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FifthModule\ScannerManager\bin\Debug\ScannerManager.exe"  -displayname "Streaming Scanner Service" -servicename "StreamingScannerService" 
+2017/05/05 00:46:16.260 Closing Registry 
+2017/05/05 00:46:18.450 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:46:18.463 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:46:18.841 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:46:18.854 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:46:18.862 Starting StreamingScannerService 
+2017/05/05 00:46:19.081 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:46:19.081 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:46:19.113 Started by the Windows services process 
+2017/05/05 00:46:19.113 Running as a service, creating service host. 
+2017/05/05 00:46:19.113 Starting as a Windows service 
+2017/05/05 00:46:19.113 [Topshelf] Starting up as a windows service application 
+2017/05/05 00:46:19.113 [Topshelf] Starting 
+2017/05/05 00:46:19.113 [Topshelf] Current Directory: C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FifthModule\ScannerManager\bin\Debug 
+2017/05/05 00:46:19.113 [Topshelf] Arguments:  
+2017/05/05 00:46:19.113 [Topshelf] Started 
+2017/05/05 00:46:19.369 The StreamingScannerService service was started. 
+2017/05/05 00:52:02.562 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:52:02.575 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:52:02.997 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:52:03.010 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:52:03.010 Stopping StreamingScannerService 
+2017/05/05 00:52:03.020 [Topshelf] Stopping 
+2017/05/05 00:52:03.020 [Topshelf] Stopped 
+2017/05/05 00:52:03.270 The StreamingScannerService service was stopped. 
+2017/05/05 00:52:05.369 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:52:05.369 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:52:05.769 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:52:05.782 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:52:05.790 Uninstalling StreamingScannerService 
+2017/05/05 00:52:05.790 Uninstalling StreamingScannerService service 
+2017/05/05 00:52:24.978 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:52:24.991 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:52:25.414 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:52:25.414 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:52:25.436 Attempting to install 'StreamingScannerService' 
+2017/05/05 00:52:25.444 Installing Streaming Scanner Service service 
+2017/05/05 00:52:25.537 Opening Registry 
+2017/05/05 00:52:25.538 Service path: "C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FifthModule\ScannerManager\bin\Debug\ScannerManager.exe" 
+2017/05/05 00:52:25.538 Image path: "C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FifthModule\ScannerManager\bin\Debug\ScannerManager.exe"  -displayname "Streaming Scanner Service" -servicename "StreamingScannerService" 
+2017/05/05 00:52:25.538 Closing Registry 
+2017/05/05 00:52:30.335 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:52:30.356 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:52:30.776 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:52:30.788 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:52:30.788 Starting StreamingScannerService 
+2017/05/05 00:52:31.009 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:52:31.009 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:52:31.040 Started by the Windows services process 
+2017/05/05 00:52:31.040 Running as a service, creating service host. 
+2017/05/05 00:52:31.040 Starting as a Windows service 
+2017/05/05 00:52:31.040 [Topshelf] Starting up as a windows service application 
+2017/05/05 00:52:31.040 [Topshelf] Starting 
+2017/05/05 00:52:31.040 [Topshelf] Current Directory: C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FifthModule\ScannerManager\bin\Debug 
+2017/05/05 00:52:31.040 [Topshelf] Arguments:  
+2017/05/05 00:52:31.040 [Topshelf] Started 
+2017/05/05 00:52:31.297 The StreamingScannerService service was started. 
+2017/05/05 00:55:31.749 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:55:31.761 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:55:32.189 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:55:32.201 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:55:32.201 Stopping StreamingScannerService 
+2017/05/05 00:55:32.212 [Topshelf] Stopping 
+2017/05/05 00:55:32.214 [Topshelf] Stopped 
+2017/05/05 00:55:32.462 The StreamingScannerService service was stopped. 
+2017/05/05 00:55:40.024 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:55:40.037 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:55:40.460 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:55:40.473 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:55:40.481 Starting StreamingScannerService 
+2017/05/05 00:55:40.711 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:55:40.724 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:55:40.742 Started by the Windows services process 
+2017/05/05 00:55:40.742 Running as a service, creating service host. 
+2017/05/05 00:55:40.742 Starting as a Windows service 
+2017/05/05 00:55:40.747 [Topshelf] Starting up as a windows service application 
+2017/05/05 00:55:40.747 [Topshelf] Starting 
+2017/05/05 00:55:40.747 [Topshelf] Current Directory: C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FifthModule\ScannerManager\bin\Debug 
+2017/05/05 00:55:40.747 [Topshelf] Arguments:  
+2017/05/05 00:55:40.747 [Topshelf] Started 
+2017/05/05 00:55:40.999 The StreamingScannerService service was started. 
+2017/05/05 00:59:29.480 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:59:29.494 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:59:29.922 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:59:29.922 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:59:29.941 Stopping StreamingScannerService 
+2017/05/05 00:59:29.945 [Topshelf] Stopping 
+2017/05/05 00:59:29.945 [Topshelf] Stopped 
+2017/05/05 00:59:30.195 The StreamingScannerService service was stopped. 
+2017/05/05 00:59:35.216 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:59:35.216 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:59:35.658 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:59:35.671 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:59:35.671 Uninstalling StreamingScannerService 
+2017/05/05 00:59:35.685 Uninstalling StreamingScannerService service 
+2017/05/05 00:59:42.149 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:59:42.161 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:59:42.580 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:59:42.593 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:59:42.593 Attempting to install 'StreamingScannerService' 
+2017/05/05 00:59:42.610 Installing Streaming Scanner Service service 
+2017/05/05 00:59:42.730 Opening Registry 
+2017/05/05 00:59:42.730 Service path: "C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FifthModule\ScannerManager\bin\Debug\ScannerManager.exe" 
+2017/05/05 00:59:42.730 Image path: "C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FifthModule\ScannerManager\bin\Debug\ScannerManager.exe"  -displayname "Streaming Scanner Service" -servicename "StreamingScannerService" 
+2017/05/05 00:59:42.733 Closing Registry 
+2017/05/05 00:59:44.388 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:59:44.388 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:59:44.786 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:59:44.799 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:59:44.799 Starting StreamingScannerService 
+2017/05/05 00:59:45.024 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:59:45.036 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 00:59:45.055 Started by the Windows services process 
+2017/05/05 00:59:45.055 Running as a service, creating service host. 
+2017/05/05 00:59:45.055 Starting as a Windows service 
+2017/05/05 00:59:45.060 [Topshelf] Starting up as a windows service application 
+2017/05/05 00:59:45.060 [Topshelf] Starting 
+2017/05/05 00:59:45.060 [Topshelf] Current Directory: C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FifthModule\ScannerManager\bin\Debug 
+2017/05/05 00:59:45.060 [Topshelf] Arguments:  
+2017/05/05 00:59:45.060 [Topshelf] Started 
+2017/05/05 00:59:45.312 The StreamingScannerService service was started. 
