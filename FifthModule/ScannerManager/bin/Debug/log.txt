@@ -552,3 +552,33 @@
 2017/05/05 00:59:45.060 [Topshelf] Arguments:  
 2017/05/05 00:59:45.060 [Topshelf] Started 
 2017/05/05 00:59:45.312 The StreamingScannerService service was started. 
+2017/05/05 01:07:26.085 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 01:07:26.098 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 01:07:26.522 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 01:07:26.535 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 01:07:26.535 Stopping StreamingScannerService 
+2017/05/05 01:07:26.545 [Topshelf] Stopping 
+2017/05/05 01:07:26.547 [Topshelf] Stopped 
+2017/05/05 01:07:26.795 The StreamingScannerService service was stopped. 
+2017/05/05 01:07:29.064 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 01:07:29.064 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 01:07:29.465 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 01:07:29.478 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/05 01:07:29.486 Uninstalling StreamingScannerService 
+2017/05/05 01:07:29.486 Uninstalling StreamingScannerService service 
