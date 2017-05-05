@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Threading;
 
-namespace FifthModule.Classes
+namespace Scanner.Classes
 {
 	public class FileManager
 	{
@@ -62,16 +63,28 @@ namespace FifthModule.Classes
 
 		public bool TryOpen(string filePath, int retryCount, int interval) 
 		{
+			FileStream file = null;
+
 			for (var i = 0; i < retryCount; i++) {
 				try 
 				{
-					var file = File.Open(filePath, FileMode.Open, FileAccess.Read, FileShare.None);
+					file = File.Open(filePath, FileMode.Open, FileAccess.Read, FileShare.None);
 					file.Close();
 					return true;
 				}
 				catch (Exception ex)
 				{
+					Debug.WriteLine("Exception has occured!");
+					Debug.WriteLine(ex.Message);
+
 					Thread.Sleep(interval);
+				}
+				finally
+				{
+					if (file != null)
+					{
+						file.Close();
+					}
 				}
 			}
 

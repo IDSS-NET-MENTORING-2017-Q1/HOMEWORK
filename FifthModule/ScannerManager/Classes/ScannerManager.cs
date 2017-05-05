@@ -1,87 +1,61 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
-using System.Threading;
-using Topshelf;
+﻿using System.Collections.Generic;
 
-namespace FifthModule.Classes
+namespace Scanner.Classes
 {
 	public class ScannerManager
 	{
-		private FileManager _fileManager;
+		private FileManagerFactory _fileManagerFactory;
+		private ICollection<PathWatcher> _pathWatchers = new List<PathWatcher>();
+
 		private BarcodeManager _barcodeManager;
 		private DocumentManager _documentManager;
 
-		private FileSystemWatcher _watcher;
-		private Thread _worker;
-
-		ManualResetEvent _stopRequested;
-		AutoResetEvent _fileCreated;
-
-		public FileManager FileManager
+		public ICollection<PathWatcher> PathWatchers
 		{
 			get
 			{
-				return _fileManager;
+				return _pathWatchers;
 			}
 			set
 			{
-				_fileManager = value;
+				_pathWatchers = value;
 			}
 		}
 
-		private void WorkProcess()
+		public FileManagerFactory FileManagerFactory
 		{
-			do
+			get
 			{
-				foreach (var fileName in _fileManager.GetInputFiles())
-				{
-					if (_stopRequested.WaitOne(TimeSpan.Zero))
-					{
-						return;
-					}
+				return _fileManagerFactory;
+			}
+			set
+			{
+				_fileManagerFactory = value;
+			}
+		}
 
-					if (_fileManager.TryOpen(fileName, 3, 3000))
-					{
-						try
-						{
-							if (_barcodeManager.IsBarcode(fileName))
-							{
-								var sourceFiles = _fileManager.GetTempFiles();
-								var pdfName = Path.Combine(_fileManager.OutputPath, Guid.NewGuid().ToString() + ".pdf");
+		public BarcodeManager BarcodeManager
+		{
+			get
+			{
+				return _barcodeManager;
+			}
+			set
+			{
+				_barcodeManager = value;
+			}
+		}
 
-								Debug.WriteLine(string.Format("Generating resulting PDF...", fileName));
-
-								_fileManager.Delete(fileName);
-								_documentManager.GeneratePdf(pdfName, sourceFiles);
-								_fileManager.ClearTemp();
-							}
-							else
-							{
-								Debug.WriteLine(string.Format("Moving {0} to temp folder...", fileName));
-								_fileManager.MoveToTemp(fileName);
-							}
-
-							continue;
-						}
-						catch (Exception ex) {
-							Debug.WriteLine("Exception has occured!");
-							Debug.WriteLine(ex.Message);
-						}
-
-						try
-						{
-							Debug.WriteLine(string.Format("Moving {0} to corrupted folder...", fileName));
-							_fileManager.MoveToCorrupted(fileName);
-						}
-						catch (Exception ex)
-						{
-							Debug.WriteLine("Exception has occured!");
-							Debug.WriteLine(ex.Message);
-						}
-					}
-				}
-			} while (WaitHandle.WaitAny(new WaitHandle[] {_stopRequested, _fileCreated}) != 0);
+		public DocumentManager DocumentManager
+		{
+			get
+			{
+				return _documentManager;
+			}
+			set
+			{
+				_documentManager = value;
+			}
 		}
 
 		protected void Init()
@@ -89,23 +63,38 @@ namespace FifthModule.Classes
 			Init(null, null, null, null);
 		}
 
-		protected void Init(string inputPath, string outputPath, string tempPath, string corruptedPath)
+		protected void Init(IEnumerable<string> sourcePaths, string outputPath, string tempPath, string corruptedPath)
 		{
-			_fileManager = new FileManager(inputPath, outputPath, tempPath, corruptedPath);
+			_fileManagerFactory = new FileManagerFactory(outputPath, tempPath, corruptedPath);
 			_documentManager = new DocumentManager();
 			_barcodeManager = new BarcodeManager();
 
-			CreateWatcherAndEvents();
-		}
+			if (sourcePaths == null)
+			{
+				var fileManager = _fileManagerFactory.Create(null);
+				var pathWatcher = new PathWatcher(fileManager.InputPath)
+				{
+					FileManager = fileManager,
+					DocumentManager = _documentManager,
+					BarcodeManager = _barcodeManager
+				};
 
-		protected void CreateWatcherAndEvents()
-		{
-			_watcher = new FileSystemWatcher(_fileManager.InputPath);
-			_watcher.Created += Watcher_Created;
-			_worker = new Thread(WorkProcess);
+				_pathWatchers.Add(pathWatcher);
 
-			_stopRequested = new ManualResetEvent(false);
-			_fileCreated = new AutoResetEvent(false);
+				return;
+			}
+
+			foreach (var sourcePath in sourcePaths)
+			{
+				var fileManager = _fileManagerFactory.Create(sourcePath);
+				var pathWatcher = new PathWatcher(sourcePath) {
+					FileManager = fileManager,
+					DocumentManager = _documentManager,
+					BarcodeManager = _barcodeManager
+				};
+
+				_pathWatchers.Add(pathWatcher);
+			}
 		}
 
 		public ScannerManager()
@@ -113,40 +102,29 @@ namespace FifthModule.Classes
 			Init();
 		}
 
-		public ScannerManager(FileManager fileManager, BarcodeManager barcodeManager, DocumentManager documentManager)
+		public ScannerManager(IEnumerable<string> sourcesPath, string outputPath) : this(sourcesPath, outputPath, null, null) { }
+
+		public ScannerManager(IEnumerable<string> sourcesPath, string outputPath, string tempPath, string corruptedPath)
 		{
-			_fileManager = fileManager;
-			_barcodeManager = barcodeManager;
-			_documentManager = documentManager;
-
-			CreateWatcherAndEvents();
-		}
-
-		public ScannerManager(string inputPath, string outputPath) : this(inputPath, outputPath, null, null) { }
-
-		public ScannerManager(string inputPath, string outputPath, string tempPath, string corruptedPath)
-		{
-			Init(inputPath, outputPath, tempPath, corruptedPath);
-		}
-
-		private void Watcher_Created(object sender, FileSystemEventArgs e)
-		{
-			_fileCreated.Set();
+			Init(sourcesPath, outputPath, tempPath, corruptedPath);
 		}
 
 		public bool Start()
 		{
-			_worker.Start();
-			_watcher.EnableRaisingEvents = true;
+			foreach (var pathWatcher in _pathWatchers)
+			{
+				pathWatcher.Start();
+			}
 
 			return true;
 		}
 
 		public bool Stop()
 		{
-			_watcher.EnableRaisingEvents = false;
-			_stopRequested.Set();
-			_worker.Join();
+			foreach (var pathWatcher in _pathWatchers)
+			{
+				pathWatcher.Stop();
+			}
 
 			return true;
 		}

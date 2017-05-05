@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using MigraDoc.DocumentObjectModel;
 using MigraDoc.DocumentObjectModel.Shapes;
 using MigraDoc.Rendering;
 
-namespace FifthModule.Classes
+namespace Scanner.Classes
 {
 	public class DocumentManager
 	{
@@ -29,10 +27,13 @@ namespace FifthModule.Classes
 				section.AddPageBreak();
 			}
 
-			var renderer = new PdfDocumentRenderer();
-			renderer.Document = document;
-			renderer.RenderDocument();
+			var renderer = new PdfDocumentRenderer()
+			{
+				Document = document
+			};
 
+			renderer.PrepareRenderPages();
+			//renderer.RenderDocument();
 			renderer.Save(destination);
 		}
 	}

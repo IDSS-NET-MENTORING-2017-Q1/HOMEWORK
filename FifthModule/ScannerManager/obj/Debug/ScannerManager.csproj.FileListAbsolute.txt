@@ -105,3 +105,5 @@ C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\FifthModule\S
 C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\FifthModule\ScannerManager\obj\Debug\ScannerManager.exe
 C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\FifthModule\ScannerManager\obj\Debug\ScannerManager.pdb
 C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\FifthModule\ScannerManager\obj\Debug\ScannerManager.csprojResolveAssemblyReference.cache
+C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\FifthModule\ScannerManager\bin\Debug\Newtonsoft.Json.dll
+C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\FifthModule\ScannerManager\bin\Debug\Newtonsoft.Json.xml

@@ -2,7 +2,7 @@
 using System.IO;
 using ZXing;
 
-namespace FifthModule.Classes
+namespace Scanner.Classes
 {
 	public class BarcodeManager
 	{

@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Configuration;
 using System.IO;
-using FifthModule.Classes;
 using NLog;
 using NLog.Config;
 using NLog.Targets;
 using Topshelf;
+using System.Collections.Generic;
+using Newtonsoft.Json;
+using Scanner.Classes;
+using System.Diagnostics;
 
-namespace FifthModule
+namespace Scanner
 {
 	class Program
 	{
@@ -19,10 +22,23 @@ namespace FifthModule
 				logPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "log.txt");
 			}
 
-			var inputPath = ConfigurationManager.AppSettings["inputPath"];
 			var outputPath = ConfigurationManager.AppSettings["outputPath"];
 			var tempPath = ConfigurationManager.AppSettings["tempPath"];
 			var corruptedPath = ConfigurationManager.AppSettings["corruptedPath"];
+			var sourcesPath = ConfigurationManager.AppSettings["sourcesPath"];
+
+			IEnumerable<string> sources = null;
+			if (File.Exists(sourcesPath)) {
+				try
+				{
+					sources = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(sourcesPath));
+				}
+				catch (Exception ex)
+				{
+					Debug.WriteLine("Exception has occured!");
+					Debug.WriteLine(ex.Message);
+				}
+			}
 
 			var fileTarget = new FileTarget {
 				Name = "Default",
@@ -54,7 +70,7 @@ namespace FifthModule
 
 					conf.Service<ScannerManager>(callback =>
 					{
-						callback.ConstructUsing(() => new ScannerManager(inputPath, outputPath, tempPath, corruptedPath));
+						callback.ConstructUsing(() => new ScannerManager(sources, outputPath, tempPath, corruptedPath));
 						callback.WhenStarted(service => service.Start());
 						callback.WhenStopped(service => service.Stop());
 					}).UseNLog(logFactory);
