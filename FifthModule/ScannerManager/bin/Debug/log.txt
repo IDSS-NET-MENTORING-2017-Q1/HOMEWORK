@@ -73,3 +73,54 @@
 2017/05/05 00:21:15.843 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
 2017/05/05 00:21:15.874 Running as a console application, creating the console host. 
 2017/05/05 00:21:15.874 The StreamingScannerService service is running and must be stopped before running via the console 
+2017/05/04 23:46:37.260 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/04 23:46:37.289 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/04 23:46:37.308 Running as a console application, creating the console host. 
+2017/05/04 23:46:37.312 Starting up as a console application 
+2017/05/04 23:46:37.312 The StreamingScannerService service is now running, press Control+C to exit. 
+2017/05/04 23:46:55.016 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/04 23:46:55.016 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/04 23:46:55.045 Running as a console application, creating the console host. 
+2017/05/04 23:46:55.045 Starting up as a console application 
+2017/05/04 23:46:55.045 The StreamingScannerService service is now running, press Control+C to exit. 
+2017/05/04 23:47:57.153 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/04 23:47:57.165 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/04 23:47:57.182 Running as a console application, creating the console host. 
+2017/05/04 23:47:57.187 Starting up as a console application 
+2017/05/04 23:47:57.187 The StreamingScannerService service is now running, press Control+C to exit. 
+2017/05/04 23:48:52.334 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/04 23:48:52.346 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/04 23:48:52.364 Running as a console application, creating the console host. 
+2017/05/04 23:48:52.364 Starting up as a console application 
+2017/05/04 23:48:52.364 The StreamingScannerService service is now running, press Control+C to exit. 
+2017/05/04 23:50:12.465 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/04 23:50:12.477 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 
+2017/05/04 23:50:12.495 Running as a console application, creating the console host. 
+2017/05/04 23:50:12.499 Starting up as a console application 
+2017/05/04 23:50:12.499 The StreamingScannerService service is now running, press Control+C to exit. 
+2017/05/05 00:18:42.479 Configuration Result:
+[Success] Name StreamingScannerService
+[Success] DisplayName Streaming Scanner Service
+[Success] Description Streaming Scanner Service
+[Success] ServiceName StreamingScannerService 
+2017/05/05 00:18:42.479 Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000 

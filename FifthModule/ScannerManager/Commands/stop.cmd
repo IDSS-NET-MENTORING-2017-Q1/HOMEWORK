@@ -1,1 +1,1 @@
-sc stop StreamingScannerService
+..\ScannerManager.exe stop

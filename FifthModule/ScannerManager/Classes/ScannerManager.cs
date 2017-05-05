@@ -46,19 +46,27 @@ namespace FifthModule.Classes
 						{
 							if (_barcodeManager.IsBarcode(fileName))
 							{
+								var sourceFiles = _fileManager.GetTempFiles();
+								var pdfDestination = Path.Combine(_fileManager.OutputPath, Guid.NewGuid().ToString() + ".pdf");
+
 								_fileManager.Delete(fileName);
-								_documentManager.GeneratePdf();
+								_documentManager.GeneratePdf(pdfDestination, sourceFiles);
 								_fileManager.ClearTemp();
 							}
 							else
 							{
 								_fileManager.MoveToTemp(fileName);
 							}
+
+							continue;
 						}
-						catch (Exception ex)
+						catch (Exception ex) { }
+
+						try
 						{
 							_fileManager.MoveToCorrupted(fileName);
-						}						
+						}
+						catch (Exception ex) { }
 					}
 				}
 			} while (WaitHandle.WaitAny(new WaitHandle[] {_stopRequested, _fileCreated}) != 0);
@@ -72,7 +80,7 @@ namespace FifthModule.Classes
 		protected void Init(string inputPath, string outputPath, string tempPath, string corruptedPath)
 		{
 			_fileManager = new FileManager(inputPath, outputPath, tempPath, corruptedPath);
-			_documentManager = new DocumentManager(_fileManager);
+			_documentManager = new DocumentManager();
 			_barcodeManager = new BarcodeManager();
 
 			CreateWatcherAndEvents();

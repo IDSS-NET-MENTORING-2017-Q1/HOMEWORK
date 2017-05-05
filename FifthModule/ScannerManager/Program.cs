@@ -39,20 +39,25 @@ namespace FifthModule
 			HostFactory.Run(
 				conf =>
 				{
-					conf.Service<ScannerManager>(callback => {
-						callback.ConstructUsing(() => new ScannerManager(inputPath, outputPath, tempPath, corruptedPath));
-						callback.WhenStarted(service => service.Start());
-						callback.WhenStopped(service => service.Stop());
-					}).UseNLog(logFactory);
-
 					conf.StartAutomaticallyDelayed();
 					conf.SetServiceName("StreamingScannerService");
 					conf.SetDisplayName("Streaming Scanner Service");
 					conf.RunAsLocalSystem();
 					conf.EnableServiceRecovery(recovery =>
 					{
-						recovery.RestartService(1).SetResetPeriod(0);
+						recovery
+							.RestartService(1)
+							.RestartService(3)
+							.RestartService(5)
+							.SetResetPeriod(1);
 					});
+
+					conf.Service<ScannerManager>(callback =>
+					{
+						callback.ConstructUsing(() => new ScannerManager(inputPath, outputPath, tempPath, corruptedPath));
+						callback.WhenStarted(service => service.Start());
+						callback.WhenStopped(service => service.Stop());
+					}).UseNLog(logFactory);
 				}
 			);
 		}

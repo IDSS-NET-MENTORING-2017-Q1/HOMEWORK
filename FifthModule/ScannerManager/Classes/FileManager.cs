@@ -175,13 +175,14 @@ namespace FifthModule.Classes
 
 		public bool MoveToTemp(string fileName)
 		{
-			var tempFile = Path.Combine(_tempPath, fileName);
+			var tempFile = Path.Combine(_tempPath, Path.GetFileName(fileName));
+			
 			return MoveTo(fileName, tempFile);		
 		}
 
 		public bool MoveToCorrupted(string fileName)
 		{
-			var corruptedFile = Path.Combine(_corruptedPath, fileName);
+			var corruptedFile = Path.Combine(_corruptedPath, Path.GetFileName(fileName));
 			return MoveTo(fileName, corruptedFile);		
 		}
 

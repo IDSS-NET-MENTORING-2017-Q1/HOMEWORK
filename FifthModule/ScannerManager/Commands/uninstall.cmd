@@ -1,1 +1,1 @@
-sc delete StreamingScannerService
+..\ScannerManager.exe uninstall --sudo

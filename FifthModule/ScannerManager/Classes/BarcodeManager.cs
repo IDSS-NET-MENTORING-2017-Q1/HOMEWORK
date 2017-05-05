@@ -18,14 +18,18 @@ namespace FifthModule.Classes
 				return false;
 			}
 
-			var bitmap = Bitmap.FromFile(fileName) as Bitmap;
-
-			var reader = new BarcodeReader { AutoRotate = true };
-			var decodeResult = reader.Decode(bitmap);
-
-			if (decodeResult != null)
+			using (FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read))
 			{
-				return true;
+				using (Bitmap bitmap = Bitmap.FromStream(fs) as Bitmap)
+				{
+					var reader = new BarcodeReader { AutoRotate = true };
+					var decodeResult = reader.Decode(bitmap);
+
+					if (decodeResult != null)
+					{
+						return true;
+					}
+				}
 			}
 
 			return false;

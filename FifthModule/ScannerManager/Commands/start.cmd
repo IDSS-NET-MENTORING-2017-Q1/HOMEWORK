@@ -1,1 +1,1 @@
-sc start StreamingScannerService
+..\ScannerManager.exe start

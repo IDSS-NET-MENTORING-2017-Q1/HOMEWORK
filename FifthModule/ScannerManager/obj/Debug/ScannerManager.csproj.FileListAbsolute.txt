@@ -41,7 +41,6 @@ C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FifthMo
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FifthModule\ScannerManager\bin\Debug\MigraDoc.DocumentObjectModel.dll
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FifthModule\ScannerManager\bin\Debug\MigraDoc.Rendering.dll
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FifthModule\ScannerManager\bin\Debug\MigraDoc.RtfRendering.dll
-C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FifthModule\ScannerManager\bin\Debug\NLog.dll
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FifthModule\ScannerManager\bin\Debug\PdfSharp.Charting.dll
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FifthModule\ScannerManager\bin\Debug\PdfSharp.dll
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FifthModule\ScannerManager\bin\Debug\Topshelf.dll
@@ -51,7 +50,6 @@ C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FifthMo
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FifthModule\ScannerManager\bin\Debug\MigraDoc.DocumentObjectModel.xml
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FifthModule\ScannerManager\bin\Debug\MigraDoc.Rendering.xml
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FifthModule\ScannerManager\bin\Debug\MigraDoc.RtfRendering.xml
-C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FifthModule\ScannerManager\bin\Debug\NLog.xml
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FifthModule\ScannerManager\bin\Debug\PdfSharp.xml
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FifthModule\ScannerManager\bin\Debug\PdfSharp.Charting.xml
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FifthModule\ScannerManager\bin\Debug\Topshelf.xml

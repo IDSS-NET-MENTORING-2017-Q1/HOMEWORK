@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using MigraDoc.DocumentObjectModel;
 using MigraDoc.DocumentObjectModel.Shapes;
@@ -8,35 +9,11 @@ namespace FifthModule.Classes
 {
 	public class DocumentManager
 	{
-		private FileManager _fileManager;
-
-		public FileManager FileManager
-		{
-			get
-			{
-				return _fileManager;
-			}
-			set
-			{
-				_fileManager = value;
-			}
-		}
-
-		public DocumentManager(FileManager fileManager)
-		{
-			_fileManager = fileManager;
-		}
-
-		public void GeneratePdf() {
-			if (_fileManager == null)
-			{
-				throw new InvalidOperationException("File manager is not defined!");
-			}
-
+		public void GeneratePdf(string destination, IEnumerable<string> sourceFiles) {
 			var document = new Document();
 			var section = document.AddSection();
 
-			foreach (string fileName in _fileManager.GetTempFiles())
+			foreach (string fileName in sourceFiles)
 			{
 				var image = section.AddImage(fileName);
 
@@ -56,11 +33,7 @@ namespace FifthModule.Classes
 			renderer.Document = document;
 			renderer.RenderDocument();
 
-			var resultName = Path.Combine(_fileManager.OutputPath, Guid.NewGuid().ToString());
-			
-			renderer.Save(resultName);
-
-			_fileManager.ClearTemp();
+			renderer.Save(destination);
 		}
 	}
 }
