@@ -107,3 +107,8 @@ C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\FifthModule\S
 C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\FifthModule\ScannerManager\obj\Debug\ScannerManager.csprojResolveAssemblyReference.cache
 C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\FifthModule\ScannerManager\bin\Debug\Newtonsoft.Json.dll
 C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\FifthModule\ScannerManager\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FifthModule\ScannerManager\obj\Debug\ScannerManager.csprojResolveAssemblyReference.cache
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FifthModule\ScannerManager\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FifthModule\ScannerManager\bin\Debug\NLog.dll
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FifthModule\ScannerManager\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\FifthModule\ScannerManager\bin\Debug\NLog.xml

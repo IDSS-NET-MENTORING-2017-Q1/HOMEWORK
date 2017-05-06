@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Scanner.Classes
 {
@@ -58,6 +60,12 @@ namespace Scanner.Classes
 			}
 		}
 
+		protected bool IsUnc(string sourcePath)
+		{
+			var uri = new Uri(sourcePath);
+			return uri.IsUnc;
+		}
+
 		protected void Init()
 		{
 			Init(null, null, null, null);
@@ -69,7 +77,7 @@ namespace Scanner.Classes
 			_documentManager = new DocumentManager();
 			_barcodeManager = new BarcodeManager();
 
-			if (sourcePaths == null)
+			if (sourcePaths == null || !sourcePaths.Any(path => !IsUnc(path)))
 			{
 				var fileManager = _fileManagerFactory.Create(null);
 				var pathWatcher = new PathWatcher(fileManager.InputPath)
@@ -84,7 +92,7 @@ namespace Scanner.Classes
 				return;
 			}
 
-			foreach (var sourcePath in sourcePaths)
+			foreach (var sourcePath in sourcePaths.Where(path => !IsUnc(path)))
 			{
 				var fileManager = _fileManagerFactory.Create(sourcePath);
 				var pathWatcher = new PathWatcher(sourcePath) {

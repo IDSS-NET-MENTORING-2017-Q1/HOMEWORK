@@ -1,40 +1,33 @@
 ﻿using System.Collections.Generic;
-using MigraDoc.DocumentObjectModel;
-using MigraDoc.DocumentObjectModel.Shapes;
+using System.Drawing;
+using System.IO;
 using MigraDoc.Rendering;
+using PdfSharp.Drawing;
+using PdfSharp.Pdf;
 
 namespace Scanner.Classes
 {
 	public class DocumentManager
 	{
 		public void GeneratePdf(string destination, IEnumerable<string> sourceFiles) {
-			var document = new Document();
-			var section = document.AddSection();
+			var document = new PdfDocument();
 
 			foreach (string fileName in sourceFiles)
 			{
-				var image = section.AddImage(fileName);
+				var page = document.AddPage();
+				var graphics = XGraphics.FromPdfPage(page);
 
-				image.RelativeHorizontal = RelativeHorizontal.Page;
-				image.RelativeVertical = RelativeVertical.Page;
-
-				image.Top = 0;
-				image.Left = 0;
-
-				image.Height = document.DefaultPageSetup.PageHeight;
-				image.Width = document.DefaultPageSetup.PageWidth;
-
-				section.AddPageBreak();
+				using (FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read))
+				{
+					using (Image image = Image.FromStream(fs))
+					{
+						var xImage = XImage.FromGdiPlusImage(image);
+						graphics.DrawImage(xImage, 0, 0, page.Width, page.Height);
+					}
+				}
 			}
 
-			var renderer = new PdfDocumentRenderer()
-			{
-				Document = document
-			};
-
-			renderer.PrepareRenderPages();
-			//renderer.RenderDocument();
-			renderer.Save(destination);
+			document.Save(destination);
 		}
 	}
 }
