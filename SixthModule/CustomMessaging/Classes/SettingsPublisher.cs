@@ -1,6 +1,7 @@
 ﻿using System.Text;
 using CustomMessaging.Interfaces;
 using RabbitMQ.Client;
+using Newtonsoft.Json;
 
 namespace CustomMessaging.Classes
 {
@@ -14,7 +15,7 @@ namespace CustomMessaging.Classes
 			{
 				channel.ExchangeDeclare(exchange: "logs", type: "fanout");
 
-				var message = "Hello, World!";
+				var message = JsonConvert.SerializeObject(value);
 				var body = Encoding.UTF8.GetBytes(message);
 				channel.BasicPublish(exchange: "logs",
 									 routingKey: "",
