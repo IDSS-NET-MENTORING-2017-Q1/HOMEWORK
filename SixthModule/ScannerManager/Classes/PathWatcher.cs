@@ -34,24 +34,6 @@ namespace Scanner.Classes
 		private IReceiver<Settings> _settingsListener;
 		private IPublisher<ServiceStatuses> _statusPublisher;
 
-		public int StatusInterval
-		{
-			get { return _statusInterval; }
-			set { _statusInterval = value; }
-		}
-
-		public IPublisher<ServiceStatuses> StatusPublisher
-		{
-			get { return _statusPublisher; }
-			set { _statusPublisher = value; }
-		}
-
-		public IReceiver<Settings> SettingsListener
-		{
-			get { return _settingsListener; }
-			set { _settingsListener = value; }
-		}
-
 		public PathWatcher(string inputPath)
 		{
 
@@ -99,7 +81,9 @@ namespace Scanner.Classes
 			{
 				return;
 			}
-			
+
+			Debug.WriteLine("Generating resulting PDF...");
+
 			var pdfStream = _documentManager.GeneratePdf(sourceFiles);
 			var pdfContent = pdfStream.ToArray();
 
@@ -241,6 +225,36 @@ namespace Scanner.Classes
 			{
 				_documentManager = value;
 			}
+		}
+
+		public IPublisher<IEnumerable<byte>> DocumentPublisher
+		{
+			get
+			{
+				return _documentPublisher;
+			}
+			set
+			{
+				_documentPublisher = value;
+			}
+		}
+
+		public int StatusInterval
+		{
+			get { return _statusInterval; }
+			set { _statusInterval = value; }
+		}
+
+		public IPublisher<ServiceStatuses> StatusPublisher
+		{
+			get { return _statusPublisher; }
+			set { _statusPublisher = value; }
+		}
+
+		public IReceiver<Settings> SettingsListener
+		{
+			get { return _settingsListener; }
+			set { _settingsListener = value; }
 		}
 	}
 }

@@ -120,7 +120,8 @@ namespace Scanner.Classes
 			foreach (var sourcePath in sourcePaths.Where(path => !IsUnc(path)))
 			{
 				var fileManager = _fileManagerFactory.Create(sourcePath);
-				var pathWatcher = new PathWatcher(sourcePath) {
+				var pathWatcher = new PathWatcher(sourcePath)
+				{
 					FileManager = fileManager,
 					DocumentManager = _documentManager,
 					BarcodeManager = _barcodeManager
