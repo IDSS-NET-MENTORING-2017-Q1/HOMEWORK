@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessagingService", "MessagingService\MessagingService.csproj", "{18FCE512-687E-44FE-891E-F4C80A41F0F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScannerManager", "ScannerManager\ScannerManager.csproj", "{27C11F20-5673-4CBB-88AD-D894BC47465A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{18FCE512-687E-44FE-891E-F4C80A41F0F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18FCE512-687E-44FE-891E-F4C80A41F0F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18FCE512-687E-44FE-891E-F4C80A41F0F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18FCE512-687E-44FE-891E-F4C80A41F0F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27C11F20-5673-4CBB-88AD-D894BC47465A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27C11F20-5673-4CBB-88AD-D894BC47465A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27C11F20-5673-4CBB-88AD-D894BC47465A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27C11F20-5673-4CBB-88AD-D894BC47465A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
