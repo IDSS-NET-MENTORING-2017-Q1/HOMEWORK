@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessagingService", "Messagi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScannerManager", "ScannerManager\ScannerManager.csproj", "{27C11F20-5673-4CBB-88AD-D894BC47465A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomMessaging", "CustomMessaging\CustomMessaging.csproj", "{C23B74CD-1B9D-4184-B388-CE08702F3AD9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{27C11F20-5673-4CBB-88AD-D894BC47465A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27C11F20-5673-4CBB-88AD-D894BC47465A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27C11F20-5673-4CBB-88AD-D894BC47465A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C23B74CD-1B9D-4184-B388-CE08702F3AD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C23B74CD-1B9D-4184-B388-CE08702F3AD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C23B74CD-1B9D-4184-B388-CE08702F3AD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C23B74CD-1B9D-4184-B388-CE08702F3AD9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

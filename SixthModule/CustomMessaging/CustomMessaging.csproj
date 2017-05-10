@@ -4,17 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{18FCE512-687E-44FE-891E-F4C80A41F0F4}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{C23B74CD-1B9D-4184-B388-CE08702F3AD9}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MessagingService</RootNamespace>
-    <AssemblyName>MessagingService</AssemblyName>
+    <RootNamespace>CustomMessaging</RootNamespace>
+    <AssemblyName>CustomMessaging</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -46,11 +44,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="Classes\DocumentPublisher.cs" />
+    <Compile Include="Classes\DocumentReceiver.cs" />
+    <Compile Include="Classes\Settings.cs" />
+    <Compile Include="Classes\SettingsPublisher.cs" />
+    <Compile Include="Classes\SettingsReceiver.cs" />
+    <Compile Include="Classes\StatusPublisher.cs" />
+    <Compile Include="Classes\StatusReceiver.cs" />
+    <Compile Include="Interfaces\IPublisher.cs" />
+    <Compile Include="Interfaces\IReceiver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceStatuses.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

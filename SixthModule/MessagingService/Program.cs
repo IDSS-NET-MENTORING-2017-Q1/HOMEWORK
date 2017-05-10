@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Text;
+using MessagingService.Classes;
 using RabbitMQ.Client;
 namespace MessagingService
 {
@@ -8,32 +9,16 @@ namespace MessagingService
 	{
 		static void Main(string[] args)
 		{
-			var factory = new ConnectionFactory() { HostName = "localhost" };
-			using (var connection = factory.CreateConnection())
-			using (var channel = connection.CreateModel())
-			{
-				channel.ExchangeDeclare(exchange: "logs", type: "fanout");
+			var documentReceiver = new DocumentReceiver();
+			var statusReceiver = new StatusReceiver();
+			var settingsPublisher = new SettingsPublisher();
 
-				var message = GetMessage(args);
-				var body = Encoding.UTF8.GetBytes(message);
-				channel.BasicPublish(exchange: "logs",
-									 routingKey: "",
-									 basicProperties: null,
-									 body: body);
-				Console.WriteLine("[x] Sent {0}", message);
-			}
-
-
+			documentReceiver.Listen();
+			statusReceiver.Listen();
+			settingsPublisher.Listen();
 
 			Console.WriteLine("Press [enter] to exit.");
 			Console.ReadLine();
-		}
-
-		private static string GetMessage(string[] args)
-		{
-			return ((args.Length > 0)
-				   ? string.Join(" ", args)
-				   : "info: Hello World!");
 		}
 	}
 }

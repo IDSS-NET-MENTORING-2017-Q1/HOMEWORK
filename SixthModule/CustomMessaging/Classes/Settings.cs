@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MessagingService.Classes
+namespace CustomMessaging.Classes
 {
-	class SettingsPublisher : IMessager
+	public class Settings
 	{
 	}
 }
