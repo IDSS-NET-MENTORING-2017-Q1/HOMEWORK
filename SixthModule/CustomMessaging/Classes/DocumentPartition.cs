@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace CustomMessaging.Classes
 {
-	public class Settings
+	public class DocumentPartition
 	{
-		public int Timeout { get; set; }
-		public string EndOfDocument { get; set; }
 	}
 }

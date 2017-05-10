@@ -6,6 +6,30 @@ namespace Scanner.Classes
 {
 	public class BarcodeManager
 	{
+		private string _endOfDocument = "EndOfDocument";
+
+		public BarcodeManager()
+		{
+
+		}
+
+		public BarcodeManager(string endOfDocument)
+		{
+			_endOfDocument = endOfDocument;
+		}
+
+		public string EndOfDocument
+		{
+			get
+			{
+				return _endOfDocument;
+			}
+			set
+			{
+				_endOfDocument = value;
+			}
+		}
+
 		public bool IsBarcode(string fileName)
 		{
 			if (string.IsNullOrWhiteSpace(fileName))
@@ -25,7 +49,7 @@ namespace Scanner.Classes
 					var reader = new BarcodeReader { AutoRotate = true };
 					var decodeResult = reader.Decode(bitmap);
 
-					if (decodeResult != null)
+					if (decodeResult != null && decodeResult.Text == _endOfDocument)
 					{
 						return true;
 					}

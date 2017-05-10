@@ -1,0 +1,6 @@
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SixthModule\CustomMessaging\bin\Debug\CustomMessaging.dll
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SixthModule\CustomMessaging\bin\Debug\CustomMessaging.pdb
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SixthModule\CustomMessaging\bin\Debug\RabbitMQ.Client.dll
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SixthModule\CustomMessaging\bin\Debug\RabbitMQ.Client.xml
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SixthModule\CustomMessaging\obj\Debug\CustomMessaging.dll
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SixthModule\CustomMessaging\obj\Debug\CustomMessaging.pdb

@@ -1,6 +1,7 @@
 ﻿using System.Text;
 using CustomMessaging.Interfaces;
 using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
 
 namespace CustomMessaging.Classes
 {
@@ -30,7 +31,7 @@ namespace CustomMessaging.Classes
 									 consumer: consumer);
 			}
 
-			return null;
+			return ServiceStatuses.Waiting;
 		}
 	}
 }

@@ -1,11 +1,14 @@
-﻿using System.Text;
+﻿using System.Collections.Generic;
+using System.Text;
+using CustomMessaging.Interfaces;
 using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
 
 namespace CustomMessaging.Classes
 {
-	public class DocumentReceiver : IReceiver
+	public class DocumentReceiver : IReceiver<IEnumerable<byte>>
 	{
-		public void Listen()
+		public IEnumerable<byte> Receive()
 		{
 			var factory = new ConnectionFactory() { HostName = "localhost" };
 			using (var connection = factory.CreateConnection())
@@ -27,6 +30,8 @@ namespace CustomMessaging.Classes
 									 noAck: true,
 									 consumer: consumer);
 			}
+
+			throw new System.NotImplementedException();
 		}
 	}
 }

@@ -1,26 +1,55 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Timers;
+
+using CustomMessaging.Classes;
+using CustomMessaging.Interfaces;
 
 namespace Scanner.Classes
 {
 	public class ScannerManager
 	{
+		private int _checkInterval;
+		private Timer _checkTimer;
+
 		private FileManagerFactory _fileManagerFactory;
 		private ICollection<PathWatcher> _pathWatchers = new List<PathWatcher>();
 
 		private BarcodeManager _barcodeManager;
 		private DocumentManager _documentManager;
 
+		private IReceiver<Settings> _settingsListener;
+
+		public int CheckInterval
+		{
+			get
+			{
+				return _checkInterval;
+			}
+			set
+			{
+				_checkInterval = value;
+			}
+		}
+
+		public IReceiver<Settings> SettingsReceiver
+		{
+			get
+			{
+				return _settingsListener;
+			}
+			set
+			{
+				_settingsListener = value;
+			}
+		}
+
 		public ICollection<PathWatcher> PathWatchers
 		{
 			get
 			{
 				return _pathWatchers;
-			}
-			set
-			{
-				_pathWatchers = value;
 			}
 		}
 
@@ -30,10 +59,6 @@ namespace Scanner.Classes
 			{
 				return _fileManagerFactory;
 			}
-			set
-			{
-				_fileManagerFactory = value;
-			}
 		}
 
 		public BarcodeManager BarcodeManager
@@ -42,10 +67,6 @@ namespace Scanner.Classes
 			{
 				return _barcodeManager;
 			}
-			set
-			{
-				_barcodeManager = value;
-			}
 		}
 
 		public DocumentManager DocumentManager
@@ -53,10 +74,6 @@ namespace Scanner.Classes
 			get
 			{
 				return _documentManager;
-			}
-			set
-			{
-				_documentManager = value;
 			}
 		}
 
@@ -73,6 +90,14 @@ namespace Scanner.Classes
 
 		protected void Init(IEnumerable<string> sourcePaths, string outputPath, string tempPath, string corruptedPath)
 		{
+			_checkTimer = new Timer(_checkInterval)
+			{
+				Enabled = true,
+				AutoReset = true
+			};
+
+			_checkTimer.Elapsed += CheckTimer_Elapsed;
+
 			_fileManagerFactory = new FileManagerFactory(outputPath, tempPath, corruptedPath);
 			_documentManager = new DocumentManager();
 			_barcodeManager = new BarcodeManager();
@@ -102,6 +127,17 @@ namespace Scanner.Classes
 				};
 
 				_pathWatchers.Add(pathWatcher);
+			}
+		}
+
+		void CheckTimer_Elapsed(object sender, ElapsedEventArgs e)
+		{
+			var settings = _settingsListener.Receive();
+
+			foreach (var pathWatcher in _pathWatchers)
+			{
+				pathWatcher.WaitInterval = settings.Timeout;
+				pathWatcher.BarcodeManager.EndOfDocument = settings.EndOfDocument;
 			}
 		}
 

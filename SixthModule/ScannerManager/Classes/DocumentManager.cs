@@ -42,5 +42,34 @@ namespace Scanner.Classes
 
 			document.Save(destination);
 		}
+
+		public MemoryStream GeneratePdf(IEnumerable<string> sourceFiles)
+		{
+			var document = new PdfDocument();
+
+			foreach (string fileName in sourceFiles)
+			{
+				if (!ValidateName(fileName))
+				{
+					continue;
+				}
+
+				var page = document.AddPage();
+				var graphics = XGraphics.FromPdfPage(page);
+
+				using (FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read))
+				{
+					using (Image image = Image.FromStream(fs))
+					{
+						var xImage = XImage.FromGdiPlusImage(image);
+						graphics.DrawImage(xImage, 0, 0, page.Width, page.Height);
+					}
+				}
+			}
+
+			var result = new MemoryStream((int)document.FileSize);
+			document.Save(result);
+			return result;
+		}
 	}
 }
