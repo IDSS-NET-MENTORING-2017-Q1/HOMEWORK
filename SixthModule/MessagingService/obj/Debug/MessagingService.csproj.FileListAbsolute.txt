@@ -3,6 +3,5 @@ C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SixthMo
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SixthModule\MessagingService\bin\Debug\MessagingService.pdb
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SixthModule\MessagingService\bin\Debug\RabbitMQ.Client.dll
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SixthModule\MessagingService\bin\Debug\RabbitMQ.Client.xml
-C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SixthModule\MessagingService\obj\Debug\MessagingService.csprojResolveAssemblyReference.cache
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SixthModule\MessagingService\obj\Debug\MessagingService.exe
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SixthModule\MessagingService\obj\Debug\MessagingService.pdb

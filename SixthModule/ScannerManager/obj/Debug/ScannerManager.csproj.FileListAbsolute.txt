@@ -151,3 +151,5 @@ C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SixthMo
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SixthModule\ScannerManager\obj\Debug\ScannerManager.csprojResolveAssemblyReference.cache
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SixthModule\ScannerManager\obj\Debug\ScannerManager.exe
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SixthModule\ScannerManager\obj\Debug\ScannerManager.pdb
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SixthModule\ScannerManager\bin\Debug\RabbitMQ.Client.dll
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SixthModule\ScannerManager\bin\Debug\RabbitMQ.Client.xml
