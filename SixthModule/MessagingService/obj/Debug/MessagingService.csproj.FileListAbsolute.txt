@@ -20,3 +20,5 @@ C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\SixthModule\M
 C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\SixthModule\MessagingService\obj\Debug\MessagingService.csprojResolveAssemblyReference.cache
 C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\SixthModule\MessagingService\obj\Debug\MessagingService.exe
 C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\SixthModule\MessagingService\obj\Debug\MessagingService.pdb
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SixthModule\MessagingService\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SixthModule\MessagingService\bin\Debug\Newtonsoft.Json.xml

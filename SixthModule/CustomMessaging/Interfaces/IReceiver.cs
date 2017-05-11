@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace CustomMessaging.Interfaces
 {
+	public interface IReceiver
+	{
+		void Receive();
+	}
+
 	public interface IReceiver<T>
 	{
 		T Receive();

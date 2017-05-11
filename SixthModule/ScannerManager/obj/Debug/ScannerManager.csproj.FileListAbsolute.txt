@@ -123,7 +123,6 @@ C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SixthMo
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SixthModule\ScannerManager\bin\Debug\MigraDoc.Rendering.dll
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SixthModule\ScannerManager\bin\Debug\MigraDoc.RtfRendering.dll
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SixthModule\ScannerManager\bin\Debug\Newtonsoft.Json.dll
-C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SixthModule\ScannerManager\bin\Debug\NLog.dll
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SixthModule\ScannerManager\bin\Debug\PdfSharp.Charting.dll
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SixthModule\ScannerManager\bin\Debug\PdfSharp.dll
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SixthModule\ScannerManager\bin\Debug\Topshelf.dll

@@ -21,7 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>6</LangVersion>
+    <LangVersion>5</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -53,6 +53,7 @@
     <Compile Include="Classes\Settings.cs" />
     <Compile Include="Classes\SettingsPublisher.cs" />
     <Compile Include="Classes\SettingsReceiver.cs" />
+    <Compile Include="Classes\Status.cs" />
     <Compile Include="Classes\StatusPublisher.cs" />
     <Compile Include="Classes\StatusReceiver.cs" />
     <Compile Include="Interfaces\IPublisher.cs" />
