@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 namespace CustomMessaging.Interfaces
 {
-	public interface IReceiver
+	public interface IListener
 	{
-		void Receive();
+		void Start();
+		void Stop();
 	}
 
-	public interface IReceiver<T>
+	public interface IListener<T> : IListener
 	{
-		T Receive();
+		event EventHandler<T> Received;
 	}
 }

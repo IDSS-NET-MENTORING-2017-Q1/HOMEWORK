@@ -10,30 +10,12 @@ namespace Scanner.Classes
 {
 	public class ScannerManager
 	{
-		private int _checkInterval;
-		private Timer _checkTimer;
-
 		private FileManagerFactory _fileManagerFactory;
 		private ICollection<PathWatcher> _pathWatchers = new List<PathWatcher>();
 
-		private BarcodeManager _barcodeManager;
-		private DocumentManager _documentManager;
+		private IListener<Settings> _settingsListener;
 
-		private IReceiver<Settings> _settingsListener;
-
-		public int CheckInterval
-		{
-			get
-			{
-				return _checkInterval;
-			}
-			set
-			{
-				_checkInterval = value;
-			}
-		}
-
-		public IReceiver<Settings> SettingsReceiver
+		public IListener<Settings> SettingsReceiver
 		{
 			get
 			{
@@ -61,22 +43,6 @@ namespace Scanner.Classes
 			}
 		}
 
-		public BarcodeManager BarcodeManager
-		{
-			get
-			{
-				return _barcodeManager;
-			}
-		}
-
-		public DocumentManager DocumentManager
-		{
-			get
-			{
-				return _documentManager;
-			}
-		}
-
 		protected bool IsUnc(string sourcePath)
 		{
 			var uri = new Uri(sourcePath);
@@ -90,17 +56,11 @@ namespace Scanner.Classes
 
 		protected void Init(IEnumerable<string> sourcePaths, string outputPath, string tempPath, string corruptedPath)
 		{
-			_checkTimer = new Timer(_checkInterval)
-			{
-				Enabled = true,
-				AutoReset = true
-			};
-
-			_checkTimer.Elapsed += CheckTimer_Elapsed;
-
+			_settingsListener.Received += SettingsListener_Received;
 			_fileManagerFactory = new FileManagerFactory(outputPath, tempPath, corruptedPath);
-			_documentManager = new DocumentManager();
-			_barcodeManager = new BarcodeManager();
+
+			var documentManager = new DocumentManager();
+			var barcodeManager = new BarcodeManager();
 
 			if (sourcePaths == null || !sourcePaths.Any(path => !IsUnc(path)))
 			{
@@ -108,8 +68,8 @@ namespace Scanner.Classes
 				var pathWatcher = new PathWatcher(fileManager.InputPath)
 				{
 					FileManager = fileManager,
-					DocumentManager = _documentManager,
-					BarcodeManager = _barcodeManager
+					DocumentManager = documentManager,
+					BarcodeManager = barcodeManager
 				};
 
 				_pathWatchers.Add(pathWatcher);
@@ -123,22 +83,20 @@ namespace Scanner.Classes
 				var pathWatcher = new PathWatcher(sourcePath)
 				{
 					FileManager = fileManager,
-					DocumentManager = _documentManager,
-					BarcodeManager = _barcodeManager
+					DocumentManager = documentManager,
+					BarcodeManager = barcodeManager
 				};
 
 				_pathWatchers.Add(pathWatcher);
 			}
 		}
 
-		void CheckTimer_Elapsed(object sender, ElapsedEventArgs e)
+		void SettingsListener_Received(object sender, Settings e)
 		{
-			var settings = _settingsListener.Receive();
-
 			foreach (var pathWatcher in _pathWatchers)
 			{
-				pathWatcher.WaitInterval = settings.Timeout;
-				pathWatcher.BarcodeManager.EndOfDocument = settings.EndOfDocument;
+				pathWatcher.WaitInterval = e.Timeout;
+				pathWatcher.BarcodeManager.EndOfDocument = e.EndOfDocument;
 			}
 		}
 
@@ -156,6 +114,8 @@ namespace Scanner.Classes
 
 		public bool Start()
 		{
+			_settingsListener.Start();
+
 			foreach (var pathWatcher in _pathWatchers)
 			{
 				pathWatcher.Start();
@@ -170,6 +130,8 @@ namespace Scanner.Classes
 			{
 				pathWatcher.Stop();
 			}
+
+			_settingsListener.Stop();
 
 			return true;
 		}

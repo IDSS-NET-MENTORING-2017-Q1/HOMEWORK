@@ -49,13 +49,13 @@
   <ItemGroup>
     <Compile Include="Classes\DocumentPartition.cs" />
     <Compile Include="Classes\DocumentPublisher.cs" />
-    <Compile Include="Classes\DocumentReceiver.cs" />
+    <Compile Include="Classes\DocumentListener.cs" />
     <Compile Include="Classes\Settings.cs" />
     <Compile Include="Classes\SettingsPublisher.cs" />
-    <Compile Include="Classes\SettingsReceiver.cs" />
+    <Compile Include="Classes\SettingsListener.cs" />
     <Compile Include="Classes\Status.cs" />
     <Compile Include="Classes\StatusPublisher.cs" />
-    <Compile Include="Classes\StatusReceiver.cs" />
+    <Compile Include="Classes\StatusListener.cs" />
     <Compile Include="Interfaces\IPublisher.cs" />
     <Compile Include="Interfaces\IReceiver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

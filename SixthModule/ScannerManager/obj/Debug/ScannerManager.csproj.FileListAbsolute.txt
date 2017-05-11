@@ -133,7 +133,6 @@ C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SixthMo
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SixthModule\ScannerManager\bin\Debug\MigraDoc.Rendering.xml
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SixthModule\ScannerManager\bin\Debug\MigraDoc.RtfRendering.xml
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SixthModule\ScannerManager\bin\Debug\Newtonsoft.Json.xml
-C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SixthModule\ScannerManager\bin\Debug\NLog.xml
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SixthModule\ScannerManager\bin\Debug\PdfSharp.xml
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SixthModule\ScannerManager\bin\Debug\PdfSharp.Charting.xml
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SixthModule\ScannerManager\bin\Debug\Topshelf.xml

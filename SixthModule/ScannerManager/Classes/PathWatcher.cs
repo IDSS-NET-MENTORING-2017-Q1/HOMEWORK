@@ -31,12 +31,11 @@ namespace Scanner.Classes
 		private DocumentManager _documentManager;
 
 		private IPublisher<IEnumerable<byte>> _documentPublisher;
-		private IReceiver<Settings> _settingsListener;
+		private IListener<Settings> _settingsListener;
 		private IPublisher<ServiceStatuses> _statusPublisher;
 
 		public PathWatcher(string inputPath)
 		{
-
 			_statusTimer = new SystemTimer(_statusInterval)
 			{
 				Enabled = false,
@@ -111,7 +110,9 @@ namespace Scanner.Classes
 							if (_barcodeManager.IsBarcode(fileName))
 							{
 								_status = ServiceStatuses.ProcessingPdf;
-								GeneratePdf(fileName);
+
+								//GeneratePdf(fileName);
+								PublishPdf();
 							}
 							else
 							{
@@ -170,10 +171,12 @@ namespace Scanner.Classes
 		{
 			_worker.Start();
 			_watcher.EnableRaisingEvents = true;
+			_statusTimer.Enabled = true;
 		}
 
 		public void Stop()
 		{
+			_statusTimer.Enabled = false;
 			_watcher.EnableRaisingEvents = false;
 			_stopRequested.Set();
 			_worker.Join();
@@ -251,7 +254,7 @@ namespace Scanner.Classes
 			set { _statusPublisher = value; }
 		}
 
-		public IReceiver<Settings> SettingsListener
+		public IListener<Settings> SettingsListener
 		{
 			get { return _settingsListener; }
 			set { _settingsListener = value; }

@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
+using System.Threading;
 using CustomMessaging.Interfaces;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
@@ -6,7 +8,7 @@ using RabbitMQ.Client.Events;
 
 namespace CustomMessaging.Classes
 {
-	public class SettingsReceiver : IReceiver
+	public class SettingsListener : IListener<Settings>
 	{
 		private Settings _settings;
 
@@ -15,7 +17,18 @@ namespace CustomMessaging.Classes
 			get { return _settings; }
 		}
 
-		public void Receive()
+		private ManualResetEvent _stopRequested;
+		private Thread _worker;
+		private object _lockObj;
+
+		public SettingsListener()
+		{
+			_worker = new Thread(WorkProcess);
+			_stopRequested = new ManualResetEvent(false);
+			_lockObj = new object();
+		}
+
+		private void WorkProcess()
 		{
 			var factory = new ConnectionFactory() { HostName = "localhost" };
 			using (var connection = factory.CreateConnection())
@@ -33,13 +46,34 @@ namespace CustomMessaging.Classes
 				{
 					var body = ea.Body;
 					var message = Encoding.UTF8.GetString(body);
-					_settings = JsonConvert.DeserializeObject<Settings>(message);
+					lock (_lockObj)
+					{
+						_settings = JsonConvert.DeserializeObject<Settings>(message);
+						if (Received != null)
+						{
+							Received(this, _settings);
+						}
+					}
 				};
 
 				channel.BasicConsume(queue: queueName,
 									 noAck: true,
 									 consumer: consumer);
 			}
+
+			_stopRequested.WaitOne();
 		}
+
+		public void Start()
+		{
+			_worker.Start();
+		}
+
+		public void Stop()
+		{
+			_stopRequested.Set();
+		}
+
+		public event EventHandler<Settings> Received;
 	}
 }

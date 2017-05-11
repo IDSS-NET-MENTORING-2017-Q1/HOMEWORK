@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Threading;
 using CustomMessaging.Interfaces;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
@@ -8,7 +10,7 @@ using RabbitMQ.Client.Events;
 
 namespace CustomMessaging.Classes
 {
-	public class DocumentReceiver : IReceiver
+	public class DocumentListener : IListener
 	{
 		private string _outputPath;
 
@@ -18,31 +20,40 @@ namespace CustomMessaging.Classes
 			set { _outputPath = value; }
 		}
 
+		private ManualResetEvent _stopRequested;
+		private Thread _worker;
+
 		private string _currentGuid = null;
-		private readonly List<DocumentPartition> _partitions = new List<DocumentPartition>();
+		private readonly List<DocumentPartition> _partitions;
 
-		protected void MakePdf()
+		public DocumentListener() : this(null) { }
+
+		public DocumentListener(string outputPath)
 		{
-			List<byte> result = new List<byte>();
-			foreach (var partition in _partitions)
-			{
-				result.AddRange(partition.Content);
-			}
+			_worker = new Thread(WorkProcess);
+			_stopRequested = new ManualResetEvent(false);
+			_partitions = new List<DocumentPartition>();
 
-			var resultPath = Path.Combine(_outputPath, _currentGuid);
-			using (var file = File.Open(resultPath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None))
+			if (string.IsNullOrWhiteSpace(outputPath))
 			{
-				using (var writer = new StreamWriter(file))
+				var basePath = AppDomain.CurrentDomain.BaseDirectory;
+
+				if (string.IsNullOrWhiteSpace(outputPath))
 				{
-					writer.Write(result.ToArray());
+					outputPath = Path.Combine(basePath, "out");
+				}
+				if (!Directory.Exists(outputPath))
+				{
+					Directory.CreateDirectory(outputPath);
 				}
 			}
-
-			_partitions.Clear();
-			_currentGuid = null;
+			else
+			{
+				_outputPath = outputPath;
+			}
 		}
 
-		public void Receive()
+		private void WorkProcess()
 		{
 			var factory = new ConnectionFactory() { HostName = "localhost" };
 			using (var connection = factory.CreateConnection())
@@ -82,6 +93,40 @@ namespace CustomMessaging.Classes
 									 noAck: true,
 									 consumer: consumer);
 			}
+
+			_stopRequested.WaitOne();
+		}
+
+		protected void MakePdf()
+		{
+			List<byte> result = new List<byte>();
+			foreach (var partition in _partitions)
+			{
+				result.AddRange(partition.Content);
+			}
+
+			var resultPath = Path.Combine(_outputPath, _currentGuid);
+			using (var file = File.Open(resultPath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None))
+			{
+				using (var writer = new StreamWriter(file))
+				{
+					writer.Write(result.ToArray());
+				}
+			}
+
+			_partitions.Clear();
+			_currentGuid = null;
+		}
+
+		public void Start()
+		{
+			_worker.Start();
+		}
+
+
+		public void Stop()
+		{
+			_stopRequested.Set();
 		}
 	}
 }
