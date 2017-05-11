@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Text;
 using System.Timers;
 using CustomMessaging.Classes;
-using RabbitMQ.Client;
 
 namespace MessagingService
 {
@@ -27,11 +25,24 @@ namespace MessagingService
 			documentListener.Start();
 			statusListener.Start();
 
+			statusListener.Received += StatusListener_Received;
+
 			settingsTimer.Elapsed += SettingsTimer_Elapsed;
 			settingsTimer.Enabled = true;
 
 			Console.WriteLine("Press [enter] to exit...");
 			Console.ReadLine();
+
+			settingsTimer.Enabled = false;
+			documentListener.Stop();
+			statusListener.Stop();
+		}
+
+		private static void StatusListener_Received(object sender, Status e)
+		{
+			Console.WriteLine("Status Received!");
+			Console.WriteLine(string.Format("Service name: {0}", e.ServiceName));
+			Console.WriteLine(string.Format("Status: {0}", e.Value));
 		}
 
 		static void SettingsTimer_Elapsed(object sender, ElapsedEventArgs e)

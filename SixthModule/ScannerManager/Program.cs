@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Scanner.Classes;
 using System.Diagnostics;
+using CustomMessaging.Classes;
 
 namespace Scanner
 {
@@ -70,7 +71,7 @@ namespace Scanner
 
 					conf.Service<ScannerManager>(callback =>
 					{
-						callback.ConstructUsing(() => new ScannerManager(sources, outputPath, tempPath, corruptedPath));
+						callback.ConstructUsing(() => new ScannerManager(sources, outputPath, tempPath, corruptedPath, new SettingsListener()));
 						callback.WhenStarted(service => service.Start());
 						callback.WhenStopped(service => service.Stop());
 					}).UseNLog(logFactory);

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Timers;
 
 using CustomMessaging.Classes;
 using CustomMessaging.Interfaces;
@@ -15,7 +14,7 @@ namespace Scanner.Classes
 
 		private IListener<Settings> _settingsListener;
 
-		public IListener<Settings> SettingsReceiver
+		public IListener<Settings> SettingsListener
 		{
 			get
 			{
@@ -51,11 +50,12 @@ namespace Scanner.Classes
 
 		protected void Init()
 		{
-			Init(null, null, null, null);
+			Init(null, null, null, null, new SettingsListener());
 		}
 
-		protected void Init(IEnumerable<string> sourcePaths, string outputPath, string tempPath, string corruptedPath)
+		protected void Init(IEnumerable<string> sourcePaths, string outputPath, string tempPath, string corruptedPath, IListener<Settings> settingsListener)
 		{
+			_settingsListener = settingsListener;
 			_settingsListener.Received += SettingsListener_Received;
 			_fileManagerFactory = new FileManagerFactory(outputPath, tempPath, corruptedPath);
 
@@ -69,7 +69,9 @@ namespace Scanner.Classes
 				{
 					FileManager = fileManager,
 					DocumentManager = documentManager,
-					BarcodeManager = barcodeManager
+					BarcodeManager = barcodeManager,
+					DocumentPublisher = new DocumentPublisher(),
+					StatusPublisher = new StatusPublisher()
 				};
 
 				_pathWatchers.Add(pathWatcher);
@@ -84,7 +86,9 @@ namespace Scanner.Classes
 				{
 					FileManager = fileManager,
 					DocumentManager = documentManager,
-					BarcodeManager = barcodeManager
+					BarcodeManager = barcodeManager,
+					DocumentPublisher = new DocumentPublisher(),
+					StatusPublisher = new StatusPublisher()
 				};
 
 				_pathWatchers.Add(pathWatcher);
@@ -105,11 +109,11 @@ namespace Scanner.Classes
 			Init();
 		}
 
-		public ScannerManager(IEnumerable<string> sourcesPath, string outputPath) : this(sourcesPath, outputPath, null, null) { }
+		public ScannerManager(IEnumerable<string> sourcesPath, string outputPath, IListener<Settings> settingsListener) : this(sourcesPath, outputPath, null, null, settingsListener) { }
 
-		public ScannerManager(IEnumerable<string> sourcesPath, string outputPath, string tempPath, string corruptedPath)
+		public ScannerManager(IEnumerable<string> sourcesPath, string outputPath, string tempPath, string corruptedPath, IListener<Settings> settingsListener)
 		{
-			Init(sourcesPath, outputPath, tempPath, corruptedPath);
+			Init(sourcesPath, outputPath, tempPath, corruptedPath, settingsListener);
 		}
 
 		public bool Start()

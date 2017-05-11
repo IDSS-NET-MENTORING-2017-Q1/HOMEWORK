@@ -1,99 +1,55 @@
-﻿using System.Collections.Generic;
-using System.Text;
-using System.Linq;
+﻿using System.Text;
 using CustomMessaging.Interfaces;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using System.Threading;
+using System;
 
 namespace CustomMessaging.Classes
 {
 	public class StatusListener : IListener<Status>
 	{
-		private ICollection<Status> _statuses;
-
-		private ManualResetEvent _stopRequested;
-		private Thread _worker;
-		private object _lockObj;
-
-		public StatusListener()
-		{
-			_worker = new Thread(WorkProcess);
-			_stopRequested = new ManualResetEvent(false);
-			_statuses = new List<Status>();
-			_lockObj = new object();
-		}
-
-		public ICollection<Status> Statuses
-		{
-			get
-			{
-				return _statuses;
-			}
-			set
-			{
-				_statuses = value;
-			}
-		}
-
-		private void WorkProcess()
-		{
-			var factory = new ConnectionFactory() { HostName = "localhost" };
-			using (var connection = factory.CreateConnection())
-			using (var channel = connection.CreateModel())
-			{
-				channel.ExchangeDeclare(exchange: "statuses", type: "fanout");
-
-				var queueName = channel.QueueDeclare().QueueName;
-				channel.QueueBind(queue: queueName,
-								  exchange: "statuses",
-								  routingKey: "");
-
-				var consumer = new EventingBasicConsumer(channel);
-				consumer.Received += (model, ea) =>
-				{
-					var body = ea.Body;
-					var message = Encoding.UTF8.GetString(body);
-					var status = JsonConvert.DeserializeObject<Status>(message);
-
-					if (Received != null)
-					{
-						Received(this, status);
-					}
-
-					lock (_lockObj)
-					{
-						var registeredStatus = _statuses.FirstOrDefault(o => o.ServiceName == status.ServiceName);
-						if (registeredStatus != null)
-						{
-							registeredStatus.Value = status.Value;
-						}
-						else
-						{
-							_statuses.Add(status);
-						}
-					}
-				};
-				channel.BasicConsume(queue: queueName,
-									 noAck: true,
-									 consumer: consumer);
-			}
-
-			_stopRequested.WaitOne();
-		}
+		private IConnection _connection;
+		private IModel _channel;
+		private EventingBasicConsumer _consumer;
 
 		public void Start()
 		{
-			_worker.Start();
-		}
+			var factory = new ConnectionFactory() { HostName = "localhost" };
 
+			_connection = factory.CreateConnection();
+			_channel = _connection.CreateModel();
+			_channel.ExchangeDeclare(exchange: "statuses", type: "fanout");
+
+			var queueName = _channel.QueueDeclare().QueueName;
+			_channel.QueueBind(queue: queueName,
+							  exchange: "statuses",
+							  routingKey: "");
+
+			_consumer = new EventingBasicConsumer(_channel);
+			_consumer.Received += (model, ea) =>
+			{
+				var body = ea.Body;
+				var message = Encoding.UTF8.GetString(body);
+				var status = JsonConvert.DeserializeObject<Status>(message);
+
+				if (Received != null)
+				{
+					Received(this, status);
+				}
+			};
+
+			_channel.BasicConsume(queue: queueName,
+								 noAck: true,
+								 consumer: _consumer);
+		}
 
 		public void Stop()
 		{
-			_stopRequested.Set();
+			_channel.Dispose();
+			_connection.Dispose();
 		}
 
-		public event System.EventHandler<Status> Received;
+		public event EventHandler<Status> Received;
 	}
 }

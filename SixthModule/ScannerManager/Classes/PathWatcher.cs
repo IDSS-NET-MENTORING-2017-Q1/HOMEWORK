@@ -7,7 +7,6 @@ using System.Threading;
 using CustomMessaging;
 using CustomMessaging.Classes;
 using CustomMessaging.Interfaces;
-using Scanner.Classes;
 
 using SystemTimer = System.Timers.Timer;
 
@@ -15,7 +14,7 @@ namespace Scanner.Classes
 {
 	public class PathWatcher
 	{
-		private ServiceStatuses _status = ServiceStatuses.Waiting;
+		private Status _status;
 
 		private int _waitInterval = 10000;
 		private int _statusInterval = 10000;
@@ -31,11 +30,15 @@ namespace Scanner.Classes
 		private DocumentManager _documentManager;
 
 		private IPublisher<IEnumerable<byte>> _documentPublisher;
-		private IListener<Settings> _settingsListener;
-		private IPublisher<ServiceStatuses> _statusPublisher;
+		private IPublisher<Status> _statusPublisher;
 
 		public PathWatcher(string inputPath)
 		{
+			_status = new Status() {
+				Value = ServiceStatuses.Waiting,
+				ServiceName = Guid.NewGuid().ToString()
+			};
+
 			_statusTimer = new SystemTimer(_statusInterval)
 			{
 				Enabled = false,
@@ -87,8 +90,6 @@ namespace Scanner.Classes
 			var pdfContent = pdfStream.ToArray();
 
 			_documentPublisher.Publish(pdfContent);
-
-			_fileManager.ClearTemp();
 		}
 
 		private void WorkProcess()
@@ -109,14 +110,13 @@ namespace Scanner.Classes
 						{
 							if (_barcodeManager.IsBarcode(fileName))
 							{
-								_status = ServiceStatuses.ProcessingPdf;
-
-								//GeneratePdf(fileName);
+								_status.Value = ServiceStatuses.ProcessingPdf;								
 								PublishPdf();
+								_fileManager.ClearTemp();
 							}
 							else
 							{
-								_status = ServiceStatuses.ProcessingFile;
+								_status.Value = ServiceStatuses.ProcessingFile;
 								Debug.WriteLine(string.Format("Moving {0} to temp folder...", fileName));
 								_fileManager.MoveToTemp(fileName);
 							}
@@ -142,15 +142,16 @@ namespace Scanner.Classes
 					}
 				}
 
-				_status = ServiceStatuses.Waiting;
+				_status.Value = ServiceStatuses.Waiting;
 
 				waitResult = WaitHandle.WaitAny(new WaitHandle[] { _stopRequested, _fileCreated }, _waitInterval);
 				if (waitResult == WaitHandle.WaitTimeout)
 				{
 					try
 					{
-						_status = ServiceStatuses.ProcessingPdf;
+						_status.Value = ServiceStatuses.ProcessingPdf;
 						PublishPdf();
+						_fileManager.ClearTemp();
 					}
 					catch (Exception ex)
 					{
@@ -248,16 +249,10 @@ namespace Scanner.Classes
 			set { _statusInterval = value; }
 		}
 
-		public IPublisher<ServiceStatuses> StatusPublisher
+		public IPublisher<Status> StatusPublisher
 		{
 			get { return _statusPublisher; }
 			set { _statusPublisher = value; }
-		}
-
-		public IListener<Settings> SettingsListener
-		{
-			get { return _settingsListener; }
-			set { _settingsListener = value; }
 		}
 	}
 }

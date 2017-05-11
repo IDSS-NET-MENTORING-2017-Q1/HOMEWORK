@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using System.Threading;
 using CustomMessaging.Interfaces;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
@@ -14,14 +13,15 @@ namespace CustomMessaging.Classes
 	{
 		private string _outputPath;
 
+		private IConnection _connection;
+		private IModel _channel;
+		private EventingBasicConsumer _consumer;
+
 		public string OutputPath
 		{
 			get { return _outputPath; }
 			set { _outputPath = value; }
 		}
-
-		private ManualResetEvent _stopRequested;
-		private Thread _worker;
 
 		private string _currentGuid = null;
 		private readonly List<DocumentPartition> _partitions;
@@ -30,8 +30,6 @@ namespace CustomMessaging.Classes
 
 		public DocumentListener(string outputPath)
 		{
-			_worker = new Thread(WorkProcess);
-			_stopRequested = new ManualResetEvent(false);
 			_partitions = new List<DocumentPartition>();
 
 			if (string.IsNullOrWhiteSpace(outputPath))
@@ -51,50 +49,6 @@ namespace CustomMessaging.Classes
 			{
 				_outputPath = outputPath;
 			}
-		}
-
-		private void WorkProcess()
-		{
-			var factory = new ConnectionFactory() { HostName = "localhost" };
-			using (var connection = factory.CreateConnection())
-			using (var channel = connection.CreateModel())
-			{
-				channel.ExchangeDeclare(exchange: "documents", type: "fanout");
-
-				var queueName = channel.QueueDeclare().QueueName;
-				channel.QueueBind(queue: queueName,
-								  exchange: "documents",
-								  routingKey: "");
-
-				var consumer = new EventingBasicConsumer(channel);
-				consumer.Received += (model, ea) =>
-				{
-					var body = ea.Body;
-					var message = Encoding.UTF8.GetString(body);
-					var partition = JsonConvert.DeserializeObject<DocumentPartition>(message);
-					if (string.IsNullOrWhiteSpace(_currentGuid))
-					{
-						_currentGuid = partition.DocumentGuid;
-					}
-					else if (_currentGuid != partition.DocumentGuid)
-					{
-						MakePdf();
-						_currentGuid = partition.DocumentGuid;
-					}
-
-					_partitions.Add(partition);
-					if (partition.EndOfDocument)
-					{
-						MakePdf();
-					}
-
-				};
-				channel.BasicConsume(queue: queueName,
-									 noAck: true,
-									 consumer: consumer);
-			}
-
-			_stopRequested.WaitOne();
 		}
 
 		protected void MakePdf()
@@ -120,13 +74,50 @@ namespace CustomMessaging.Classes
 
 		public void Start()
 		{
-			_worker.Start();
-		}
+			var factory = new ConnectionFactory() { HostName = "localhost" };
 
+			_connection = factory.CreateConnection();
+			_channel = _connection.CreateModel();
+
+			_channel.ExchangeDeclare(exchange: "documents", type: "fanout");
+
+			var queueName = _channel.QueueDeclare().QueueName;
+			_channel.QueueBind(queue: queueName,
+							  exchange: "documents",
+							  routingKey: "");
+
+			_consumer = new EventingBasicConsumer(_channel);
+			_consumer.Received += (model, ea) =>
+			{
+				var body = ea.Body;
+				var message = Encoding.UTF8.GetString(body);
+				var partition = JsonConvert.DeserializeObject<DocumentPartition>(message);
+				if (string.IsNullOrWhiteSpace(_currentGuid))
+				{
+					_currentGuid = partition.DocumentGuid;
+				}
+				else if (_currentGuid != partition.DocumentGuid)
+				{
+					MakePdf();
+					_currentGuid = partition.DocumentGuid;
+				}
+
+				_partitions.Add(partition);
+				if (partition.EndOfDocument)
+				{
+					MakePdf();
+				}
+
+			};
+			_channel.BasicConsume(queue: queueName,
+								 noAck: true,
+								 consumer: _consumer);
+		}
 
 		public void Stop()
 		{
-			_stopRequested.Set();
+			_channel.Dispose();
+			_connection.Dispose();
 		}
 	}
 }
