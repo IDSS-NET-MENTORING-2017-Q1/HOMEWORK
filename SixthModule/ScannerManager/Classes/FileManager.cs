@@ -9,7 +9,6 @@ namespace Scanner.Classes
 	public class FileManager
 	{
 		private string _inputPath;
-		private string _outputPath;
 		private string _tempPath;
 		private string _corruptedPath;
 
@@ -22,18 +21,6 @@ namespace Scanner.Classes
 			set
 			{
 				_inputPath = value;
-			}
-		}
-
-		public string OutputPath
-		{
-			get
-			{
-				return _outputPath;
-			}
-			set
-			{
-				_outputPath = value;
 			}
 		}
 
@@ -92,18 +79,18 @@ namespace Scanner.Classes
 		}
 
 		public FileManager()
-			: this(null, null, null, null)
+			: this(null, null, null)
 		{
 
 		}
 
-		public FileManager(string inputPath, string outputPath)
-			: this(inputPath, outputPath, null, null)
+		public FileManager(string inputPath)
+			: this(inputPath, null, null)
 		{
 
 		}
 
-		public FileManager(string inputPath, string outputPath, string tempPath, string corruptedPath)
+		public FileManager(string inputPath, string tempPath, string corruptedPath)
 		{
 			var basePath = AppDomain.CurrentDomain.BaseDirectory;
 
@@ -114,15 +101,6 @@ namespace Scanner.Classes
 			if (!Directory.Exists(inputPath))
 			{
 				Directory.CreateDirectory(inputPath);
-			}
-
-			if (string.IsNullOrWhiteSpace(outputPath))
-			{
-				outputPath = Path.Combine(basePath, "out");
-			}
-			if (!Directory.Exists(outputPath))
-			{
-				Directory.CreateDirectory(outputPath);
 			}
 
 			if (string.IsNullOrWhiteSpace(tempPath))
@@ -144,7 +122,6 @@ namespace Scanner.Classes
 			}
 
 			_inputPath = inputPath;
-			_outputPath = outputPath;
 			_tempPath = tempPath;
 			_corruptedPath = corruptedPath;
 		}
@@ -157,11 +134,6 @@ namespace Scanner.Classes
 		public IEnumerable<string> GetInputFiles()
 		{
 			return GetFiles(_inputPath);
-		}
-
-		public IEnumerable<string> GetOutputFiles()
-		{
-			return GetFiles(_outputPath);
 		}
 
 		public IEnumerable<string> GetTempFiles()

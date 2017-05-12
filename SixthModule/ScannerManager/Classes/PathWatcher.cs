@@ -28,13 +28,91 @@ namespace Scanner.Classes
 		private FileManager _fileManager;
 		private BarcodeManager _barcodeManager;
 		private DocumentManager _documentManager;
-
 		private IPublisher<IEnumerable<byte>> _documentPublisher;
 		private IPublisher<Status> _statusPublisher;
 
+		public int WaitInterval
+		{
+			get
+			{
+				return _waitInterval;
+			}
+			set
+			{
+				_waitInterval = value;
+			}
+		}
+
+		public int StatusInterval
+		{
+			get
+			{
+				return _statusInterval;
+			}
+			set
+			{
+				_statusInterval = value;
+			}
+		}
+
+		public FileManager FileManager
+		{
+			get
+			{
+				return _fileManager;
+			}
+			set
+			{
+				_fileManager = value;
+			}
+		}
+
+		public BarcodeManager BarcodeManager
+		{
+			get
+			{
+				return _barcodeManager;
+			}
+			set
+			{
+				_barcodeManager = value;
+			}
+		}
+
+		public DocumentManager DocumentManager
+		{
+			get
+			{
+				return _documentManager;
+			}
+			set
+			{
+				_documentManager = value;
+			}
+		}
+
+		public IPublisher<IEnumerable<byte>> DocumentPublisher
+		{
+			get
+			{
+				return _documentPublisher;
+			}
+			set
+			{
+				_documentPublisher = value;
+			}
+		}
+
+		public IPublisher<Status> StatusPublisher
+		{
+			get { return _statusPublisher; }
+			set { _statusPublisher = value; }
+		}
+
 		public PathWatcher(string inputPath)
 		{
-			_status = new Status() {
+			_status = new Status
+			{
 				Value = ServiceStatuses.Waiting,
 				ServiceName = Guid.NewGuid().ToString()
 			};
@@ -45,34 +123,11 @@ namespace Scanner.Classes
 				AutoReset = true
 			};
 
-			_statusTimer.Elapsed += StatusTimer_Elapsed;
-
 			_watcher = new FileSystemWatcher(inputPath);
-			_watcher.Created += Watcher_Created;
 			_worker = new Thread(WorkProcess);
-		}
 
-		void StatusTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
-		{
-			_statusPublisher.Publish(_status);
-		}
-
-		private void GeneratePdf(string fileName)
-		{
-			var sourceFiles = _fileManager.GetTempFiles();
-
-			if (sourceFiles.Count() <= 0)
-			{
-				return;
-			}
-
-			var pdfName = Path.Combine(_fileManager.OutputPath, Guid.NewGuid().ToString() + ".pdf");
-
-			Debug.WriteLine("Generating resulting PDF...");
-
-			_fileManager.Delete(fileName);
-			_documentManager.GeneratePdf(pdfName, sourceFiles);
-			_fileManager.ClearTemp();
+			_watcher.Created += Watcher_Created;
+			_statusTimer.Elapsed += StatusTimer_Elapsed;
 		}
 
 		private void PublishPdf()
@@ -86,10 +141,9 @@ namespace Scanner.Classes
 
 			Debug.WriteLine("Generating resulting PDF...");
 
-			var pdfStream = _documentManager.GeneratePdf(sourceFiles);
-			var pdfContent = pdfStream.ToArray();
+			var content = _documentManager.GeneratePdf(sourceFiles).ToArray();
 
-			_documentPublisher.Publish(pdfContent);
+			_documentPublisher.Publish(content);
 		}
 
 		private void WorkProcess()
@@ -110,7 +164,7 @@ namespace Scanner.Classes
 						{
 							if (_barcodeManager.IsBarcode(fileName))
 							{
-								_status.Value = ServiceStatuses.ProcessingPdf;								
+								_status.Value = ServiceStatuses.ProcessingPdf;
 								PublishPdf();
 								_fileManager.ClearTemp();
 							}
@@ -168,6 +222,11 @@ namespace Scanner.Classes
 			_fileCreated.Set();
 		}
 
+		void StatusTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+		{
+			_statusPublisher.Publish(_status);
+		}
+
 		public void Start()
 		{
 			_worker.Start();
@@ -181,78 +240,6 @@ namespace Scanner.Classes
 			_watcher.EnableRaisingEvents = false;
 			_stopRequested.Set();
 			_worker.Join();
-		}
-
-		public int WaitInterval
-		{
-			get
-			{
-				return _waitInterval;
-			}
-			set
-			{
-				_waitInterval = value;
-			}
-		}
-
-		public FileManager FileManager
-		{
-			get
-			{
-				return _fileManager;
-			}
-			set
-			{
-				_fileManager = value;
-			}
-		}
-
-		public BarcodeManager BarcodeManager
-		{
-			get
-			{
-				return _barcodeManager;
-			}
-			set
-			{
-				_barcodeManager = value;
-			}
-		}
-
-		public DocumentManager DocumentManager
-		{
-			get
-			{
-				return _documentManager;
-			}
-			set
-			{
-				_documentManager = value;
-			}
-		}
-
-		public IPublisher<IEnumerable<byte>> DocumentPublisher
-		{
-			get
-			{
-				return _documentPublisher;
-			}
-			set
-			{
-				_documentPublisher = value;
-			}
-		}
-
-		public int StatusInterval
-		{
-			get { return _statusInterval; }
-			set { _statusInterval = value; }
-		}
-
-		public IPublisher<Status> StatusPublisher
-		{
-			get { return _statusPublisher; }
-			set { _statusPublisher = value; }
 		}
 	}
 }

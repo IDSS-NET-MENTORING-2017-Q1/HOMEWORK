@@ -44,7 +44,7 @@ namespace CustomMessaging.Classes
 								 consumer: _consumer);
 		}
 
-		public void Stop()
+		public void Dispose()
 		{
 			_channel.Dispose();
 			_connection.Dispose();

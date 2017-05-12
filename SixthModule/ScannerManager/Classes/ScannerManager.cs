@@ -9,11 +9,11 @@ namespace Scanner.Classes
 {
 	public class ScannerManager
 	{
-		private FileManagerFactory _fileManagerFactory;
 		private ICollection<PathWatcher> _pathWatchers = new List<PathWatcher>();
 
+		private FileManagerFactory _fileManagerFactory;
 		private IListener<Settings> _settingsListener;
-
+		
 		public IListener<Settings> SettingsListener
 		{
 			get
@@ -48,19 +48,11 @@ namespace Scanner.Classes
 			return uri.IsUnc;
 		}
 
-		protected void Init()
-		{
-			Init(null, null, null, null, new SettingsListener());
-		}
-
-		protected void Init(IEnumerable<string> sourcePaths, string outputPath, string tempPath, string corruptedPath, IListener<Settings> settingsListener)
+		protected void Init(IEnumerable<string> sourcePaths, FileManagerFactory fileManagerFactory, DocumentManager documentManager, BarcodeManager barcodeManager, IPublisher<IEnumerable<byte>> documentPublisher, IPublisher<Status> statusPublisher, IListener<Settings> settingsListener)
 		{
 			_settingsListener = settingsListener;
 			_settingsListener.Received += SettingsListener_Received;
-			_fileManagerFactory = new FileManagerFactory(outputPath, tempPath, corruptedPath);
-
-			var documentManager = new DocumentManager();
-			var barcodeManager = new BarcodeManager();
+			_fileManagerFactory = fileManagerFactory;
 
 			if (sourcePaths == null || !sourcePaths.Any(path => !IsUnc(path)))
 			{
@@ -70,8 +62,8 @@ namespace Scanner.Classes
 					FileManager = fileManager,
 					DocumentManager = documentManager,
 					BarcodeManager = barcodeManager,
-					DocumentPublisher = new DocumentPublisher(),
-					StatusPublisher = new StatusPublisher()
+					DocumentPublisher = documentPublisher,
+					StatusPublisher = statusPublisher
 				};
 
 				_pathWatchers.Add(pathWatcher);
@@ -87,8 +79,8 @@ namespace Scanner.Classes
 					FileManager = fileManager,
 					DocumentManager = documentManager,
 					BarcodeManager = barcodeManager,
-					DocumentPublisher = new DocumentPublisher(),
-					StatusPublisher = new StatusPublisher()
+					DocumentPublisher = documentPublisher,
+					StatusPublisher = statusPublisher
 				};
 
 				_pathWatchers.Add(pathWatcher);
@@ -104,16 +96,9 @@ namespace Scanner.Classes
 			}
 		}
 
-		public ScannerManager()
+		public ScannerManager(IEnumerable<string> sourcePaths, FileManagerFactory fileManagerFactory, DocumentManager documentManager, BarcodeManager barcodeManager, IPublisher<IEnumerable<byte>> documentPublisher, IPublisher<Status> statusPublisher, IListener<Settings> settingsListener)
 		{
-			Init();
-		}
-
-		public ScannerManager(IEnumerable<string> sourcesPath, string outputPath, IListener<Settings> settingsListener) : this(sourcesPath, outputPath, null, null, settingsListener) { }
-
-		public ScannerManager(IEnumerable<string> sourcesPath, string outputPath, string tempPath, string corruptedPath, IListener<Settings> settingsListener)
-		{
-			Init(sourcesPath, outputPath, tempPath, corruptedPath, settingsListener);
+			Init(sourcePaths, fileManagerFactory, documentManager, barcodeManager, documentPublisher, statusPublisher, settingsListener);
 		}
 
 		public bool Start()
@@ -135,7 +120,7 @@ namespace Scanner.Classes
 				pathWatcher.Stop();
 			}
 
-			_settingsListener.Stop();
+			_settingsListener.Dispose();
 
 			return true;
 		}

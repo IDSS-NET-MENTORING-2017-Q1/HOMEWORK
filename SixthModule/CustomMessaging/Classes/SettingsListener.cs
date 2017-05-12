@@ -43,8 +43,8 @@ namespace CustomMessaging.Classes
 								 noAck: true,
 								 consumer: _consumer);
 		}
-
-		public void Stop()
+		
+		public void Dispose()
 		{
 			_channel.Dispose();
 			_connection.Dispose();

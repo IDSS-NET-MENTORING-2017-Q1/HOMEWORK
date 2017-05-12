@@ -1,53 +1,88 @@
 ﻿using System;
-using System.Timers;
 using CustomMessaging.Classes;
+using System.IO;
+using System.Configuration;
+using Newtonsoft.Json;
 
 namespace MessagingService
 {
 	class Program
 	{
+		static string settingsPath;
+		static string statusesPath;
+		static string outputPath;
+
 		static DocumentListener documentListener = new DocumentListener();
 		static StatusListener statusListener = new StatusListener();
 		static SettingsPublisher settingsPublisher = new SettingsPublisher();
-		static Settings settings = new Settings()
-		{
-			EndOfDocument = "EndOfDocument",
-			Timeout = 10000
-		};
-		static Timer settingsTimer = new Timer(10000)
-		{
-			Enabled = false,
-			AutoReset = true
-		};
+		static FileSystemWatcher watcher = new FileSystemWatcher();
 
 		static void Main(string[] args)
 		{
-			documentListener.Start();
-			statusListener.Start();
+			var basePath = AppDomain.CurrentDomain.BaseDirectory;
+			settingsPath = ConfigurationManager.AppSettings["settingsFile"];
+			statusesPath = ConfigurationManager.AppSettings["statusesFile"];
+			outputPath = ConfigurationManager.AppSettings["outputPath"];
 
-			statusListener.Received += StatusListener_Received;
+			if (string.IsNullOrWhiteSpace(settingsPath) || !File.Exists(settingsPath))
+			{
+				return;
+			}
+			if (string.IsNullOrWhiteSpace(statusesPath))
+			{
+				statusesPath = Path.Combine(basePath, "statuses.txt");
+			}
+			if (string.IsNullOrWhiteSpace(outputPath))
+			{
+				outputPath = Path.Combine(basePath, "out");
+			}
+			if (!Directory.Exists(outputPath))
+			{
+				Directory.CreateDirectory(outputPath);
+			}
 
-			settingsTimer.Elapsed += SettingsTimer_Elapsed;
-			settingsTimer.Enabled = true;
+			documentListener.OutputPath = outputPath;
 
-			Console.WriteLine("Press [enter] to exit...");
-			Console.ReadLine();
+			using (documentListener)
+			using (statusListener)
+			{
+				documentListener.Start();
+				statusListener.Start();
 
-			settingsTimer.Enabled = false;
-			documentListener.Stop();
-			statusListener.Stop();
+				statusListener.Received += StatusListener_Received;
+
+				watcher.Path = Path.GetDirectoryName(settingsPath);
+				watcher.Filter = "*.json";
+				watcher.Changed += Watcher_Changed;
+				watcher.EnableRaisingEvents = true;
+
+				Console.WriteLine("Press [enter] to exit...");
+				Console.ReadLine();
+				
+				watcher.EnableRaisingEvents = false;
+			}
+		}
+
+		private static void Watcher_Changed(object sender, FileSystemEventArgs e)
+		{
+			if (e.FullPath != settingsPath)
+			{
+				return;
+			}
+
+			var settingsText = File.ReadAllText(settingsPath);
+			var settings = JsonConvert.DeserializeObject<Settings>(settingsText);
+			settingsPublisher.Publish(settings);
 		}
 
 		private static void StatusListener_Received(object sender, Status e)
 		{
-			Console.WriteLine("Status Received!");
-			Console.WriteLine(string.Format("Service name: {0}", e.ServiceName));
-			Console.WriteLine(string.Format("Status: {0}", e.Value));
-		}
-
-		static void SettingsTimer_Elapsed(object sender, ElapsedEventArgs e)
-		{
-			settingsPublisher.Publish(settings);
+			using (var writer = File.AppendText(statusesPath))
+			{
+				writer.WriteLine(string.Format("Status Received on: {0}", DateTime.Now));
+				writer.WriteLine(string.Format("Service name: {0}", e.ServiceName));
+				writer.WriteLine(string.Format("Status: {0}", e.Value));
+			}
 		}
 	}
 }

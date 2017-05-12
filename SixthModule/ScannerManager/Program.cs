@@ -53,6 +53,13 @@ namespace Scanner
 
 			var logFactory = new LogFactory(logConfig);
 
+			var documentPublisher = new DocumentPublisher();
+			var statusPublisher = new StatusPublisher();
+			var documentManager = new DocumentManager();
+			var barcodeManager = new BarcodeManager();
+			var settingsListener = new SettingsListener();
+			var fileManagerFactory = new FileManagerFactory(tempPath, corruptedPath);
+
 			HostFactory.Run(
 				conf =>
 				{
@@ -71,7 +78,14 @@ namespace Scanner
 
 					conf.Service<ScannerManager>(callback =>
 					{
-						callback.ConstructUsing(() => new ScannerManager(sources, outputPath, tempPath, corruptedPath, new SettingsListener()));
+						callback.ConstructUsing(() => new ScannerManager(
+							sources, 
+							fileManagerFactory, 
+							documentManager, 
+							barcodeManager, 
+							documentPublisher, 
+							statusPublisher, 
+							settingsListener));
 						callback.WhenStarted(service => service.Start());
 						callback.WhenStopped(service => service.Stop());
 					}).UseNLog(logFactory);

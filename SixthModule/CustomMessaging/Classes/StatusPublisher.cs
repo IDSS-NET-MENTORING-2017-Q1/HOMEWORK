@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using System.Text;
+﻿using System.Text;
 using CustomMessaging.Interfaces;
 using Newtonsoft.Json;
 using RabbitMQ.Client;

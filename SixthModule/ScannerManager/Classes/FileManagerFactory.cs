@@ -2,27 +2,13 @@
 {
 	public class FileManagerFactory
 	{
-		private string _outputPath;
 		private string _tempPath;
 		private string _corruptedPath;
 
-		public FileManagerFactory(string outputPath, string tempPath, string corruptedPath)
+		public FileManagerFactory(string tempPath, string corruptedPath)
 		{
-			_outputPath = outputPath;
 			_tempPath = tempPath;
 			_corruptedPath = corruptedPath;
-		}
-
-		public string OutputPath
-		{
-			get
-			{
-				return _outputPath;
-			}
-			set
-			{
-				_outputPath = value;
-			}
 		}
 
 		public string TempPath
@@ -51,7 +37,7 @@
 
 		public FileManager Create(string inputPath)
 		{
-			return new FileManager(inputPath, _outputPath, _tempPath, _corruptedPath);
+			return new FileManager(inputPath, _tempPath, _corruptedPath);
 		}
 	}
 }

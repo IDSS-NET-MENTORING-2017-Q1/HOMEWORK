@@ -14,3 +14,4 @@ C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\SixthModule\C
 C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\SixthModule\CustomMessaging\obj\Debug\CustomMessaging.pdb
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SixthModule\CustomMessaging\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\SixthModule\CustomMessaging\bin\Debug\Newtonsoft.Json.xml
+C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\SixthModule\CustomMessaging\obj\Debug\CustomMessaging.csprojResolveAssemblyReference.cache
