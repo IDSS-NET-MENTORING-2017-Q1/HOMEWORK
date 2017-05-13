@@ -6,6 +6,8 @@ using CustomMessaging.Interfaces;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
+using System.Linq;
+using System.Diagnostics;
 
 namespace CustomMessaging.Classes
 {
@@ -22,8 +24,7 @@ namespace CustomMessaging.Classes
 			get { return _outputPath; }
 			set { _outputPath = value; }
 		}
-
-		private string _currentGuid = null;
+		
 		private readonly List<DocumentPartition> _partitions;
 
 		public DocumentListener() : this(null) { }
@@ -51,25 +52,20 @@ namespace CustomMessaging.Classes
 			}
 		}
 
-		protected void MakePdf()
+		protected void MakePdf(string guid)
 		{
 			List<byte> result = new List<byte>();
-			foreach (var partition in _partitions)
+			foreach (var partition in _partitions.Where(o => o.DocumentGuid == guid))
 			{
 				result.AddRange(partition.Content);
 			}
 
-			var resultPath = Path.Combine(_outputPath, _currentGuid);
-			using (var file = File.Open(resultPath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None))
-			{
-				using (var writer = new StreamWriter(file))
-				{
-					writer.Write(result.ToArray());
-				}
-			}
+			var path = Path.Combine(_outputPath, guid + ".pdf");
+			var content = result.ToArray();
 
-			_partitions.Clear();
-			_currentGuid = null;
+			File.WriteAllBytes(path, content);
+
+			_partitions.RemoveAll(o => o.DocumentGuid == guid);
 		}
 
 		public void Start()
@@ -79,11 +75,11 @@ namespace CustomMessaging.Classes
 			_connection = factory.CreateConnection();
 			_channel = _connection.CreateModel();
 
-			_channel.ExchangeDeclare(exchange: "documents", type: "fanout");
+			_channel.ExchangeDeclare(exchange: "documents_exchange", type: "fanout");
 
 			var queueName = _channel.QueueDeclare().QueueName;
 			_channel.QueueBind(queue: queueName,
-							  exchange: "documents",
+							  exchange: "documents_exchange",
 							  routingKey: "");
 
 			_consumer = new EventingBasicConsumer(_channel);
@@ -91,23 +87,25 @@ namespace CustomMessaging.Classes
 			{
 				var body = ea.Body;
 				var message = Encoding.UTF8.GetString(body);
-				var partition = JsonConvert.DeserializeObject<DocumentPartition>(message);
-				if (string.IsNullOrWhiteSpace(_currentGuid))
+				DocumentPartition partition;
+
+				try
 				{
-					_currentGuid = partition.DocumentGuid;
+					partition = JsonConvert.DeserializeObject<DocumentPartition>(message);
 				}
-				else if (_currentGuid != partition.DocumentGuid)
+				catch (Exception ex)
 				{
-					MakePdf();
-					_currentGuid = partition.DocumentGuid;
+					Debug.WriteLine("Exception has occured!");
+					Debug.WriteLine(ex.Message);
+					return;
 				}
+
 
 				_partitions.Add(partition);
 				if (partition.EndOfDocument)
 				{
-					MakePdf();
+					MakePdf(partition.DocumentGuid);
 				}
-
 			};
 			_channel.BasicConsume(queue: queueName,
 								 noAck: true,

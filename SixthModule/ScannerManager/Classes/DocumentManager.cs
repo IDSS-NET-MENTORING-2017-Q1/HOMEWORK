@@ -12,7 +12,7 @@ namespace Scanner.Classes
 		protected bool ValidateName(string fileName)
 		{
 			Guid guid;
-			var value = Path.GetFileName(fileName);
+			var value = Path.GetFileNameWithoutExtension(fileName);
 			bool result = Guid.TryParse(value, out guid);
 			return result;
 		}

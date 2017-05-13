@@ -13,12 +13,12 @@ namespace CustomMessaging.Classes
 			using (var connection = factory.CreateConnection())
 			using (var channel = connection.CreateModel())
 			{
-				channel.ExchangeDeclare(exchange: "statuses", type: "fanout");
+				channel.ExchangeDeclare(exchange: "statuses_exchange", type: "fanout");
 
 				var message = JsonConvert.SerializeObject(value);
 				var body = Encoding.UTF8.GetBytes(message);
 
-				channel.BasicPublish(exchange: "statuses",
+				channel.BasicPublish(exchange: "statuses_exchange",
 										routingKey: "",
 										basicProperties: null,
 										body: body);

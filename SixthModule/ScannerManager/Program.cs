@@ -10,11 +10,18 @@ using Newtonsoft.Json;
 using Scanner.Classes;
 using System.Diagnostics;
 using CustomMessaging.Classes;
+using System.Linq;
 
 namespace Scanner
 {
 	class Program
 	{
+		static bool IsUnc(string sourcePath)
+		{
+			var uri = new Uri(sourcePath);
+			return uri.IsUnc;
+		}
+
 		static void Main(string[] args)
 		{
 			var logPath = ConfigurationManager.AppSettings["logPath"];
@@ -23,23 +30,27 @@ namespace Scanner
 				logPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "log.txt");
 			}
 
-			var outputPath = ConfigurationManager.AppSettings["outputPath"];
-			var tempPath = ConfigurationManager.AppSettings["tempPath"];
-			var corruptedPath = ConfigurationManager.AppSettings["corruptedPath"];
 			var sourcesPath = ConfigurationManager.AppSettings["sourcesPath"];
 
-			IEnumerable<string> sources = null;
+			IEnumerable<Paths> paths = null;
 			if (File.Exists(sourcesPath)) {
 				try
 				{
-					sources = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(sourcesPath));
+					paths = JsonConvert.DeserializeObject<List<Paths>>(File.ReadAllText(sourcesPath));
 				}
 				catch (Exception ex)
 				{
 					Debug.WriteLine("Exception has occured!");
 					Debug.WriteLine(ex.Message);
+					return;
 				}
 			}
+
+			var fileManagers = paths.Where(o => !IsUnc(o.InputPath)).Select(o => new FileManager(
+				o.InputPath,
+				o.TempPath,
+				o.CorruptedPath
+			));
 
 			var fileTarget = new FileTarget {
 				Name = "Default",
@@ -58,7 +69,6 @@ namespace Scanner
 			var documentManager = new DocumentManager();
 			var barcodeManager = new BarcodeManager();
 			var settingsListener = new SettingsListener();
-			var fileManagerFactory = new FileManagerFactory(tempPath, corruptedPath);
 
 			HostFactory.Run(
 				conf =>
@@ -79,8 +89,7 @@ namespace Scanner
 					conf.Service<ScannerManager>(callback =>
 					{
 						callback.ConstructUsing(() => new ScannerManager(
-							sources, 
-							fileManagerFactory, 
+							fileManagers, 
 							documentManager, 
 							barcodeManager, 
 							documentPublisher, 

@@ -84,7 +84,7 @@
     <Compile Include="Classes\BarcodeManager.cs" />
     <Compile Include="Classes\DocumentManager.cs" />
     <Compile Include="Classes\FileManager.cs" />
-    <Compile Include="Classes\FileManagerFactory.cs" />
+    <Compile Include="Classes\Paths.cs" />
     <Compile Include="Classes\PathWatcher.cs" />
     <Compile Include="Classes\ScannerManager.cs" />
     <Compile Include="Program.cs" />

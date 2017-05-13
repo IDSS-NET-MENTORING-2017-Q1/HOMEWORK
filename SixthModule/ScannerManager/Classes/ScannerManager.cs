@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 
 using CustomMessaging.Classes;
 using CustomMessaging.Interfaces;
@@ -10,8 +8,7 @@ namespace Scanner.Classes
 	public class ScannerManager
 	{
 		private ICollection<PathWatcher> _pathWatchers = new List<PathWatcher>();
-
-		private FileManagerFactory _fileManagerFactory;
+		
 		private IListener<Settings> _settingsListener;
 		
 		public IListener<Settings> SettingsListener
@@ -34,47 +31,14 @@ namespace Scanner.Classes
 			}
 		}
 
-		public FileManagerFactory FileManagerFactory
-		{
-			get
-			{
-				return _fileManagerFactory;
-			}
-		}
-
-		protected bool IsUnc(string sourcePath)
-		{
-			var uri = new Uri(sourcePath);
-			return uri.IsUnc;
-		}
-
-		protected void Init(IEnumerable<string> sourcePaths, FileManagerFactory fileManagerFactory, DocumentManager documentManager, BarcodeManager barcodeManager, IPublisher<IEnumerable<byte>> documentPublisher, IPublisher<Status> statusPublisher, IListener<Settings> settingsListener)
+		protected void Init(IEnumerable<FileManager> fileManagers, DocumentManager documentManager, BarcodeManager barcodeManager, IPublisher<IEnumerable<byte>> documentPublisher, IPublisher<Status> statusPublisher, IListener<Settings> settingsListener)
 		{
 			_settingsListener = settingsListener;
 			_settingsListener.Received += SettingsListener_Received;
-			_fileManagerFactory = fileManagerFactory;
 
-			if (sourcePaths == null || !sourcePaths.Any(path => !IsUnc(path)))
+			foreach (var fileManager in fileManagers)
 			{
-				var fileManager = _fileManagerFactory.Create(null);
 				var pathWatcher = new PathWatcher(fileManager.InputPath)
-				{
-					FileManager = fileManager,
-					DocumentManager = documentManager,
-					BarcodeManager = barcodeManager,
-					DocumentPublisher = documentPublisher,
-					StatusPublisher = statusPublisher
-				};
-
-				_pathWatchers.Add(pathWatcher);
-
-				return;
-			}
-
-			foreach (var sourcePath in sourcePaths.Where(path => !IsUnc(path)))
-			{
-				var fileManager = _fileManagerFactory.Create(sourcePath);
-				var pathWatcher = new PathWatcher(sourcePath)
 				{
 					FileManager = fileManager,
 					DocumentManager = documentManager,
@@ -96,9 +60,9 @@ namespace Scanner.Classes
 			}
 		}
 
-		public ScannerManager(IEnumerable<string> sourcePaths, FileManagerFactory fileManagerFactory, DocumentManager documentManager, BarcodeManager barcodeManager, IPublisher<IEnumerable<byte>> documentPublisher, IPublisher<Status> statusPublisher, IListener<Settings> settingsListener)
+		public ScannerManager(IEnumerable<FileManager> fileManagers, DocumentManager documentManager, BarcodeManager barcodeManager, IPublisher<IEnumerable<byte>> documentPublisher, IPublisher<Status> statusPublisher, IListener<Settings> settingsListener)
 		{
-			Init(sourcePaths, fileManagerFactory, documentManager, barcodeManager, documentPublisher, statusPublisher, settingsListener);
+			Init(fileManagers, documentManager, barcodeManager, documentPublisher, statusPublisher, settingsListener);
 		}
 
 		public bool Start()

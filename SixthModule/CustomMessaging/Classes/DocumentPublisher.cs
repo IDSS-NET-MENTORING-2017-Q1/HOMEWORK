@@ -18,7 +18,7 @@ namespace CustomMessaging.Classes
 			using (var connection = factory.CreateConnection())
 			using (var channel = connection.CreateModel())
 			{
-				channel.ExchangeDeclare(exchange: "documents", type: "fanout");
+				channel.ExchangeDeclare(exchange: "documents_exchange", type: "fanout");
 
 				var buffer = value;
 				while (buffer.Count() > 128)
@@ -29,10 +29,10 @@ namespace CustomMessaging.Classes
 						EndOfDocument = false
 					};
 
-					var message = JsonConvert.SerializeObject(value);
+					var message = JsonConvert.SerializeObject(partition);
 					var body = Encoding.UTF8.GetBytes(message);
 
-					channel.BasicPublish(exchange: "documents",
+					channel.BasicPublish(exchange: "documents_exchange",
 										 routingKey: "",
 										 basicProperties: null,
 										 body: body);
@@ -49,10 +49,10 @@ namespace CustomMessaging.Classes
 						EndOfDocument = true
 					};
 
-					var message = JsonConvert.SerializeObject(value);
+					var message = JsonConvert.SerializeObject(partition);
 					var body = Encoding.UTF8.GetBytes(message);
 
-					channel.BasicPublish(exchange: "documents",
+					channel.BasicPublish(exchange: "documents_exchange",
 										 routingKey: "",
 										 basicProperties: null,
 										 body: body);

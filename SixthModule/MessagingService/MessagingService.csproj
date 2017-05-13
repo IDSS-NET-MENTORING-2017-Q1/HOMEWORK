@@ -62,6 +62,10 @@
       <Project>{c23b74cd-1b9d-4184-b388-ce08702f3ad9}</Project>
       <Name>CustomMessaging</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ScannerManager\ScannerManager.csproj">
+      <Project>{27C11F20-5673-4CBB-88AD-D894BC47465A}</Project>
+      <Name>ScannerManager</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

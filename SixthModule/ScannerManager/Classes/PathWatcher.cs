@@ -165,13 +165,18 @@ namespace Scanner.Classes
 							if (_barcodeManager.IsBarcode(fileName))
 							{
 								_status.Value = ServiceStatuses.ProcessingPdf;
+
 								PublishPdf();
+
 								_fileManager.ClearTemp();
+								_fileManager.Delete(fileName);
 							}
 							else
 							{
 								_status.Value = ServiceStatuses.ProcessingFile;
+
 								Debug.WriteLine(string.Format("Moving {0} to temp folder...", fileName));
+
 								_fileManager.MoveToTemp(fileName);
 							}
 
@@ -204,7 +209,9 @@ namespace Scanner.Classes
 					try
 					{
 						_status.Value = ServiceStatuses.ProcessingPdf;
+
 						PublishPdf();
+
 						_fileManager.ClearTemp();
 					}
 					catch (Exception ex)

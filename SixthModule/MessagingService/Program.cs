@@ -3,6 +3,8 @@ using CustomMessaging.Classes;
 using System.IO;
 using System.Configuration;
 using Newtonsoft.Json;
+using System.Diagnostics;
+using System.Threading;
 
 namespace MessagingService
 {
@@ -63,6 +65,37 @@ namespace MessagingService
 			}
 		}
 
+		private static bool TryOpen(string filePath, int retryCount, int interval)
+		{
+			FileStream file = null;
+
+			for (var i = 0; i < retryCount; i++)
+			{
+				try
+				{
+					file = File.Open(filePath, FileMode.Open, FileAccess.Read, FileShare.None);
+					file.Close();
+					return true;
+				}
+				catch (Exception ex)
+				{
+					Debug.WriteLine("Exception has occured!");
+					Debug.WriteLine(ex.Message);
+
+					Thread.Sleep(interval);
+				}
+				finally
+				{
+					if (file != null)
+					{
+						file.Close();
+					}
+				}
+			}
+
+			return false;
+		}
+
 		private static void Watcher_Changed(object sender, FileSystemEventArgs e)
 		{
 			if (e.FullPath != settingsPath)
@@ -70,7 +103,11 @@ namespace MessagingService
 				return;
 			}
 
+			if (!TryOpen(settingsPath, 3, 5000))
+				return;
+
 			var settingsText = File.ReadAllText(settingsPath);
+
 			var settings = JsonConvert.DeserializeObject<Settings>(settingsText);
 			settingsPublisher.Publish(settings);
 		}
