@@ -5,16 +5,17 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using CustomMessaging;
-using CustomMessaging.Classes;
+using CustomMessaging.DTO;
 using CustomMessaging.Interfaces;
 
 using SystemTimer = System.Timers.Timer;
+using CustomMessaging.Enums;
 
 namespace Scanner.Classes
 {
 	public class PathWatcher
 	{
-		private Status _status;
+		private StatusDTO _status;
 
 		private int _waitInterval = 10000;
 		private int _statusInterval = 10000;
@@ -29,7 +30,7 @@ namespace Scanner.Classes
 		private BarcodeManager _barcodeManager;
 		private DocumentManager _documentManager;
 		private IPublisher<IEnumerable<byte>> _documentPublisher;
-		private IPublisher<Status> _statusPublisher;
+		private IPublisher<StatusDTO> _statusPublisher;
 
 		public int WaitInterval
 		{
@@ -103,7 +104,7 @@ namespace Scanner.Classes
 			}
 		}
 
-		public IPublisher<Status> StatusPublisher
+		public IPublisher<StatusDTO> StatusPublisher
 		{
 			get { return _statusPublisher; }
 			set { _statusPublisher = value; }
@@ -111,7 +112,7 @@ namespace Scanner.Classes
 
 		public PathWatcher(string inputPath)
 		{
-			_status = new Status
+			_status = new StatusDTO
 			{
 				Value = ServiceStatuses.Waiting,
 				ServiceName = Guid.NewGuid().ToString()

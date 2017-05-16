@@ -4,10 +4,11 @@ using CustomMessaging.Interfaces;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
+using CustomMessaging.DTO;
 
-namespace CustomMessaging.Classes
+namespace CustomMessaging.Listeners
 {
-	public class SettingsListener : IListener<Settings>
+	public class SettingsListener : IListener<SettingsDTO>
 	{
 		private IConnection _connection;
 		private IModel _channel;
@@ -32,7 +33,7 @@ namespace CustomMessaging.Classes
 			{
 				var body = ea.Body;
 				var message = Encoding.UTF8.GetString(body);
-				var settings = JsonConvert.DeserializeObject<Settings>(message);
+				var settings = JsonConvert.DeserializeObject<SettingsDTO>(message);
 				if (Received != null)
 				{
 					Received(this, settings);
@@ -50,6 +51,6 @@ namespace CustomMessaging.Classes
 			_connection.Dispose();
 		}
 
-		public event EventHandler<Settings> Received;
+		public event EventHandler<SettingsDTO> Received;
 	}
 }

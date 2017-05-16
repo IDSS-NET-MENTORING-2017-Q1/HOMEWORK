@@ -8,8 +8,9 @@ using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Linq;
 using System.Diagnostics;
+using CustomMessaging.DTO;
 
-namespace CustomMessaging.Classes
+namespace CustomMessaging.Listeners
 {
 	public class DocumentListener : IListener
 	{
@@ -25,13 +26,13 @@ namespace CustomMessaging.Classes
 			set { _outputPath = value; }
 		}
 		
-		private readonly List<DocumentPartition> _partitions;
+		private readonly List<DocumentPartitionDTO> _partitions;
 
 		public DocumentListener() : this(null) { }
 
 		public DocumentListener(string outputPath)
 		{
-			_partitions = new List<DocumentPartition>();
+			_partitions = new List<DocumentPartitionDTO>();
 
 			if (string.IsNullOrWhiteSpace(outputPath))
 			{
@@ -87,11 +88,11 @@ namespace CustomMessaging.Classes
 			{
 				var body = ea.Body;
 				var message = Encoding.UTF8.GetString(body);
-				DocumentPartition partition;
+				DocumentPartitionDTO partition;
 
 				try
 				{
-					partition = JsonConvert.DeserializeObject<DocumentPartition>(message);
+					partition = JsonConvert.DeserializeObject<DocumentPartitionDTO>(message);
 				}
 				catch (Exception ex)
 				{

@@ -4,10 +4,11 @@ using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;
+using CustomMessaging.DTO;
 
-namespace CustomMessaging.Classes
+namespace CustomMessaging.Listeners
 {
-	public class StatusListener : IListener<Status>
+	public class StatusListener : IListener<StatusDTO>
 	{
 		private IConnection _connection;
 		private IModel _channel;
@@ -31,7 +32,7 @@ namespace CustomMessaging.Classes
 			{
 				var body = ea.Body;
 				var message = Encoding.UTF8.GetString(body);
-				var status = JsonConvert.DeserializeObject<Status>(message);
+				var status = JsonConvert.DeserializeObject<StatusDTO>(message);
 
 				if (Received != null)
 				{
@@ -50,6 +51,6 @@ namespace CustomMessaging.Classes
 			_connection.Dispose();
 		}
 
-		public event EventHandler<Status> Received;
+		public event EventHandler<StatusDTO> Received;
 	}
 }

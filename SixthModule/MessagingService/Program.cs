@@ -1,10 +1,12 @@
 ﻿using System;
-using CustomMessaging.Classes;
+using CustomMessaging.DTO;
 using System.IO;
 using System.Configuration;
 using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Threading;
+using CustomMessaging.Listeners;
+using CustomMessaging.Publishers;
 
 namespace MessagingService
 {
@@ -108,11 +110,11 @@ namespace MessagingService
 
 			var settingsText = File.ReadAllText(settingsPath);
 
-			var settings = JsonConvert.DeserializeObject<Settings>(settingsText);
+			var settings = JsonConvert.DeserializeObject<SettingsDTO>(settingsText);
 			settingsPublisher.Publish(settings);
 		}
 
-		private static void StatusListener_Received(object sender, Status e)
+		private static void StatusListener_Received(object sender, StatusDTO e)
 		{
 			using (var writer = File.AppendText(statusesPath))
 			{

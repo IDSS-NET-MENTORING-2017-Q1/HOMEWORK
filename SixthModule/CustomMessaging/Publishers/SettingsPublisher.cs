@@ -2,12 +2,13 @@
 using CustomMessaging.Interfaces;
 using RabbitMQ.Client;
 using Newtonsoft.Json;
+using CustomMessaging.DTO;
 
-namespace CustomMessaging.Classes
+namespace CustomMessaging.Publishers
 {
-	public class SettingsPublisher : IPublisher<Settings>
+	public class SettingsPublisher : IPublisher<SettingsDTO>
 	{
-		public void Publish(Settings value)
+		public void Publish(SettingsDTO value)
 		{
 			var factory = new ConnectionFactory() { HostName = "localhost" };
 			using (var connection = factory.CreateConnection())

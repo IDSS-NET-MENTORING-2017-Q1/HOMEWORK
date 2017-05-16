@@ -5,8 +5,9 @@ using RabbitMQ.Client;
 using Newtonsoft.Json;
 using System.Linq;
 using System;
+using CustomMessaging.DTO;
 
-namespace CustomMessaging.Classes
+namespace CustomMessaging.Publishers
 {
 	public class DocumentPublisher : IPublisher<IEnumerable<byte>>
 	{
@@ -23,7 +24,7 @@ namespace CustomMessaging.Classes
 				var buffer = value;
 				while (buffer.Count() > 128)
 				{
-					var partition = new DocumentPartition() {
+					var partition = new DocumentPartitionDTO() {
 						Content = buffer.Take(128),
 						DocumentGuid = documentGuid,
 						EndOfDocument = false
@@ -42,7 +43,7 @@ namespace CustomMessaging.Classes
 
 				if (buffer.Count() > 0)
 				{
-					var partition = new DocumentPartition()
+					var partition = new DocumentPartitionDTO()
 					{
 						Content = buffer,
 						DocumentGuid = documentGuid,

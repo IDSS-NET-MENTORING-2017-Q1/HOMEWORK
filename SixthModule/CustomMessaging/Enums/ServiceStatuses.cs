@@ -1,4 +1,4 @@
-﻿namespace CustomMessaging
+﻿namespace CustomMessaging.Enums
 {
 	public enum ServiceStatuses
 	{

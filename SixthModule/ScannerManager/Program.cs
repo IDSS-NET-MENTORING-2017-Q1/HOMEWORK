@@ -9,8 +9,10 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Scanner.Classes;
 using System.Diagnostics;
-using CustomMessaging.Classes;
+using CustomMessaging.DTO;
 using System.Linq;
+using CustomMessaging.Publishers;
+using CustomMessaging.Listeners;
 
 namespace Scanner
 {

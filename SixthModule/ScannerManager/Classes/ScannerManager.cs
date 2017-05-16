@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-using CustomMessaging.Classes;
+using CustomMessaging.DTO;
 using CustomMessaging.Interfaces;
 
 namespace Scanner.Classes
@@ -9,9 +9,9 @@ namespace Scanner.Classes
 	{
 		private ICollection<PathWatcher> _pathWatchers = new List<PathWatcher>();
 		
-		private IListener<Settings> _settingsListener;
+		private IListener<SettingsDTO> _settingsListener;
 		
-		public IListener<Settings> SettingsListener
+		public IListener<SettingsDTO> SettingsListener
 		{
 			get
 			{
@@ -31,7 +31,7 @@ namespace Scanner.Classes
 			}
 		}
 
-		protected void Init(IEnumerable<FileManager> fileManagers, DocumentManager documentManager, BarcodeManager barcodeManager, IPublisher<IEnumerable<byte>> documentPublisher, IPublisher<Status> statusPublisher, IListener<Settings> settingsListener)
+		protected void Init(IEnumerable<FileManager> fileManagers, DocumentManager documentManager, BarcodeManager barcodeManager, IPublisher<IEnumerable<byte>> documentPublisher, IPublisher<StatusDTO> statusPublisher, IListener<SettingsDTO> settingsListener)
 		{
 			_settingsListener = settingsListener;
 			_settingsListener.Received += SettingsListener_Received;
@@ -51,7 +51,7 @@ namespace Scanner.Classes
 			}
 		}
 
-		void SettingsListener_Received(object sender, Settings e)
+		void SettingsListener_Received(object sender, SettingsDTO e)
 		{
 			foreach (var pathWatcher in _pathWatchers)
 			{
@@ -60,7 +60,7 @@ namespace Scanner.Classes
 			}
 		}
 
-		public ScannerManager(IEnumerable<FileManager> fileManagers, DocumentManager documentManager, BarcodeManager barcodeManager, IPublisher<IEnumerable<byte>> documentPublisher, IPublisher<Status> statusPublisher, IListener<Settings> settingsListener)
+		public ScannerManager(IEnumerable<FileManager> fileManagers, DocumentManager documentManager, BarcodeManager barcodeManager, IPublisher<IEnumerable<byte>> documentPublisher, IPublisher<StatusDTO> statusPublisher, IListener<SettingsDTO> settingsListener)
 		{
 			Init(fileManagers, documentManager, barcodeManager, documentPublisher, statusPublisher, settingsListener);
 		}
