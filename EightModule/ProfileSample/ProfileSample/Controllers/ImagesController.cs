@@ -60,7 +60,7 @@ namespace ProfileSample.Controllers
 		[HttpGet]
 		public ActionResult Upload()
 		{
-			ViewBag.Message = "Upload your file here.";
+			ViewBag.Message = "Upload your file here";
 
 			return View();
 		}
