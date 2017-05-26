@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ProfileSampleModelStoreContainer" CdmEntityContainer="ProfileSampleEntities">
+    <EntitySetMapping Name="ImgSources">
+      <EntityTypeMapping TypeName="ProfileSampleModel.ImgSource">
+        <MappingFragment StoreEntitySet="ImgSources">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Data" ColumnName="Data" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
