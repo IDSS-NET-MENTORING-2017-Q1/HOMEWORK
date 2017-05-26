@@ -1,20 +1,25 @@
 ﻿@{
-    ViewBag.Title = "title";
+    ViewBag.Title = "Gallery";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@ViewBag.Title.</h2>
+<h2>@ViewBag.Title</h2>
 <h3>@ViewBag.Message</h3>
 
+<div class="fixed overlay full-width full-height" id="loader-container">
+    <div id="dimmer" class="absolute full-height full-width dimmer"></div>
+    <div id="loader"></div>
+</div>
+
 <div class="row">
-    <div class="row">
+    <div class="col-md-12">
         <div class="form-group">
+            <label for="search-phrase">Search phrase:</label>
             <input class="form-control" type="text" id="search-phrase" />
         </div>
         <div class="form-group">
             <input class="btn btn-primary" type="button" value="Search!" onclick="refresh()" />
         </div>
     </div>
-
-    <div id="results" class="row"></div>
+    <div class="col-md-12" id="results"></div>
 </div>

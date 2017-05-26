@@ -28,6 +28,10 @@ namespace ProfileSample
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
-        }
+
+			bundles.Add(new StyleBundle("~/Home/Index").Include(
+					 "~/Content/Shared/core.css",
+					 "~/Content/Shared/loader.css"));
+		}
     }
 }

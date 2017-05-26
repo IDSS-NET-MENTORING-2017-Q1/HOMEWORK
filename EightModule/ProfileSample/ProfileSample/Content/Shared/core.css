@@ -1,0 +1,30 @@
+﻿.relative {
+    position: relative;
+}
+
+.absolute {
+    position: absolute;
+}
+
+.fixed {
+    position: fixed;
+}
+
+.full-width {
+    left: 0;
+    width: 100%;
+}
+
+.full-height {
+    top: 0;
+    height: 100%;
+}
+
+.overlay {
+    z-index: 5;
+}
+
+.dimmer {
+    background-color: #cacaca;
+    opacity: 0.4;
+}

@@ -192,6 +192,8 @@
     <Content Include="Content\Img\Planet Scenes %28273%29.jpg" />
     <Content Include="Content\Img\Planet Scenes %28274%29.jpg" />
     <Content Include="Content\Img\Planet Scenes %28275%29.jpg" />
+    <Content Include="Content\Shared\core.css" />
+    <Content Include="Content\Shared\loader.css" />
     <Content Include="DAL\MyImgContext.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>MyImgContext.edmx</DependentUpon>
