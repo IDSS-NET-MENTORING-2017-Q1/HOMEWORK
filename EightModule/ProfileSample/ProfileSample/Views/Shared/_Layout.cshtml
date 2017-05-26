@@ -25,6 +25,7 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Upload", "Upload", "Images")</li>
                 </ul>
             </div>
         </div>
@@ -39,6 +40,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/" + ViewContext.RouteData.Values["controller"] + "/" + ViewContext.RouteData.Values["action"])
     @RenderSection("scripts", required: false)
     @MiniProfiler.RenderIncludes()
 </body>
