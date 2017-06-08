@@ -20,7 +20,6 @@ C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\TenthModule\U
 C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\TenthModule\UnityAOP\CustomMessaging\bin\Debug\RabbitMQ.Client.dll
 C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\TenthModule\UnityAOP\CustomMessaging\bin\Debug\Newtonsoft.Json.xml
 C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\TenthModule\UnityAOP\CustomMessaging\bin\Debug\RabbitMQ.Client.xml
-C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\TenthModule\UnityAOP\CustomMessaging\obj\Debug\CustomMessaging.csprojResolveAssemblyReference.cache
 C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\TenthModule\UnityAOP\CustomMessaging\obj\Debug\CustomMessaging.dll
 C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\TenthModule\UnityAOP\CustomMessaging\obj\Debug\CustomMessaging.pdb
 C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\TenthModule\UnityAOP\CustomMessaging\bin\Debug\Microsoft.Practices.ServiceLocation.dll

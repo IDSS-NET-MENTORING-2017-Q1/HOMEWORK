@@ -112,7 +112,7 @@ namespace Scanner
 					{
 						callback.ConstructUsing(() => container.Resolve<IScannerManager>(
 							new ParameterOverride("fileManagers", fileManagers)
-						);
+						));
 						callback.WhenStarted(service => service.Start());
 						callback.WhenStopped(service => service.Stop());
 					}).UseNLog(logFactory);

@@ -4,6 +4,7 @@ using RabbitMQ.Client;
 using Newtonsoft.Json;
 using CustomMessaging.DTO;
 using CustomMessaging.Unity;
+using System;
 
 namespace CustomMessaging.Publishers
 {
