@@ -3,9 +3,11 @@
 using CustomMessaging.DTO;
 using CustomMessaging.Interfaces;
 using Scanner.Interfaces;
+using CustomMessaging.Unity;
 
 namespace Scanner.Classes
 {
+	[LogFileName("scanner_manager_logs")]
 	public class ScannerManager
 	{
 		private ICollection<PathWatcher> _pathWatchers = new List<PathWatcher>();
@@ -32,7 +34,7 @@ namespace Scanner.Classes
 			}
 		}
 
-		protected void Init(IEnumerable<FileManager> fileManagers, IDocumentManager documentManager, IBarcodeManager barcodeManager, IPublisher<IEnumerable<byte>> documentPublisher, IPublisher<StatusDTO> statusPublisher, IListener<SettingsDTO> settingsListener)
+		protected void Init(IEnumerable<IFileManager> fileManagers, IDocumentManager documentManager, IBarcodeManager barcodeManager, IPublisher<IEnumerable<byte>> documentPublisher, IPublisher<StatusDTO> statusPublisher, IListener<SettingsDTO> settingsListener)
 		{
 			_settingsListener = settingsListener;
 			_settingsListener.Received += SettingsListener_Received;
@@ -61,7 +63,7 @@ namespace Scanner.Classes
 			}
 		}
 
-		public ScannerManager(IEnumerable<FileManager> fileManagers, IDocumentManager documentManager, IBarcodeManager barcodeManager, IPublisher<IEnumerable<byte>> documentPublisher, IPublisher<StatusDTO> statusPublisher, IListener<SettingsDTO> settingsListener)
+		public ScannerManager(IEnumerable<IFileManager> fileManagers, IDocumentManager documentManager, IBarcodeManager barcodeManager, IPublisher<IEnumerable<byte>> documentPublisher, IPublisher<StatusDTO> statusPublisher, IListener<SettingsDTO> settingsListener)
 		{
 			Init(fileManagers, documentManager, barcodeManager, documentPublisher, statusPublisher, settingsListener);
 		}

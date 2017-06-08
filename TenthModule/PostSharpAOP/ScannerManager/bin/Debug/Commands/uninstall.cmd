@@ -1,0 +1,1 @@
+..\ScannerManager.exe uninstall --sudo

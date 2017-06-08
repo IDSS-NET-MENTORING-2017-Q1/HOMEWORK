@@ -5,9 +5,11 @@ using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 using System;
 using Scanner.Interfaces;
+using CustomMessaging.Unity;
 
 namespace Scanner.Classes
 {
+	[LogFileName("document_manager_logs")]
 	public class DocumentManager : IDocumentManager
 	{
 		protected bool ValidateName(string fileName)
@@ -42,9 +44,14 @@ namespace Scanner.Classes
 				}
 			}
 
-			var result = new MemoryStream((int)document.FileSize);
-			document.Save(result);
-			return result;
+			if (document.PageCount > 0)
+			{
+				var documentStream = new MemoryStream((int)document.FileSize);
+				document.Save(documentStream);
+				return documentStream;
+			}
+
+			return null;
 		}
 	}
 }

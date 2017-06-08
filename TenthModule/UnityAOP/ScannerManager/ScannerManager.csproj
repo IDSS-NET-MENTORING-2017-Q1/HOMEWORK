@@ -102,6 +102,7 @@
     <Compile Include="Classes\BarcodeManager.cs" />
     <Compile Include="Classes\DocumentManager.cs" />
     <Compile Include="Classes\FileManager.cs" />
+    <Compile Include="Interfaces\IFileManager.cs" />
     <Compile Include="Interfaces\IBarcodeManager.cs" />
     <Compile Include="Interfaces\IDocumentManager.cs" />
     <Compile Include="Classes\Paths.cs" />

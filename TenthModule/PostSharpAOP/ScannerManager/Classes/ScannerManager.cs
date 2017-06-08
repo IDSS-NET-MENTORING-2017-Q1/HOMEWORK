@@ -1,0 +1,96 @@
+﻿using System.Collections.Generic;
+using CustomMessaging.DTO;
+using CustomMessaging.Interfaces;
+using CustomMessaging.Aspects;
+
+namespace Scanner.Classes
+{
+	public class ScannerManager
+	{
+		private ICollection<PathWatcher> _pathWatchers = new List<PathWatcher>();
+		
+		private IListener<SettingsDTO> _settingsListener;
+		
+		public IListener<SettingsDTO> SettingsListener
+		{
+			get
+			{
+				return _settingsListener;
+			}
+			set
+			{
+				_settingsListener = value;
+			}
+		}
+
+		public ICollection<PathWatcher> PathWatchers
+		{
+			get
+			{
+				return _pathWatchers;
+			}
+		}
+
+		[LogMethod]
+		protected void Init(IEnumerable<FileManager> fileManagers, DocumentManager documentManager, BarcodeManager barcodeManager, IPublisher<IEnumerable<byte>> documentPublisher, IPublisher<StatusDTO> statusPublisher, IListener<SettingsDTO> settingsListener)
+		{
+			_settingsListener = settingsListener;
+			_settingsListener.Received += SettingsListener_Received;
+
+			foreach (var fileManager in fileManagers)
+			{
+				var pathWatcher = new PathWatcher(fileManager.InputPath)
+				{
+					FileManager = fileManager,
+					DocumentManager = documentManager,
+					BarcodeManager = barcodeManager,
+					DocumentPublisher = documentPublisher,
+					StatusPublisher = statusPublisher
+				};
+
+				_pathWatchers.Add(pathWatcher);
+			}
+		}
+
+		[LogMethod]
+		void SettingsListener_Received(object sender, SettingsDTO e)
+		{
+			foreach (var pathWatcher in _pathWatchers)
+			{
+				pathWatcher.WaitInterval = e.Timeout;
+				pathWatcher.BarcodeManager.EndOfDocument = e.EndOfDocument;
+			}
+		}
+
+		public ScannerManager(IEnumerable<FileManager> fileManagers, DocumentManager documentManager, BarcodeManager barcodeManager, IPublisher<IEnumerable<byte>> documentPublisher, IPublisher<StatusDTO> statusPublisher, IListener<SettingsDTO> settingsListener)
+		{
+			Init(fileManagers, documentManager, barcodeManager, documentPublisher, statusPublisher, settingsListener);
+		}
+
+		[LogMethod]
+		public bool Start()
+		{
+			_settingsListener.Start();
+
+			foreach (var pathWatcher in _pathWatchers)
+			{
+				pathWatcher.Start();
+			}
+
+			return true;
+		}
+
+		[LogMethod]
+		public bool Stop()
+		{
+			foreach (var pathWatcher in _pathWatchers)
+			{
+				pathWatcher.Stop();
+			}
+
+			_settingsListener.Dispose();
+
+			return true;
+		}
+	}
+}

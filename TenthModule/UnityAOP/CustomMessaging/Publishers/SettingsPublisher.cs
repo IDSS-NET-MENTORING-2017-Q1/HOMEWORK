@@ -3,9 +3,11 @@ using CustomMessaging.Interfaces;
 using RabbitMQ.Client;
 using Newtonsoft.Json;
 using CustomMessaging.DTO;
+using CustomMessaging.Unity;
 
 namespace CustomMessaging.Publishers
 {
+	[LogFileName("settings_publisher_logs")]
 	public class SettingsPublisher : IPublisher<SettingsDTO>
 	{
 		public void Publish(SettingsDTO value)

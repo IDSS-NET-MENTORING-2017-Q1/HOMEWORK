@@ -27,18 +27,6 @@ namespace MessagingService
 
 		static void Main(string[] args)
 		{
-			var container = new UnityContainer();
-			container.RegisterType<IDocumentListener, DocumentListener>(new Interceptor<InterfaceInterceptor>(),
-				new InterceptionBehavior<LoggingInterceptionBehavior>());
-			container.RegisterType<IListener<StatusDTO>, StatusListener>(new Interceptor<InterfaceInterceptor>(),
-				new InterceptionBehavior<LoggingInterceptionBehavior>());
-			container.RegisterType<IPublisher<SettingsDTO>, SettingsPublisher>(new Interceptor<InterfaceInterceptor>(),
-				new InterceptionBehavior<LoggingInterceptionBehavior>());
-
-			documentListener = container.Resolve<IDocumentListener>();
-			statusListener = container.Resolve<IListener<StatusDTO>>();
-			settingsPublisher = container.Resolve<IPublisher<SettingsDTO>>();
-
 			var basePath = AppDomain.CurrentDomain.BaseDirectory;
 			settingsPath = ConfigurationManager.AppSettings["settingsFile"];
 			statusesPath = ConfigurationManager.AppSettings["statusesFile"];
@@ -60,6 +48,19 @@ namespace MessagingService
 			{
 				Directory.CreateDirectory(outputPath);
 			}
+
+			var container = new UnityContainer();
+			container.AddNewExtension<Interception>();
+			container.RegisterType<IDocumentListener, DocumentListener>(new Interceptor<InterfaceInterceptor>(),
+				new InterceptionBehavior<LoggingInterceptionBehavior>());
+			container.RegisterType<IListener<StatusDTO>, StatusListener>(new Interceptor<InterfaceInterceptor>(),
+				new InterceptionBehavior<LoggingInterceptionBehavior>());
+			container.RegisterType<IPublisher<SettingsDTO>, SettingsPublisher>(new Interceptor<InterfaceInterceptor>(),
+				new InterceptionBehavior<LoggingInterceptionBehavior>());
+
+			documentListener = container.Resolve<IDocumentListener>(new ParameterOverride("outputPath", outputPath));
+			statusListener = container.Resolve<IListener<StatusDTO>>();
+			settingsPublisher = container.Resolve<IPublisher<SettingsDTO>>();
 
 			documentListener.OutputPath = outputPath;
 

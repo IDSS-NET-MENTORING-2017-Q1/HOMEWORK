@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Practices.Unity.InterceptionExtension;
 using System.IO;
 using System.Configuration;
+using System.Linq;
 
 namespace CustomMessaging.Unity
 {
@@ -12,7 +13,7 @@ namespace CustomMessaging.Unity
 		  GetNextInterceptionBehaviorDelegate getNext)
 		{
 			// Before invoking the method on the original target.
-			WriteLog(String.Format(
+			WriteLog(input, String.Format(
 			  "Invoking method {0} at {1}",
 			  input.MethodBase, DateTime.Now.ToLongTimeString()));
 
@@ -23,14 +24,14 @@ namespace CustomMessaging.Unity
 			// After invoking the method on the original target.
 			if (result.Exception != null)
 			{
-				WriteLog(String.Format(
+				WriteLog(input, String.Format(
 				  "Method {0} threw exception {1} at {2}",
 				  input.MethodBase, result.Exception.Message,
 				  DateTime.Now.ToLongTimeString()));
 			}
 			else
 			{
-				WriteLog(String.Format(
+				WriteLog(input, String.Format(
 				  "Method {0} returned {1} at {2}",
 				  input.MethodBase, result.ReturnValue,
 				  DateTime.Now.ToLongTimeString()));
@@ -49,14 +50,28 @@ namespace CustomMessaging.Unity
 			get { return true; }
 		}
 
-		private void WriteLog(string message)
+		private void WriteLog(IMethodInvocation input, string message)
 		{
-			var logPath = ConfigurationManager.AppSettings["logPath"];
+			var logPath = ConfigurationManager.AppSettings["logFolder"];
 			if (string.IsNullOrWhiteSpace(logPath))
 			{
-				logPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "log.txt");
+				logPath = AppDomain.CurrentDomain.BaseDirectory;
 			}
-			File.AppendAllText(logPath, message);
+
+			var fileNameAttribute = input.Target.GetType().GetCustomAttributes(typeof(LogFileNameAttribute), false).FirstOrDefault() as LogFileNameAttribute;
+			if (fileNameAttribute != null)
+			{
+				logPath = Path.Combine(logPath, fileNameAttribute.Name);
+			}
+			else
+			{
+				logPath = Path.Combine(logPath, Guid.NewGuid().ToString() + ".txt");
+			}
+
+			using (var logFile = File.AppendText(logPath))
+			{
+				logFile.WriteLine(message);
+			}
 		}
 	}
 }

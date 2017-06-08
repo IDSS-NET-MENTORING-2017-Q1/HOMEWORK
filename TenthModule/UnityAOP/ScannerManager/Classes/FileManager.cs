@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CustomMessaging.Unity;
+using Scanner.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -6,7 +8,8 @@ using System.Threading;
 
 namespace Scanner.Classes
 {
-	public class FileManager
+	[LogFileName("file_manager_logs")]
+	public class FileManager : IFileManager
 	{
 		private string _inputPath;
 		private string _tempPath;

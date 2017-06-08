@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CustomMessaging.Unity;
+using System;
 
 namespace CustomMessaging.Interfaces
 {
@@ -6,7 +7,7 @@ namespace CustomMessaging.Interfaces
 	{
 		void Start();
 	}
-
+	
 	public interface IDocumentListener : IListener
 	{
 		string OutputPath { get; set; }

@@ -26,7 +26,7 @@ namespace Scanner.Classes
 		private FileSystemWatcher _watcher;
 		private Thread _worker;
 
-		private FileManager _fileManager;
+		private IFileManager _fileManager;
 		private IBarcodeManager _barcodeManager;
 		private IDocumentManager _documentManager;
 		private IPublisher<IEnumerable<byte>> _documentPublisher;
@@ -56,7 +56,7 @@ namespace Scanner.Classes
 			}
 		}
 
-		public FileManager FileManager
+		public IFileManager FileManager
 		{
 			get
 			{
@@ -134,7 +134,6 @@ namespace Scanner.Classes
 		private void PublishPdf()
 		{
 			var sourceFiles = _fileManager.GetTempFiles();
-
 			if (sourceFiles.Count() <= 0)
 			{
 				return;
@@ -142,17 +141,23 @@ namespace Scanner.Classes
 
 			Debug.WriteLine("Generating resulting PDF...");
 
-			var content = _documentManager.GeneratePdf(sourceFiles).ToArray();
-
-			_documentPublisher.Publish(content);
+			using (var content = _documentManager.GeneratePdf(sourceFiles))
+			{
+				if (content != null)
+				{
+					_documentPublisher.Publish(content.ToArray());
+				}
+			};
 		}
 
 		private void WorkProcess()
 		{
 			int waitResult;
+
 			do
 			{
-				foreach (var fileName in _fileManager.GetInputFiles())
+				var sourceFiles = _fileManager.GetInputFiles();
+				foreach (var fileName in sourceFiles)
 				{
 					if (_stopRequested.WaitOne(TimeSpan.Zero))
 					{
@@ -205,6 +210,7 @@ namespace Scanner.Classes
 				_status.Value = ServiceStatuses.Waiting;
 
 				waitResult = WaitHandle.WaitAny(new WaitHandle[] { _stopRequested, _fileCreated }, _waitInterval);
+				
 				if (waitResult == WaitHandle.WaitTimeout)
 				{
 					try

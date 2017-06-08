@@ -1,10 +1,12 @@
-﻿using Scanner.Interfaces;
+﻿using CustomMessaging.Unity;
+using Scanner.Interfaces;
 using System.Drawing;
 using System.IO;
 using ZXing;
 
 namespace Scanner.Classes
 {
+	[LogFileName("barcode_manager_logs")]
 	public class BarcodeManager : IBarcodeManager
 	{
 		private string _endOfDocument = "EndOfDocument";

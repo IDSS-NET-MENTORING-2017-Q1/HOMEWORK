@@ -31,18 +31,6 @@ namespace Scanner
 
 		static void Main(string[] args)
 		{
-			var container = new UnityContainer();
-			container.RegisterType<IPublisher<IEnumerable<byte>>, DocumentPublisher>(new Interceptor<InterfaceInterceptor>(),
-				new InterceptionBehavior<LoggingInterceptionBehavior>());
-			container.RegisterType<IPublisher<StatusDTO>, StatusPublisher>(new Interceptor<InterfaceInterceptor>(),
-				new InterceptionBehavior<LoggingInterceptionBehavior>());
-			container.RegisterType<IDocumentManager, DocumentManager>(new Interceptor<InterfaceInterceptor>(),
-				new InterceptionBehavior<LoggingInterceptionBehavior>());
-			container.RegisterType<IBarcodeManager, BarcodeManager>(new Interceptor<InterfaceInterceptor>(),
-				new InterceptionBehavior<LoggingInterceptionBehavior>());
-			container.RegisterType<IListener<SettingsDTO>, SettingsListener>(new Interceptor<InterfaceInterceptor>(),
-				new InterceptionBehavior<LoggingInterceptionBehavior>());
-
 			var logPath = ConfigurationManager.AppSettings["logPath"];
 			if (string.IsNullOrWhiteSpace(logPath))
 			{
@@ -52,7 +40,8 @@ namespace Scanner
 			var sourcesPath = ConfigurationManager.AppSettings["sourcesPath"];
 
 			IEnumerable<Paths> paths = null;
-			if (File.Exists(sourcesPath)) {
+			if (File.Exists(sourcesPath))
+			{
 				try
 				{
 					paths = JsonConvert.DeserializeObject<List<Paths>>(File.ReadAllText(sourcesPath));
@@ -65,13 +54,8 @@ namespace Scanner
 				}
 			}
 
-			var fileManagers = paths.Where(o => !IsUnc(o.InputPath)).Select(o => new FileManager(
-				o.InputPath,
-				o.TempPath,
-				o.CorruptedPath
-			));
-
-			var fileTarget = new FileTarget {
+			var fileTarget = new FileTarget
+			{
 				Name = "Default",
 				FileName = logPath,
 				Layout = "${date} ${message} ${onexception:inner=${exception:format=toString}}"
@@ -83,11 +67,32 @@ namespace Scanner
 
 			var logFactory = new LogFactory(logConfig);
 
+			var container = new UnityContainer();
+			container.AddNewExtension<Interception>();
+			container.RegisterType<IPublisher<IEnumerable<byte>>, DocumentPublisher>(new Interceptor<InterfaceInterceptor>(),
+				new InterceptionBehavior<LoggingInterceptionBehavior>());
+			container.RegisterType<IPublisher<StatusDTO>, StatusPublisher>(new Interceptor<InterfaceInterceptor>(),
+				new InterceptionBehavior<LoggingInterceptionBehavior>());
+			container.RegisterType<IDocumentManager, DocumentManager>(new Interceptor<InterfaceInterceptor>(),
+				new InterceptionBehavior<LoggingInterceptionBehavior>());
+			container.RegisterType<IBarcodeManager, BarcodeManager>(new Interceptor<InterfaceInterceptor>(),
+				new InterceptionBehavior<LoggingInterceptionBehavior>());
+			container.RegisterType<IFileManager, FileManager>(new Interceptor<InterfaceInterceptor>(),
+				new InterceptionBehavior<LoggingInterceptionBehavior>());
+			container.RegisterType<IListener<SettingsDTO>, SettingsListener>(new Interceptor<InterfaceInterceptor>(),
+				new InterceptionBehavior<LoggingInterceptionBehavior>());
+
 			var documentPublisher = container.Resolve<IPublisher<IEnumerable<byte>>>();
 			var statusPublisher = container.Resolve<IPublisher<StatusDTO>>();
 			var documentManager = container.Resolve<IDocumentManager>();
-			var barcodeManager = container.Resolve<IBarcodeManager>();
+			var barcodeManager = container.Resolve<IBarcodeManager>(new ParameterOverride("endOfDocument", "EndOfDocument"));
 			var settingsListener = container.Resolve<IListener<SettingsDTO>>();
+
+			var fileManagers = paths.Where(o => !IsUnc(o.InputPath)).Select(o => container.Resolve<IFileManager>(
+				new ParameterOverride("inputPath", o.InputPath),
+				new ParameterOverride("tempPath", o.TempPath),
+				new ParameterOverride("corruptedPath", o.CorruptedPath)
+			));
 
 			HostFactory.Run(
 				conf =>
@@ -108,11 +113,11 @@ namespace Scanner
 					conf.Service<ScannerManager>(callback =>
 					{
 						callback.ConstructUsing(() => new ScannerManager(
-							fileManagers, 
-							documentManager, 
-							barcodeManager, 
-							documentPublisher, 
-							statusPublisher, 
+							fileManagers,
+							documentManager,
+							barcodeManager,
+							documentPublisher,
+							statusPublisher,
 							settingsListener));
 						callback.WhenStarted(service => service.Start());
 						callback.WhenStopped(service => service.Stop());

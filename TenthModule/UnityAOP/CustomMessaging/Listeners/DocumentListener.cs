@@ -9,9 +9,11 @@ using RabbitMQ.Client.Events;
 using System.Linq;
 using System.Diagnostics;
 using CustomMessaging.DTO;
+using CustomMessaging.Unity;
 
 namespace CustomMessaging.Listeners
 {
+	[LogFileName("document_listener_logs")]
 	public class DocumentListener : IDocumentListener
 	{
 		private string _outputPath;

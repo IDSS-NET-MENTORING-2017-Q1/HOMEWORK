@@ -5,9 +5,11 @@ using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;
 using CustomMessaging.DTO;
+using CustomMessaging.Unity;
 
 namespace CustomMessaging.Listeners
 {
+	[LogFileName("status_listener_logs")]
 	public class StatusListener : IListener<StatusDTO>
 	{
 		private IConnection _connection;

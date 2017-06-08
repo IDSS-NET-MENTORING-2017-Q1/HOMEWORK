@@ -6,9 +6,11 @@ using Newtonsoft.Json;
 using System.Linq;
 using System;
 using CustomMessaging.DTO;
+using CustomMessaging.Unity;
 
 namespace CustomMessaging.Publishers
 {
+	[LogFileName("document_publisher_logs")]
 	public class DocumentPublisher : IPublisher<IEnumerable<byte>>
 	{
 		public void Publish(IEnumerable<byte> value)

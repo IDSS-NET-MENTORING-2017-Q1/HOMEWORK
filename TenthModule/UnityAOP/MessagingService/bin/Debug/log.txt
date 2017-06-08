@@ -1,0 +1,8 @@
+Invoking method Void set_OutputPath(System.String) at 10:21:20 PM
+Method Void set_OutputPath(System.String) returned  at 10:21:20 PM
+Invoking method Void Start() at 10:21:20 PM
+Method Void Start() returned  at 10:21:20 PM
+Invoking method Void Start() at 10:21:20 PM
+Method Void Start() returned  at 10:21:20 PM
+Invoking method Void add_Received(System.EventHandler`1[CustomMessaging.DTO.StatusDTO]) at 10:21:20 PM
+Method Void add_Received(System.EventHandler`1[CustomMessaging.DTO.StatusDTO]) returned  at 10:21:20 PM

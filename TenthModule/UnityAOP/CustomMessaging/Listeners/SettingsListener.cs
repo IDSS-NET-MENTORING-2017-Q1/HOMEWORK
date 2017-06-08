@@ -5,9 +5,11 @@ using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using CustomMessaging.DTO;
+using CustomMessaging.Unity;
 
 namespace CustomMessaging.Listeners
 {
+	[LogFileName("settings_listener_logs")]
 	public class SettingsListener : IListener<SettingsDTO>
 	{
 		private IConnection _connection;
