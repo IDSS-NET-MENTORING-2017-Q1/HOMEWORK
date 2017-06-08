@@ -4,12 +4,23 @@ using Newtonsoft.Json;
 using RabbitMQ.Client;
 using CustomMessaging.DTO;
 using CustomMessaging.Unity;
+using System;
 
 namespace CustomMessaging.Publishers
 {
 	[LogFileName("status_publisher_logs")]
-	public class StatusPublisher : IPublisher<StatusDTO>
+	public class StatusPublisher : IPublisher<StatusDTO>, IIdentifiable
 	{
+		private Guid _objectGuid = Guid.NewGuid();
+
+		public string ObjectGuid
+		{
+			get
+			{
+				return _objectGuid.ToString();
+			}
+		}
+
 		public void Publish(StatusDTO value)
 		{
 			var factory = new ConnectionFactory() { HostName = "localhost" };

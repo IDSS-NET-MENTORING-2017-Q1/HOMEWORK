@@ -1,5 +1,7 @@
-﻿using CustomMessaging.Unity;
+﻿using CustomMessaging.Interfaces;
+using CustomMessaging.Unity;
 using Scanner.Interfaces;
+using System;
 using System.Drawing;
 using System.IO;
 using ZXing;
@@ -7,9 +9,18 @@ using ZXing;
 namespace Scanner.Classes
 {
 	[LogFileName("barcode_manager_logs")]
-	public class BarcodeManager : IBarcodeManager
+	public class BarcodeManager : IBarcodeManager, IIdentifiable
 	{
 		private string _endOfDocument = "EndOfDocument";
+		private Guid _objectGuid = Guid.NewGuid();
+
+		public string ObjectGuid
+		{
+			get
+			{
+				return _objectGuid.ToString();
+			}
+		}
 
 		public BarcodeManager()
 		{

@@ -8,7 +8,7 @@ namespace CustomMessaging.Unity
 
 		public LogFileNameAttribute(string name)
 		{
-			_name = string.Format("{0} ({1}).txt", name, Guid.NewGuid().ToString().ToLower());
+			_name = name;
 		}
 
 		public string Name

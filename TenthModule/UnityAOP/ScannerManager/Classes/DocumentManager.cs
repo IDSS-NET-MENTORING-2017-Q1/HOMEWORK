@@ -6,12 +6,23 @@ using PdfSharp.Pdf;
 using System;
 using Scanner.Interfaces;
 using CustomMessaging.Unity;
+using CustomMessaging.Interfaces;
 
 namespace Scanner.Classes
 {
 	[LogFileName("document_manager_logs")]
-	public class DocumentManager : IDocumentManager
+	public class DocumentManager : IDocumentManager, IIdentifiable
 	{
+		private Guid _objectGuid = Guid.NewGuid();
+
+		public string ObjectGuid
+		{
+			get
+			{
+				return _objectGuid.ToString();
+			}
+		}
+
 		protected bool ValidateName(string fileName)
 		{
 			Guid guid;

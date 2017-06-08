@@ -4,6 +4,7 @@ using Microsoft.Practices.Unity.InterceptionExtension;
 using System.IO;
 using System.Configuration;
 using System.Linq;
+using CustomMessaging.Interfaces;
 
 namespace CustomMessaging.Unity
 {
@@ -61,7 +62,8 @@ namespace CustomMessaging.Unity
 			var fileNameAttribute = input.Target.GetType().GetCustomAttributes(typeof(LogFileNameAttribute), false).FirstOrDefault() as LogFileNameAttribute;
 			if (fileNameAttribute != null)
 			{
-				logPath = Path.Combine(logPath, fileNameAttribute.Name);
+				var identifiableTarget = input.Target as IIdentifiable;
+				logPath = Path.Combine(logPath, string.Format("{0} ({1}).txt", fileNameAttribute.Name, identifiableTarget.ObjectGuid.ToLower()));
 			}
 			else
 			{

@@ -4,14 +4,25 @@ using CustomMessaging.DTO;
 using CustomMessaging.Interfaces;
 using Scanner.Interfaces;
 using CustomMessaging.Unity;
+using System;
+using Microsoft.Practices.Unity;
 
 namespace Scanner.Classes
 {
 	[LogFileName("scanner_manager_logs")]
-	public class ScannerManager
+	public class ScannerManager : IScannerManager, IIdentifiable
 	{
-		private ICollection<PathWatcher> _pathWatchers = new List<PathWatcher>();
-		
+		private ICollection<IPathWatcher> _pathWatchers = new List<IPathWatcher>();
+		private Guid _objectGuid = Guid.NewGuid();
+
+		public string ObjectGuid
+		{
+			get
+			{
+				return _objectGuid.ToString();
+			}
+		}
+
 		private IListener<SettingsDTO> _settingsListener;
 		
 		public IListener<SettingsDTO> SettingsListener
@@ -26,7 +37,7 @@ namespace Scanner.Classes
 			}
 		}
 
-		public ICollection<PathWatcher> PathWatchers
+		public ICollection<IPathWatcher> PathWatchers
 		{
 			get
 			{
@@ -34,22 +45,14 @@ namespace Scanner.Classes
 			}
 		}
 
-		protected void Init(IEnumerable<IFileManager> fileManagers, IDocumentManager documentManager, IBarcodeManager barcodeManager, IPublisher<IEnumerable<byte>> documentPublisher, IPublisher<StatusDTO> statusPublisher, IListener<SettingsDTO> settingsListener)
+		protected void Init(IEnumerable<IFileManager> fileManagers, IUnityContainer container)
 		{
-			_settingsListener = settingsListener;
+			_settingsListener = container.Resolve<IListener<SettingsDTO>>();
 			_settingsListener.Received += SettingsListener_Received;
 
 			foreach (var fileManager in fileManagers)
-			{
-				var pathWatcher = new PathWatcher(fileManager.InputPath)
-				{
-					FileManager = fileManager,
-					DocumentManager = documentManager,
-					BarcodeManager = barcodeManager,
-					DocumentPublisher = documentPublisher,
-					StatusPublisher = statusPublisher
-				};
-
+			{				
+				var pathWatcher = container.Resolve<IPathWatcher>(new ParameterOverride("inputPath", fileManager.InputPath));
 				_pathWatchers.Add(pathWatcher);
 			}
 		}
@@ -63,9 +66,9 @@ namespace Scanner.Classes
 			}
 		}
 
-		public ScannerManager(IEnumerable<IFileManager> fileManagers, IDocumentManager documentManager, IBarcodeManager barcodeManager, IPublisher<IEnumerable<byte>> documentPublisher, IPublisher<StatusDTO> statusPublisher, IListener<SettingsDTO> settingsListener)
+		public ScannerManager(IEnumerable<IFileManager> fileManagers, IUnityContainer container)
 		{
-			Init(fileManagers, documentManager, barcodeManager, documentPublisher, statusPublisher, settingsListener);
+			Init(fileManagers, container);
 		}
 
 		public bool Start()

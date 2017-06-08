@@ -10,12 +10,23 @@ using CustomMessaging.Interfaces;
 using SystemTimer = System.Timers.Timer;
 using CustomMessaging.Enums;
 using Scanner.Interfaces;
+using CustomMessaging.Unity;
 
 namespace Scanner.Classes
 {
-	public class PathWatcher
+	[LogFileName("path_watcher_logs")]
+	public class PathWatcher : IPathWatcher, IIdentifiable
 	{
 		private StatusDTO _status;
+		private Guid _objectGuid = Guid.NewGuid();
+
+		public string ObjectGuid
+		{
+			get
+			{
+				return _objectGuid.ToString();
+			}
+		}
 
 		private int _waitInterval = 10000;
 		private int _statusInterval = 10000;
@@ -110,8 +121,14 @@ namespace Scanner.Classes
 			set { _statusPublisher = value; }
 		}
 
-		public PathWatcher(string inputPath)
+		public PathWatcher(string inputPath, IFileManager fileManager, IBarcodeManager barcodeManager, IDocumentManager documentManager, IPublisher<IEnumerable<byte>> documentPublisher, IPublisher<StatusDTO> statusPublisher)
 		{
+			_fileManager = fileManager;
+			_barcodeManager = barcodeManager;
+			_documentManager = documentManager;
+			_documentPublisher = documentPublisher;
+			_statusPublisher = statusPublisher;
+
 			_status = new StatusDTO
 			{
 				Value = ServiceStatuses.Waiting,

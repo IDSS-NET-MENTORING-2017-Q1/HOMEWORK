@@ -10,11 +10,20 @@ using CustomMessaging.Unity;
 namespace CustomMessaging.Listeners
 {
 	[LogFileName("settings_listener_logs")]
-	public class SettingsListener : IListener<SettingsDTO>
+	public class SettingsListener : IListener<SettingsDTO>, IIdentifiable
 	{
 		private IConnection _connection;
 		private IModel _channel;
 		private EventingBasicConsumer _consumer;
+		private Guid _objectGuid = Guid.NewGuid();
+
+		public string ObjectGuid
+		{
+			get
+			{
+				return _objectGuid.ToString();
+			}
+		}
 
 		public void Start()
 		{

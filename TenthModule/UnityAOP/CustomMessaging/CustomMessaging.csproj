@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DTO\DocumentPartitionDTO.cs" />
+    <Compile Include="Interfaces\IIdentifiable.cs" />
     <Compile Include="Publishers\DocumentPublisher.cs" />
     <Compile Include="Listeners\DocumentListener.cs" />
     <Compile Include="DTO\SettingsDTO.cs" />

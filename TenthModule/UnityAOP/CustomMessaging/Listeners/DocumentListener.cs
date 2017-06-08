@@ -14,20 +14,29 @@ using CustomMessaging.Unity;
 namespace CustomMessaging.Listeners
 {
 	[LogFileName("document_listener_logs")]
-	public class DocumentListener : IDocumentListener
+	public class DocumentListener : IDocumentListener, IIdentifiable
 	{
 		private string _outputPath;
 
 		private IConnection _connection;
 		private IModel _channel;
 		private EventingBasicConsumer _consumer;
+		private Guid _objectGuid = Guid.NewGuid();
+		
+		public string ObjectGuid
+		{
+			get
+			{
+				return _objectGuid.ToString();
+			}
+		}
 
 		public string OutputPath
 		{
 			get { return _outputPath; }
 			set { _outputPath = value; }
 		}
-		
+
 		private readonly List<DocumentPartitionDTO> _partitions;
 
 		public DocumentListener() : this(null) { }

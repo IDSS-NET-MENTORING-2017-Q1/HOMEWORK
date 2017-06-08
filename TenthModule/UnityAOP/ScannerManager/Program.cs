@@ -75,18 +75,16 @@ namespace Scanner
 				new InterceptionBehavior<LoggingInterceptionBehavior>());
 			container.RegisterType<IDocumentManager, DocumentManager>(new Interceptor<InterfaceInterceptor>(),
 				new InterceptionBehavior<LoggingInterceptionBehavior>());
+			container.RegisterType<IPathWatcher, PathWatcher>(new Interceptor<InterfaceInterceptor>(),
+				new InterceptionBehavior<LoggingInterceptionBehavior>());
+			container.RegisterType<IScannerManager, ScannerManager>(new Interceptor<InterfaceInterceptor>(),
+				new InterceptionBehavior<LoggingInterceptionBehavior>());
 			container.RegisterType<IBarcodeManager, BarcodeManager>(new Interceptor<InterfaceInterceptor>(),
 				new InterceptionBehavior<LoggingInterceptionBehavior>());
 			container.RegisterType<IFileManager, FileManager>(new Interceptor<InterfaceInterceptor>(),
 				new InterceptionBehavior<LoggingInterceptionBehavior>());
 			container.RegisterType<IListener<SettingsDTO>, SettingsListener>(new Interceptor<InterfaceInterceptor>(),
 				new InterceptionBehavior<LoggingInterceptionBehavior>());
-
-			var documentPublisher = container.Resolve<IPublisher<IEnumerable<byte>>>();
-			var statusPublisher = container.Resolve<IPublisher<StatusDTO>>();
-			var documentManager = container.Resolve<IDocumentManager>();
-			var barcodeManager = container.Resolve<IBarcodeManager>(new ParameterOverride("endOfDocument", "EndOfDocument"));
-			var settingsListener = container.Resolve<IListener<SettingsDTO>>();
 
 			var fileManagers = paths.Where(o => !IsUnc(o.InputPath)).Select(o => container.Resolve<IFileManager>(
 				new ParameterOverride("inputPath", o.InputPath),
@@ -110,15 +108,11 @@ namespace Scanner
 							.SetResetPeriod(1);
 					});
 
-					conf.Service<ScannerManager>(callback =>
+					conf.Service<IScannerManager>(callback =>
 					{
-						callback.ConstructUsing(() => new ScannerManager(
-							fileManagers,
-							documentManager,
-							barcodeManager,
-							documentPublisher,
-							statusPublisher,
-							settingsListener));
+						callback.ConstructUsing(() => container.Resolve<IScannerManager>(
+							new ParameterOverride("fileManagers", fileManagers)
+						);
 						callback.WhenStarted(service => service.Start());
 						callback.WhenStopped(service => service.Stop());
 					}).UseNLog(logFactory);

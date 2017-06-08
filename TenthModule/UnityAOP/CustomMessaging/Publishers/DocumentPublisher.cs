@@ -11,8 +11,18 @@ using CustomMessaging.Unity;
 namespace CustomMessaging.Publishers
 {
 	[LogFileName("document_publisher_logs")]
-	public class DocumentPublisher : IPublisher<IEnumerable<byte>>
+	public class DocumentPublisher : IPublisher<IEnumerable<byte>>, IIdentifiable
 	{
+		private Guid _objectGuid = Guid.NewGuid();
+
+		public string ObjectGuid
+		{
+			get
+			{
+				return _objectGuid.ToString();
+			}
+		}
+
 		public void Publish(IEnumerable<byte> value)
 		{
 			var documentGuid = Guid.NewGuid().ToString();

@@ -8,8 +8,18 @@ using CustomMessaging.Unity;
 namespace CustomMessaging.Publishers
 {
 	[LogFileName("settings_publisher_logs")]
-	public class SettingsPublisher : IPublisher<SettingsDTO>
+	public class SettingsPublisher : IPublisher<SettingsDTO>, IIdentifiable
 	{
+		private Guid _objectGuid = Guid.NewGuid();
+
+		public string ObjectGuid
+		{
+			get
+			{
+				return _objectGuid.ToString();
+			}
+		}
+
 		public void Publish(SettingsDTO value)
 		{
 			var factory = new ConnectionFactory() { HostName = "localhost" };
