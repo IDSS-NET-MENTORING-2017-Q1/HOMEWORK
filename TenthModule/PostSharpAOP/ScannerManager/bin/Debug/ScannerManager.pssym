@@ -1,122 +1,122 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Symbols LinesOfCode="413" PostSharpLinesOfCode="0" EnhancedTypesCount="5" SchemaVersion="1" PostSharpVersion="4.3.33.0" xmlns="http://schemas.postsharp.org/2.0/symbols">
   <Class Class="#1=T:[CustomMessaging]CustomMessaging.Aspects.LogMethodAttribute">
-    <Instance Declaration="#2=M:[ScannerManager]ScannerManager.Classes.BarcodeManager::IsBarcode(System.String)" Id="53719e2a32bcd59c">
+    <Instance Declaration="#2=M:[ScannerManager]ScannerManager.Classes.BarcodeManager::IsBarcode(System.String)" Id="53719e2a92416d7a">
       <Target>
         <JoinPoint Advising="#1" Description="#3=Wrapped by advice(s) OnEntry, OnSuccess, OnException" Ordinal="0" />
       </Target>
     </Instance>
-    <Instance Declaration="#4=M:[ScannerManager]ScannerManager.Classes.DocumentManager::ValidateName(System.String)" Id="53719e2a61b64af7">
+    <Instance Declaration="#4=M:[ScannerManager]ScannerManager.Classes.DocumentManager::ValidateName(System.String)" Id="53719e2a84307477">
       <Target>
         <JoinPoint Advising="#1" Description="#3" />
       </Target>
     </Instance>
-    <Instance Declaration="#5=M:[ScannerManager]ScannerManager.Classes.DocumentManager::GeneratePdf(System.Collections.Generic.IEnumerable{System.String})" Id="53719e2a5fe56acb">
+    <Instance Declaration="#5=M:[ScannerManager]ScannerManager.Classes.DocumentManager::GeneratePdf(System.Collections.Generic.IEnumerable{System.String})" Id="53719e2a98afa3f6">
       <Target>
         <JoinPoint Advising="#1" Description="#3" Ordinal="2" />
       </Target>
     </Instance>
-    <Instance Declaration="#6=M:[ScannerManager]ScannerManager.Classes.FileManager::TryOpen(System.String, System.Int32, System.Int32)" Id="53719e2a89ee9087">
+    <Instance Declaration="#6=M:[ScannerManager]ScannerManager.Classes.FileManager::TryOpen(System.String, System.Int32, System.Int32)" Id="53719e2abcd9e8d6">
       <Target>
         <JoinPoint Advising="#1" Description="#3" Ordinal="3" />
       </Target>
     </Instance>
-    <Instance Declaration="#7=M:[ScannerManager]ScannerManager.Classes.FileManager::GetFiles(System.String)" Id="53719e2a194ea036">
+    <Instance Declaration="#7=M:[ScannerManager]ScannerManager.Classes.FileManager::GetFiles(System.String)" Id="53719e2a2df001d0">
       <Target>
         <JoinPoint Advising="#1" Description="#3" Ordinal="4" />
       </Target>
     </Instance>
-    <Instance Declaration="#8=M:[ScannerManager]ScannerManager.Classes.FileManager::GetInputFiles()" Id="53719e2aca10f60c">
+    <Instance Declaration="#8=M:[ScannerManager]ScannerManager.Classes.FileManager::GetInputFiles()" Id="53719e2ab3c28066">
       <Target>
         <JoinPoint Advising="#1" Description="#3" Ordinal="5" />
       </Target>
     </Instance>
-    <Instance Declaration="#9=M:[ScannerManager]ScannerManager.Classes.FileManager::GetTempFiles()" Id="53719e2af7fe5924">
+    <Instance Declaration="#9=M:[ScannerManager]ScannerManager.Classes.FileManager::GetTempFiles()" Id="53719e2a5d2bd285">
       <Target>
         <JoinPoint Advising="#1" Description="#3" Ordinal="6" />
       </Target>
     </Instance>
-    <Instance Declaration="#10=M:[ScannerManager]ScannerManager.Classes.FileManager::GetCorruptedFiles()" Id="53719e2ad504716f">
+    <Instance Declaration="#10=M:[ScannerManager]ScannerManager.Classes.FileManager::GetCorruptedFiles()" Id="53719e2a50aa4e93">
       <Target>
         <JoinPoint Advising="#1" Description="#3" Ordinal="7" />
       </Target>
     </Instance>
-    <Instance Declaration="#11=M:[ScannerManager]ScannerManager.Classes.FileManager::MoveTo(System.String, System.String)" Id="53719e2a36938b30">
+    <Instance Declaration="#11=M:[ScannerManager]ScannerManager.Classes.FileManager::MoveTo(System.String, System.String)" Id="53719e2acee1ef9c">
       <Target>
         <JoinPoint Advising="#1" Description="#3" Ordinal="8" />
       </Target>
     </Instance>
-    <Instance Declaration="#12=M:[ScannerManager]ScannerManager.Classes.FileManager::GenerateFileName(System.String)" Id="53719e2af5e8ad1d">
+    <Instance Declaration="#12=M:[ScannerManager]ScannerManager.Classes.FileManager::GenerateFileName(System.String)" Id="53719e2ad4b146a4">
       <Target>
         <JoinPoint Advising="#1" Description="#3" Ordinal="9" />
       </Target>
     </Instance>
-    <Instance Declaration="#13=M:[ScannerManager]ScannerManager.Classes.FileManager::MoveToTemp(System.String)" Id="53719e2a0cccc573">
+    <Instance Declaration="#13=M:[ScannerManager]ScannerManager.Classes.FileManager::MoveToTemp(System.String)" Id="53719e2ace22b31a">
       <Target>
         <JoinPoint Advising="#1" Description="#3" Ordinal="10" />
       </Target>
     </Instance>
-    <Instance Declaration="#14=M:[ScannerManager]ScannerManager.Classes.FileManager::MoveToCorrupted(System.String)" Id="53719e2a632ed6c9">
+    <Instance Declaration="#14=M:[ScannerManager]ScannerManager.Classes.FileManager::MoveToCorrupted(System.String)" Id="53719e2a866715f1">
       <Target>
         <JoinPoint Advising="#1" Description="#3" Ordinal="11" />
       </Target>
     </Instance>
-    <Instance Declaration="#15=M:[ScannerManager]ScannerManager.Classes.FileManager::Delete(System.String)" Id="53719e2a83e90b92">
+    <Instance Declaration="#15=M:[ScannerManager]ScannerManager.Classes.FileManager::Delete(System.String)" Id="53719e2af4c7272a">
       <Target>
         <JoinPoint Advising="#1" Description="#3" Ordinal="12" />
       </Target>
     </Instance>
-    <Instance Declaration="#16=M:[ScannerManager]ScannerManager.Classes.FileManager::ClearTemp()" Id="53719e2a7d367b81">
+    <Instance Declaration="#16=M:[ScannerManager]ScannerManager.Classes.FileManager::ClearTemp()" Id="53719e2a70375c2a">
       <Target>
         <JoinPoint Advising="#1" Description="#3" Ordinal="13" />
       </Target>
     </Instance>
-    <Instance Declaration="#17=M:[ScannerManager]ScannerManager.Classes.PathWatcher::PublishPdf()" Id="53719e2a003384f1">
+    <Instance Declaration="#17=M:[ScannerManager]ScannerManager.Classes.PathWatcher::PublishPdf()" Id="53719e2a50b43f13">
       <Target>
         <JoinPoint Advising="#1" Description="#3" Ordinal="14" />
       </Target>
     </Instance>
-    <Instance Declaration="#18=M:[ScannerManager]ScannerManager.Classes.PathWatcher::WorkProcess()" Id="53719e2ac17e5e88">
+    <Instance Declaration="#18=M:[ScannerManager]ScannerManager.Classes.PathWatcher::WorkProcess()" Id="53719e2ae660f6e8">
       <Target>
         <JoinPoint Advising="#1" Description="#3" Ordinal="15" />
       </Target>
     </Instance>
-    <Instance Declaration="#19=M:[ScannerManager]ScannerManager.Classes.PathWatcher::Watcher_Created(System.Object, System.IO.FileSystemEventArgs)" Id="53719e2a5142a4d7">
+    <Instance Declaration="#19=M:[ScannerManager]ScannerManager.Classes.PathWatcher::Watcher_Created(System.Object, System.IO.FileSystemEventArgs)" Id="53719e2aae971b8d">
       <Target>
         <JoinPoint Advising="#1" Description="#3" Ordinal="16" />
       </Target>
     </Instance>
-    <Instance Declaration="#20=M:[ScannerManager]ScannerManager.Classes.PathWatcher::StatusTimer_Elapsed(System.Object, System.Timers.ElapsedEventArgs)" Id="53719e2a6ac117b5">
+    <Instance Declaration="#20=M:[ScannerManager]ScannerManager.Classes.PathWatcher::StatusTimer_Elapsed(System.Object, System.Timers.ElapsedEventArgs)" Id="53719e2a426a9dbb">
       <Target>
         <JoinPoint Advising="#1" Description="#3" Ordinal="17" />
       </Target>
     </Instance>
-    <Instance Declaration="#21=M:[ScannerManager]ScannerManager.Classes.PathWatcher::Start()" Id="53719e2a8699eedd">
+    <Instance Declaration="#21=M:[ScannerManager]ScannerManager.Classes.PathWatcher::Start()" Id="53719e2aa50fb6e5">
       <Target>
         <JoinPoint Advising="#1" Description="#3" Ordinal="18" />
       </Target>
     </Instance>
-    <Instance Declaration="#22=M:[ScannerManager]ScannerManager.Classes.PathWatcher::Stop()" Id="53719e2aad18c7b3">
+    <Instance Declaration="#22=M:[ScannerManager]ScannerManager.Classes.PathWatcher::Stop()" Id="53719e2a9c57941e">
       <Target>
         <JoinPoint Advising="#1" Description="#3" Ordinal="19" />
       </Target>
     </Instance>
-    <Instance Declaration="#23=M:[ScannerManager]ScannerManager.Classes.ScannerManager::Init(System.Collections.Generic.IEnumerable{[ScannerManager]ScannerManager.Classes.FileManager}, [ScannerManager]ScannerManager.Classes.DocumentManager, [ScannerManager]ScannerManager.Classes.BarcodeManager, CustomMessaging.Interfaces.IPublisher{[mscorlib]System.Collections.Generic.IEnumerable{System.Byte}}, CustomMessaging.Interfaces.IPublisher{[CustomMessaging]CustomMessaging.DTO.StatusDto}, CustomMessaging.Interfaces.IListener{[CustomMessaging]CustomMessaging.DTO.SettingsDto})" Id="53719e2a36149501">
+    <Instance Declaration="#23=M:[ScannerManager]ScannerManager.Classes.ScannerManager::Init(System.Collections.Generic.IEnumerable{[ScannerManager]ScannerManager.Classes.FileManager}, [ScannerManager]ScannerManager.Classes.DocumentManager, [ScannerManager]ScannerManager.Classes.BarcodeManager, CustomMessaging.Interfaces.IPublisher{[mscorlib]System.Collections.Generic.IEnumerable{System.Byte}}, CustomMessaging.Interfaces.IPublisher{[CustomMessaging]CustomMessaging.DTO.StatusDto}, CustomMessaging.Interfaces.IListener{[CustomMessaging]CustomMessaging.DTO.SettingsDto})" Id="53719e2afbedf415">
       <Target>
         <JoinPoint Advising="#1" Description="#3" Ordinal="20" />
       </Target>
     </Instance>
-    <Instance Declaration="#24=M:[ScannerManager]ScannerManager.Classes.ScannerManager::SettingsListener_Received(System.Object, CustomMessaging.DTO.SettingsDto)" Id="53719e2a3f10007b">
+    <Instance Declaration="#24=M:[ScannerManager]ScannerManager.Classes.ScannerManager::SettingsListener_Received(System.Object, CustomMessaging.DTO.SettingsDto)" Id="53719e2a0c6ed72b">
       <Target>
         <JoinPoint Advising="#1" Description="#3" Ordinal="21" />
       </Target>
     </Instance>
-    <Instance Declaration="#25=M:[ScannerManager]ScannerManager.Classes.ScannerManager::Start()" Id="53719e2a50fb44e1">
+    <Instance Declaration="#25=M:[ScannerManager]ScannerManager.Classes.ScannerManager::Start()" Id="53719e2a4e929b02">
       <Target>
         <JoinPoint Advising="#1" Description="#3" Ordinal="22" />
       </Target>
     </Instance>
-    <Instance Declaration="#26=M:[ScannerManager]ScannerManager.Classes.ScannerManager::Stop()" Id="53719e2a4c974f25">
+    <Instance Declaration="#26=M:[ScannerManager]ScannerManager.Classes.ScannerManager::Stop()" Id="53719e2ad3fa63be">
       <Target>
         <JoinPoint Advising="#1" Description="#3" Ordinal="23" />
       </Target>

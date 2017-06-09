@@ -21,7 +21,7 @@ namespace CustomMessaging.Publishers
 			using (var connection = factory.CreateConnection())
 			using (var channel = connection.CreateModel())
 			{
-				channel.ExchangeDeclare(exchange: "documents_exchange", type: "fanout");
+				channel.ExchangeDeclare(exchange: "ps_documents_exchange", type: "fanout");
 
 				var partition = new DocumentPartitionDto()
 				{
@@ -37,7 +37,7 @@ namespace CustomMessaging.Publishers
 					var message = JsonConvert.SerializeObject(partition);
 					var body = Encoding.UTF8.GetBytes(message);
 
-					channel.BasicPublish(exchange: "documents_exchange",
+					channel.BasicPublish(exchange: "ps_documents_exchange",
 										 routingKey: "",
 										 basicProperties: null,
 										 body: body);
@@ -53,7 +53,7 @@ namespace CustomMessaging.Publishers
 					var message = JsonConvert.SerializeObject(partition);
 					var body = Encoding.UTF8.GetBytes(message);
 
-					channel.BasicPublish(exchange: "documents_exchange",
+					channel.BasicPublish(exchange: "ps_documents_exchange",
 										 routingKey: "",
 										 basicProperties: null,
 										 body: body);
