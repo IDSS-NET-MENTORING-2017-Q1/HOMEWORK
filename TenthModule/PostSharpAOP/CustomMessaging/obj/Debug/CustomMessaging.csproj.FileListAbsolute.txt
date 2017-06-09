@@ -19,13 +19,11 @@ C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\TenthModule\P
 C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\TenthModule\PostSharpAOP\CustomMessaging\bin\Debug\Newtonsoft.Json.dll
 C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\TenthModule\PostSharpAOP\CustomMessaging\bin\Debug\NLog.dll
 C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\TenthModule\PostSharpAOP\CustomMessaging\bin\Debug\PostSharp.dll
-C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\TenthModule\PostSharpAOP\CustomMessaging\bin\Debug\PostSharp.Patterns.Common.dll
 C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\TenthModule\PostSharpAOP\CustomMessaging\bin\Debug\PostSharp.Patterns.Diagnostics.dll
 C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\TenthModule\PostSharpAOP\CustomMessaging\bin\Debug\RabbitMQ.Client.dll
 C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\TenthModule\PostSharpAOP\CustomMessaging\bin\Debug\Newtonsoft.Json.xml
 C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\TenthModule\PostSharpAOP\CustomMessaging\bin\Debug\NLog.xml
 C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\TenthModule\PostSharpAOP\CustomMessaging\bin\Debug\PostSharp.xml
-C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\TenthModule\PostSharpAOP\CustomMessaging\bin\Debug\PostSharp.Patterns.Common.xml
 C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\TenthModule\PostSharpAOP\CustomMessaging\bin\Debug\PostSharp.Patterns.Diagnostics.xml
 C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\TenthModule\PostSharpAOP\CustomMessaging\bin\Debug\RabbitMQ.Client.xml
 C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\TenthModule\PostSharpAOP\CustomMessaging\bin\Debug\CustomMessaging.pssym
@@ -51,3 +49,4 @@ C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\TenthMo
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\TenthModule\PostSharpAOP\CustomMessaging\obj\Debug\CustomMessaging.dll
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\TenthModule\PostSharpAOP\CustomMessaging\obj\Debug\CustomMessaging.pdb
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\TenthModule\PostSharpAOP\CustomMessaging\obj\Debug\PostSharpHost.config
+C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\TenthModule\PostSharpAOP\CustomMessaging\bin\Debug\NLog.config
