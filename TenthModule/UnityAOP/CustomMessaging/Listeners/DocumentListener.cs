@@ -39,8 +39,6 @@ namespace CustomMessaging.Listeners
 
 		private readonly List<DocumentPartitionDTO> _partitions;
 
-		public DocumentListener() : this(null) { }
-
 		public DocumentListener(string outputPath)
 		{
 			_partitions = new List<DocumentPartitionDTO>();

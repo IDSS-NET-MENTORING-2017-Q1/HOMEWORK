@@ -22,16 +22,6 @@ namespace Scanner.Classes
 			}
 		}
 
-		public BarcodeManager()
-		{
-
-		}
-
-		public BarcodeManager(string endOfDocument)
-		{
-			_endOfDocument = endOfDocument;
-		}
-
 		public string EndOfDocument
 		{
 			get

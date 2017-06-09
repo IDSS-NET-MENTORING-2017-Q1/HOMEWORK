@@ -52,7 +52,10 @@ namespace Scanner.Classes
 
 			foreach (var fileManager in fileManagers)
 			{				
-				var pathWatcher = container.Resolve<IPathWatcher>(new ParameterOverride("inputPath", fileManager.InputPath));
+				var pathWatcher = container.Resolve<IPathWatcher>(
+					new ParameterOverride("inputPath", fileManager.InputPath), 
+					new ParameterOverride("fileManager", fileManager)
+				);
 				_pathWatchers.Add(pathWatcher);
 			}
 		}

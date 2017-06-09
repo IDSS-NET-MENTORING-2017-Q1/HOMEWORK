@@ -58,6 +58,10 @@ namespace CustomMessaging.Unity
 			{
 				logPath = AppDomain.CurrentDomain.BaseDirectory;
 			}
+			if (!Directory.Exists(logPath))
+			{
+				Directory.CreateDirectory(logPath);
+			}
 
 			var fileNameAttribute = input.Target.GetType().GetCustomAttributes(typeof(LogFileNameAttribute), false).FirstOrDefault() as LogFileNameAttribute;
 			if (fileNameAttribute != null)

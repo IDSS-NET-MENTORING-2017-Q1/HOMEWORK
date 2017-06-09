@@ -91,18 +91,6 @@ namespace Scanner.Classes
 			return false;
 		}
 
-		public FileManager()
-			: this(null, null, null)
-		{
-
-		}
-
-		public FileManager(string inputPath)
-			: this(inputPath, null, null)
-		{
-
-		}
-
 		public FileManager(string inputPath, string tempPath, string corruptedPath)
 		{
 			var basePath = AppDomain.CurrentDomain.BaseDirectory;

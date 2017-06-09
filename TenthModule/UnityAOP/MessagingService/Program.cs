@@ -62,8 +62,6 @@ namespace MessagingService
 			statusListener = container.Resolve<IListener<StatusDTO>>();
 			settingsPublisher = container.Resolve<IPublisher<SettingsDTO>>();
 
-			documentListener.OutputPath = outputPath;
-
 			using (documentListener)
 			using (statusListener)
 			{

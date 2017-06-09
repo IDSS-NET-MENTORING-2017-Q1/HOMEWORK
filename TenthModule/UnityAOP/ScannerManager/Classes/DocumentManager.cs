@@ -7,6 +7,7 @@ using System;
 using Scanner.Interfaces;
 using CustomMessaging.Unity;
 using CustomMessaging.Interfaces;
+using System.Diagnostics;
 
 namespace Scanner.Classes
 {
@@ -47,10 +48,24 @@ namespace Scanner.Classes
 
 				using (FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read))
 				{
-					using (Image image = Image.FromStream(fs))
+					Image image = null;
+					try
 					{
+						image = Image.FromStream(fs);
 						var xImage = XImage.FromGdiPlusImage(image);
 						graphics.DrawImage(xImage, 0, 0, page.Width, page.Height);
+					}
+					catch (Exception ex)
+					{
+						Debug.WriteLine("Exception has occured!");
+						Debug.WriteLine(ex.Message);
+					} 
+					finally
+					{
+						if (image != null)
+						{
+							image.Dispose();
+						}
 					}
 				}
 			}

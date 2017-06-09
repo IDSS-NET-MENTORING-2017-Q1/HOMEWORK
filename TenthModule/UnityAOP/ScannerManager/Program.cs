@@ -29,6 +29,29 @@ namespace Scanner
 			return uri.IsUnc;
 		}
 
+		static IUnityContainer ConfigureContainer()
+		{
+			var container = new UnityContainer();
+			container.AddNewExtension<Interception>();
+			container.RegisterType<IPublisher<IEnumerable<byte>>, DocumentPublisher>(new Interceptor<InterfaceInterceptor>(),
+				new InterceptionBehavior<LoggingInterceptionBehavior>());
+			container.RegisterType<IPublisher<StatusDTO>, StatusPublisher>(new Interceptor<InterfaceInterceptor>(),
+				new InterceptionBehavior<LoggingInterceptionBehavior>());
+			container.RegisterType<IDocumentManager, DocumentManager>(new Interceptor<InterfaceInterceptor>(),
+				new InterceptionBehavior<LoggingInterceptionBehavior>());
+			container.RegisterType<IPathWatcher, PathWatcher>(new Interceptor<InterfaceInterceptor>(),
+				new InterceptionBehavior<LoggingInterceptionBehavior>());
+			container.RegisterType<IScannerManager, ScannerManager>(new Interceptor<InterfaceInterceptor>(),
+				new InterceptionBehavior<LoggingInterceptionBehavior>());
+			container.RegisterType<IBarcodeManager, BarcodeManager>(new Interceptor<InterfaceInterceptor>(),
+				new InterceptionBehavior<LoggingInterceptionBehavior>());
+			container.RegisterType<IFileManager, FileManager>(new Interceptor<InterfaceInterceptor>(),
+				new InterceptionBehavior<LoggingInterceptionBehavior>());
+			container.RegisterType<IListener<SettingsDTO>, SettingsListener>(new Interceptor<InterfaceInterceptor>(),
+				new InterceptionBehavior<LoggingInterceptionBehavior>());
+			return container;
+		}
+
 		static void Main(string[] args)
 		{
 			var logPath = ConfigurationManager.AppSettings["logPath"];
@@ -66,25 +89,7 @@ namespace Scanner
 			logConfig.AddRuleForAllLevels(fileTarget);
 
 			var logFactory = new LogFactory(logConfig);
-
-			var container = new UnityContainer();
-			container.AddNewExtension<Interception>();
-			container.RegisterType<IPublisher<IEnumerable<byte>>, DocumentPublisher>(new Interceptor<InterfaceInterceptor>(),
-				new InterceptionBehavior<LoggingInterceptionBehavior>());
-			container.RegisterType<IPublisher<StatusDTO>, StatusPublisher>(new Interceptor<InterfaceInterceptor>(),
-				new InterceptionBehavior<LoggingInterceptionBehavior>());
-			container.RegisterType<IDocumentManager, DocumentManager>(new Interceptor<InterfaceInterceptor>(),
-				new InterceptionBehavior<LoggingInterceptionBehavior>());
-			container.RegisterType<IPathWatcher, PathWatcher>(new Interceptor<InterfaceInterceptor>(),
-				new InterceptionBehavior<LoggingInterceptionBehavior>());
-			container.RegisterType<IScannerManager, ScannerManager>(new Interceptor<InterfaceInterceptor>(),
-				new InterceptionBehavior<LoggingInterceptionBehavior>());
-			container.RegisterType<IBarcodeManager, BarcodeManager>(new Interceptor<InterfaceInterceptor>(),
-				new InterceptionBehavior<LoggingInterceptionBehavior>());
-			container.RegisterType<IFileManager, FileManager>(new Interceptor<InterfaceInterceptor>(),
-				new InterceptionBehavior<LoggingInterceptionBehavior>());
-			container.RegisterType<IListener<SettingsDTO>, SettingsListener>(new Interceptor<InterfaceInterceptor>(),
-				new InterceptionBehavior<LoggingInterceptionBehavior>());
+			var container = ConfigureContainer();
 
 			var fileManagers = paths.Where(o => !IsUnc(o.InputPath)).Select(o => container.Resolve<IFileManager>(
 				new ParameterOverride("inputPath", o.InputPath),
