@@ -19,7 +19,7 @@ namespace CustomMessaging.Publishers
 			using (var connection = factory.CreateConnection())
 			using (var channel = connection.CreateModel())
 			{
-				channel.ExchangeDeclare(exchange: "documents_exchange", type: "fanout");
+				channel.ExchangeDeclare(exchange: "di_documents_exchange", type: "fanout");
 
 				var buffer = value;
 				DocumentPartitionDTO partition = new DocumentPartitionDTO()
@@ -35,12 +35,12 @@ namespace CustomMessaging.Publishers
 					var message = JsonConvert.SerializeObject(partition);
 					var body = Encoding.UTF8.GetBytes(message);
 
-					channel.BasicPublish(exchange: "documents_exchange",
+					channel.BasicPublish(exchange: "di_documents_exchange",
 										 routingKey: "",
 										 basicProperties: null,
 										 body: body);
 
-					buffer = buffer.Skip(128).ToArray();
+					buffer = buffer.Skip(128);
 				}
 
 				if (!buffer.Any()) return;
@@ -51,7 +51,7 @@ namespace CustomMessaging.Publishers
 					var message = JsonConvert.SerializeObject(partition);
 					var body = Encoding.UTF8.GetBytes(message);
 
-					channel.BasicPublish(exchange: "documents_exchange",
+					channel.BasicPublish(exchange: "di_documents_exchange",
 						routingKey: "",
 						basicProperties: null,
 						body: body);
