@@ -22,15 +22,15 @@ namespace CustomMessaging.Publishers
 				channel.ExchangeDeclare(exchange: "documents_exchange", type: "fanout");
 
 				var buffer = value;
-				var bufferArray = buffer as byte[] ?? buffer.ToArray();
-
-				while (bufferArray.Count() > 128)
+				DocumentPartitionDTO partition = new DocumentPartitionDTO()
 				{
-					var partition = new DocumentPartitionDTO() {
-						Content = bufferArray.Take(128),
-						DocumentGuid = documentGuid,
-						EndOfDocument = false
-					};
+					DocumentGuid = documentGuid,
+					EndOfDocument = false
+				};
+
+				while (buffer.Count() > 128)
+				{
+					partition.Content = buffer.Take(128);
 
 					var message = JsonConvert.SerializeObject(partition);
 					var body = Encoding.UTF8.GetBytes(message);
@@ -40,17 +40,13 @@ namespace CustomMessaging.Publishers
 										 basicProperties: null,
 										 body: body);
 
-					buffer = bufferArray.Skip(128);
+					buffer = buffer.Skip(128).ToArray();
 				}
 
-				if (!bufferArray.Any()) return;
+				if (!buffer.Any()) return;
 				{
-					var partition = new DocumentPartitionDTO()
-					{
-						Content = bufferArray,
-						DocumentGuid = documentGuid,
-						EndOfDocument = true
-					};
+					partition.Content = buffer;
+					partition.EndOfDocument = true;
 
 					var message = JsonConvert.SerializeObject(partition);
 					var body = Encoding.UTF8.GetBytes(message);
