@@ -308,3 +308,4 @@ C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\TenthMo
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\TenthModule\UnityAOP\ScannerManager\bin\Debug\de\PdfSharp.Charting.resources.dll
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\TenthModule\UnityAOP\ScannerManager\obj\Debug\ScannerManager.exe
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\TenthModule\UnityAOP\ScannerManager\obj\Debug\ScannerManager.pdb
+C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\TenthModule\UnityAOP\ScannerManager\bin\Debug\NLog.config

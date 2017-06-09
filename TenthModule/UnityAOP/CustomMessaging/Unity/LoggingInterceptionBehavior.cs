@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Practices.Unity.InterceptionExtension;
-using System.IO;
-using System.Configuration;
-using System.Linq;
-using CustomMessaging.Interfaces;
+using NLog;
 
 namespace CustomMessaging.Unity
 {
 	public class LoggingInterceptionBehavior : IInterceptionBehavior
 	{
+		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
 		public IMethodReturn Invoke(IMethodInvocation input,
 		  GetNextInterceptionBehaviorDelegate getNext)
 		{
 			// Before invoking the method on the original target.
-			WriteLog(input, String.Format(
+			WriteLog(string.Format(
 			  "Invoking method {0} at {1}",
 			  input.MethodBase, DateTime.Now.ToLongTimeString()));
 
@@ -25,14 +24,14 @@ namespace CustomMessaging.Unity
 			// After invoking the method on the original target.
 			if (result.Exception != null)
 			{
-				WriteLog(input, String.Format(
+				WriteLog(string.Format(
 				  "Method {0} threw exception {1} at {2}",
 				  input.MethodBase, result.Exception.Message,
 				  DateTime.Now.ToLongTimeString()));
 			}
 			else
 			{
-				WriteLog(input, String.Format(
+				WriteLog(string.Format(
 				  "Method {0} returned {1} at {2}",
 				  input.MethodBase, result.ReturnValue,
 				  DateTime.Now.ToLongTimeString()));
@@ -51,33 +50,9 @@ namespace CustomMessaging.Unity
 			get { return true; }
 		}
 
-		private void WriteLog(IMethodInvocation input, string message)
+		private static void WriteLog(string message)
 		{
-			var logPath = ConfigurationManager.AppSettings["logFolder"];
-			if (string.IsNullOrWhiteSpace(logPath))
-			{
-				logPath = AppDomain.CurrentDomain.BaseDirectory;
-			}
-			if (!Directory.Exists(logPath))
-			{
-				Directory.CreateDirectory(logPath);
-			}
-
-			var fileNameAttribute = input.Target.GetType().GetCustomAttributes(typeof(LogFileNameAttribute), false).FirstOrDefault() as LogFileNameAttribute;
-			if (fileNameAttribute != null)
-			{
-				var identifiableTarget = input.Target as IIdentifiable;
-				logPath = Path.Combine(logPath, string.Format("{0} ({1}).txt", fileNameAttribute.Name, identifiableTarget.ObjectGuid.ToLower()));
-			}
-			else
-			{
-				logPath = Path.Combine(logPath, Guid.NewGuid().ToString() + ".txt");
-			}
-
-			using (var logFile = File.AppendText(logPath))
-			{
-				logFile.WriteLine(message);
-			}
+			Logger.Info(message);
 		}
 	}
 }
