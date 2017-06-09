@@ -83,7 +83,6 @@
     <Compile Include="Interfaces\IListener.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Enums\ServiceStatuses.cs" />
-    <Compile Include="Unity\LogFileNameAttribute.cs" />
     <Compile Include="Unity\LoggingInterceptionBehavior.cs" />
   </ItemGroup>
   <ItemGroup>

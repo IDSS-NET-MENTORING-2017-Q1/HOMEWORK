@@ -9,27 +9,16 @@ using RabbitMQ.Client.Events;
 using System.Linq;
 using System.Diagnostics;
 using CustomMessaging.DTO;
-using CustomMessaging.Unity;
 
 namespace CustomMessaging.Listeners
 {
-	[LogFileName("document_listener_logs")]
-	public class DocumentListener : IDocumentListener, IIdentifiable
+	public class DocumentListener : IDocumentListener
 	{
 		private string _outputPath;
 
 		private IConnection _connection;
 		private IModel _channel;
 		private EventingBasicConsumer _consumer;
-		private Guid _objectGuid = Guid.NewGuid();
-		
-		public string ObjectGuid
-		{
-			get
-			{
-				return _objectGuid.ToString();
-			}
-		}
 
 		public string OutputPath
 		{

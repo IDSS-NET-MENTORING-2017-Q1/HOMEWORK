@@ -3,27 +3,15 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
-using CustomMessaging.Interfaces;
-using CustomMessaging.Unity;
 using ScannerManager.Interfaces;
 
 namespace ScannerManager.Classes
 {
-	[LogFileName("file_manager_logs")]
-	public class FileManager : IFileManager, IIdentifiable
+	public class FileManager : IFileManager
 	{
 		private string _inputPath;
 		private string _tempPath;
 		private string _corruptedPath;
-		private Guid _objectGuid = Guid.NewGuid();
-
-		public string ObjectGuid
-		{
-			get
-			{
-				return _objectGuid.ToString();
-			}
-		}
 
 		public string InputPath
 		{

@@ -1,26 +1,13 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 using System.IO;
-using CustomMessaging.Interfaces;
-using CustomMessaging.Unity;
 using ScannerManager.Interfaces;
 using ZXing;
 
 namespace ScannerManager.Classes
 {
-	[LogFileName("barcode_manager_logs")]
-	public class BarcodeManager : IBarcodeManager, IIdentifiable
+	public class BarcodeManager : IBarcodeManager
 	{
 		private string _endOfDocument = "EndOfDocument";
-		private Guid _objectGuid = Guid.NewGuid();
-
-		public string ObjectGuid
-		{
-			get
-			{
-				return _objectGuid.ToString();
-			}
-		}
 
 		public string EndOfDocument
 		{

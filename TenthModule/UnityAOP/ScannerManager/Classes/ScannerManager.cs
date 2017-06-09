@@ -1,26 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using CustomMessaging.DTO;
 using CustomMessaging.Interfaces;
-using CustomMessaging.Unity;
 using Microsoft.Practices.Unity;
 using ScannerManager.Interfaces;
 
 namespace ScannerManager.Classes
 {
-	[LogFileName("scanner_manager_logs")]
-	public class ScannerManager : IScannerManager, IIdentifiable
+	public class ScannerManager : IScannerManager
 	{
 		private readonly ICollection<IPathWatcher> _pathWatchers = new List<IPathWatcher>();
-		private Guid _objectGuid = Guid.NewGuid();
-
-		public string ObjectGuid
-		{
-			get
-			{
-				return _objectGuid.ToString();
-			}
-		}
 
 		private IListener<SettingsDTO> _settingsListener;
 		

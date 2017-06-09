@@ -3,24 +3,11 @@ using CustomMessaging.Interfaces;
 using RabbitMQ.Client;
 using Newtonsoft.Json;
 using CustomMessaging.DTO;
-using CustomMessaging.Unity;
-using System;
 
 namespace CustomMessaging.Publishers
 {
-	[LogFileName("settings_publisher_logs")]
-	public class SettingsPublisher : IPublisher<SettingsDTO>, IIdentifiable
+	public class SettingsPublisher : IPublisher<SettingsDTO>
 	{
-		private Guid _objectGuid = Guid.NewGuid();
-
-		public string ObjectGuid
-		{
-			get
-			{
-				return _objectGuid.ToString();
-			}
-		}
-
 		public void Publish(SettingsDTO value)
 		{
 			var factory = new ConnectionFactory() { HostName = "localhost" };

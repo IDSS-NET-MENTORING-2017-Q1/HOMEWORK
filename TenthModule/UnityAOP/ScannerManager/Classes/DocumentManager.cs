@@ -3,27 +3,14 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using CustomMessaging.Interfaces;
-using CustomMessaging.Unity;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 using ScannerManager.Interfaces;
 
 namespace ScannerManager.Classes
 {
-	[LogFileName("document_manager_logs")]
-	public class DocumentManager : IDocumentManager, IIdentifiable
+	public class DocumentManager : IDocumentManager
 	{
-		private Guid _objectGuid = Guid.NewGuid();
-
-		public string ObjectGuid
-		{
-			get
-			{
-				return _objectGuid.ToString();
-			}
-		}
-
 		protected bool ValidateName(string fileName)
 		{
 			Guid guid;

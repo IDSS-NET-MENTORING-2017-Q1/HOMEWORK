@@ -60,3 +60,7 @@ C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\TenthMo
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\TenthModule\UnityAOP\CustomMessaging\obj\Debug\CustomMessaging.pdb
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\TenthModule\UnityAOP\CustomMessaging\obj\Debug\CustomMessaging.csprojResolveAssemblyReference.cache
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\TenthModule\UnityAOP\CustomMessaging\bin\Debug\NLog.config
+C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\TenthModule\UnityAOP\CustomMessaging\bin\Debug\NLog.config
+C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\TenthModule\UnityAOP\CustomMessaging\bin\Debug\NLog.dll
+C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\TenthModule\UnityAOP\CustomMessaging\bin\Debug\NLog.xml
+C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\TenthModule\UnityAOP\CustomMessaging\obj\Debug\CustomMessaging.csprojResolveAssemblyReference.cache

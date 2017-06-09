@@ -5,25 +5,14 @@ using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;
 using CustomMessaging.DTO;
-using CustomMessaging.Unity;
 
 namespace CustomMessaging.Listeners
 {
-	[LogFileName("status_listener_logs")]
-	public class StatusListener : IListener<StatusDTO>, IIdentifiable
+	public class StatusListener : IListener<StatusDTO>
 	{
 		private IConnection _connection;
 		private IModel _channel;
 		private EventingBasicConsumer _consumer;
-		private Guid _objectGuid = Guid.NewGuid();
-
-		public string ObjectGuid
-		{
-			get
-			{
-				return _objectGuid.ToString();
-			}
-		}
 
 		public void Start()
 		{

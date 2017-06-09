@@ -7,26 +7,15 @@ using System.Threading;
 using CustomMessaging.DTO;
 using CustomMessaging.Enums;
 using CustomMessaging.Interfaces;
-using CustomMessaging.Unity;
 using ScannerManager.Interfaces;
 using SystemTimer = System.Timers.Timer;
 
 namespace ScannerManager.Classes
 {
-	[LogFileName("path_watcher_logs")]
-	public class PathWatcher : IPathWatcher, IIdentifiable
+	public class PathWatcher : IPathWatcher
 	{
 		private readonly StatusDTO _status;
-		private Guid _objectGuid = Guid.NewGuid();
-
-		public string ObjectGuid
-		{
-			get
-			{
-				return _objectGuid.ToString();
-			}
-		}
-
+		
 		private int _waitInterval = 10000;
 		private int _statusInterval = 10000;
 

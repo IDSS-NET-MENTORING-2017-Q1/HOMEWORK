@@ -9,7 +9,7 @@ namespace CustomMessaging.Aspects
 	[Serializable]
 	public class LogMethodAttribute : OnMethodBoundaryAspect
 	{
-		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+		private static readonly ILogger Logger = LogManager.GetCurrentClassLogger();
 
 		/// <summary>
 		///     Method invoked before the target method is executed.

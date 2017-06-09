@@ -129,3 +129,4 @@ C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\TenthMo
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\TenthModule\UnityAOP\MessagingService\obj\Debug\MessagingService.exe
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\TenthModule\UnityAOP\MessagingService\obj\Debug\MessagingService.pdb
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\TenthModule\UnityAOP\MessagingService\bin\Debug\NLog.config
+C:\Users\sches_000\Documents\Visual Studio 2017\Projects\Mentoring\TenthModule\UnityAOP\MessagingService\bin\Debug\NLog.config

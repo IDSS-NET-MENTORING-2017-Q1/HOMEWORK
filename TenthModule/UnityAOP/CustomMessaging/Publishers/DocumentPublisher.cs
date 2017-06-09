@@ -6,23 +6,11 @@ using Newtonsoft.Json;
 using System.Linq;
 using System;
 using CustomMessaging.DTO;
-using CustomMessaging.Unity;
 
 namespace CustomMessaging.Publishers
 {
-	[LogFileName("document_publisher_logs")]
-	public class DocumentPublisher : IPublisher<IEnumerable<byte>>, IIdentifiable
+	public class DocumentPublisher : IPublisher<IEnumerable<byte>>
 	{
-		private Guid _objectGuid = Guid.NewGuid();
-
-		public string ObjectGuid
-		{
-			get
-			{
-				return _objectGuid.ToString();
-			}
-		}
-
 		public void Publish(IEnumerable<byte> value)
 		{
 			var documentGuid = Guid.NewGuid().ToString();
