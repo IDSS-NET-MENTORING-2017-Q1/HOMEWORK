@@ -1,9 +1,9 @@
 ﻿using System.Drawing;
 using System.IO;
-using ZXing;
 using CustomMessaging.Aspects;
+using ZXing;
 
-namespace Scanner.Classes
+namespace ScannerManager.Classes
 {
 	public class BarcodeManager
 	{
@@ -44,9 +44,9 @@ namespace Scanner.Classes
 				return false;
 			}
 
-			using (FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read))
+			using (var fs = new FileStream(fileName, FileMode.Open, FileAccess.Read))
 			{
-				using (Bitmap bitmap = Bitmap.FromStream(fs) as Bitmap)
+				using (var bitmap = Bitmap.FromStream(fs) as Bitmap)
 				{
 					var reader = new BarcodeReader { AutoRotate = true };
 					var decodeResult = reader.Decode(bitmap);

@@ -1,17 +1,17 @@
 ﻿using System.Collections.Generic;
+using CustomMessaging.Aspects;
 using CustomMessaging.DTO;
 using CustomMessaging.Interfaces;
-using CustomMessaging.Aspects;
 
-namespace Scanner.Classes
+namespace ScannerManager.Classes
 {
 	public class ScannerManager
 	{
-		private ICollection<PathWatcher> _pathWatchers = new List<PathWatcher>();
+		private readonly ICollection<PathWatcher> _pathWatchers = new List<PathWatcher>();
 		
-		private IListener<SettingsDTO> _settingsListener;
+		private IListener<SettingsDto> _settingsListener;
 		
-		public IListener<SettingsDTO> SettingsListener
+		public IListener<SettingsDto> SettingsListener
 		{
 			get
 			{
@@ -32,7 +32,7 @@ namespace Scanner.Classes
 		}
 
 		[LogMethod]
-		protected void Init(IEnumerable<FileManager> fileManagers, DocumentManager documentManager, BarcodeManager barcodeManager, IPublisher<IEnumerable<byte>> documentPublisher, IPublisher<StatusDTO> statusPublisher, IListener<SettingsDTO> settingsListener)
+		protected void Init(IEnumerable<FileManager> fileManagers, DocumentManager documentManager, BarcodeManager barcodeManager, IPublisher<IEnumerable<byte>> documentPublisher, IPublisher<StatusDto> statusPublisher, IListener<SettingsDto> settingsListener)
 		{
 			_settingsListener = settingsListener;
 			_settingsListener.Received += SettingsListener_Received;
@@ -53,7 +53,7 @@ namespace Scanner.Classes
 		}
 
 		[LogMethod]
-		void SettingsListener_Received(object sender, SettingsDTO e)
+		private void SettingsListener_Received(object sender, SettingsDto e)
 		{
 			foreach (var pathWatcher in _pathWatchers)
 			{
@@ -62,7 +62,7 @@ namespace Scanner.Classes
 			}
 		}
 
-		public ScannerManager(IEnumerable<FileManager> fileManagers, DocumentManager documentManager, BarcodeManager barcodeManager, IPublisher<IEnumerable<byte>> documentPublisher, IPublisher<StatusDTO> statusPublisher, IListener<SettingsDTO> settingsListener)
+		public ScannerManager(IEnumerable<FileManager> fileManagers, DocumentManager documentManager, BarcodeManager barcodeManager, IPublisher<IEnumerable<byte>> documentPublisher, IPublisher<StatusDto> statusPublisher, IListener<SettingsDto> settingsListener)
 		{
 			Init(fileManagers, documentManager, barcodeManager, documentPublisher, statusPublisher, settingsListener);
 		}

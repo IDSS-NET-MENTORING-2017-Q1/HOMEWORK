@@ -2,7 +2,7 @@
 
 namespace CustomMessaging.DTO
 {
-	public class DocumentPartitionDTO
+	public class DocumentPartitionDto
 	{
 		public bool EndOfDocument { get; set; }
 		public IEnumerable<byte> Content { get; set; }

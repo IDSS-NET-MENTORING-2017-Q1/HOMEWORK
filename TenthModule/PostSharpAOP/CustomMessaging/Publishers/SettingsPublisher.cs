@@ -1,18 +1,18 @@
 ﻿using System.Text;
-using CustomMessaging.Interfaces;
-using RabbitMQ.Client;
-using Newtonsoft.Json;
-using CustomMessaging.DTO;
 using CustomMessaging.Aspects;
+using CustomMessaging.DTO;
+using CustomMessaging.Interfaces;
+using Newtonsoft.Json;
+using RabbitMQ.Client;
 
 namespace CustomMessaging.Publishers
 {
-	public class SettingsPublisher : IPublisher<SettingsDTO>
+	public class SettingsPublisher : IPublisher<SettingsDto>
 	{
 		[LogMethod]
-		public void Publish(SettingsDTO value)
+		public void Publish(SettingsDto value)
 		{
-			var factory = new ConnectionFactory() { HostName = "localhost" };
+			var factory = new ConnectionFactory { HostName = "localhost" };
 			using (var connection = factory.CreateConnection())
 			using (var channel = connection.CreateModel())
 			{

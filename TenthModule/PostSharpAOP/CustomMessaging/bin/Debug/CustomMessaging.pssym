@@ -1,55 +1,58 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Symbols LinesOfCode="254" PostSharpLinesOfCode="0" EnhancedTypesCount="6" SchemaVersion="1" PostSharpVersion="4.3.33.0" xmlns="http://schemas.postsharp.org/2.0/symbols">
-  <Class Class="#1=T:[PostSharp.Patterns.Diagnostics]PostSharp.Patterns.Diagnostics.LogAttribute">
-    <Instance Declaration="#2=M:[CustomMessaging]CustomMessaging.Listeners.DocumentListener::MakePdf(System.String)" Id="674bbbe3f78c4d38">
+<Symbols LinesOfCode="234" PostSharpLinesOfCode="0" EnhancedTypesCount="6" SchemaVersion="1" PostSharpVersion="4.3.33.0" xmlns="http://schemas.postsharp.org/2.0/symbols">
+  <Class Class="#1=T:[CustomMessaging]CustomMessaging.Aspects.LogMethodAttribute">
+    <Instance Declaration="#2=M:[CustomMessaging]CustomMessaging.Publishers.DocumentPublisher::Publish(System.Collections.Generic.IEnumerable{System.Byte})" Id="674bbbe371a84f31">
       <Target>
-        <JoinPoint Advising="#1" Description="#3=Adds logging" Ordinal="0" LinesAvoided="4" />
+        <JoinPoint Description="#3=Wrapped by advice(s) OnEntry, OnSuccess, OnException" Ordinal="0" />
       </Target>
     </Instance>
-    <Instance Declaration="#4=M:[CustomMessaging]CustomMessaging.Listeners.DocumentListener::Start()" Id="674bbbe3da965aa1">
+    <Instance Declaration="#4=M:[CustomMessaging]CustomMessaging.Listeners.DocumentListener::MakePdf(System.String)" Id="674bbbe3ffc68a6b">
       <Target>
-        <JoinPoint Advising="#1" Description="#3" LinesAvoided="4" />
+        <JoinPoint Description="#3" />
       </Target>
     </Instance>
-    <Instance Declaration="#5=M:[CustomMessaging]CustomMessaging.Listeners.DocumentListener::Dispose()" Id="674bbbe31823616d">
+    <Instance Declaration="#5=M:[CustomMessaging]CustomMessaging.Listeners.DocumentListener::Start()" Id="674bbbe3b4915e12">
       <Target>
-        <JoinPoint Advising="#1" Description="#3" Ordinal="2" LinesAvoided="4" />
+        <JoinPoint Description="#3" Ordinal="2" />
       </Target>
     </Instance>
-    <Instance Declaration="#6=M:[CustomMessaging]CustomMessaging.Listeners.SettingsListener::Start()" Id="674bbbe32dfebf80">
+    <Instance Declaration="#6=M:[CustomMessaging]CustomMessaging.Listeners.DocumentListener::Dispose()" Id="674bbbe32090d5a0">
       <Target>
-        <JoinPoint Advising="#1" Description="#3" Ordinal="3" LinesAvoided="4" />
+        <JoinPoint Description="#3" Ordinal="3" />
       </Target>
     </Instance>
-    <Instance Declaration="#7=M:[CustomMessaging]CustomMessaging.Listeners.SettingsListener::Dispose()" Id="674bbbe31afae1b1">
+    <Instance Declaration="#7=M:[CustomMessaging]CustomMessaging.Publishers.SettingsPublisher::Publish([CustomMessaging]CustomMessaging.DTO.SettingsDto)" Id="674bbbe3586b7662">
       <Target>
-        <JoinPoint Advising="#1" Description="#3" Ordinal="4" LinesAvoided="4" />
+        <JoinPoint Description="#3" Ordinal="4" />
       </Target>
     </Instance>
-    <Instance Declaration="#8=M:[CustomMessaging]CustomMessaging.Listeners.StatusListener::Start()" Id="674bbbe362807e66">
+    <Instance Declaration="#8=M:[CustomMessaging]CustomMessaging.Listeners.SettingsListener::Start()" Id="674bbbe3288a1162">
       <Target>
-        <JoinPoint Advising="#1" Description="#3" Ordinal="5" LinesAvoided="4" />
+        <JoinPoint Description="#3" Ordinal="5" />
       </Target>
     </Instance>
-    <Instance Declaration="#9=M:[CustomMessaging]CustomMessaging.Listeners.StatusListener::Dispose()" Id="674bbbe3a66c5e2c">
+    <Instance Declaration="#9=M:[CustomMessaging]CustomMessaging.Listeners.SettingsListener::Dispose()" Id="674bbbe3592c3a83">
       <Target>
-        <JoinPoint Advising="#1" Description="#3" Ordinal="6" LinesAvoided="4" />
+        <JoinPoint Description="#3" Ordinal="6" />
       </Target>
     </Instance>
-    <Instance Declaration="#10=M:[CustomMessaging]CustomMessaging.Publishers.DocumentPublisher::Publish(System.Collections.Generic.IEnumerable{System.Byte})" Id="674bbbe329d909ac">
+    <Instance Declaration="#10=M:[CustomMessaging]CustomMessaging.Publishers.StatusPublisher::Publish([CustomMessaging]CustomMessaging.DTO.StatusDto)" Id="674bbbe37f772362">
       <Target>
-        <JoinPoint Advising="#1" Description="#3" Ordinal="7" LinesAvoided="4" />
+        <JoinPoint Description="#3" Ordinal="7" />
       </Target>
     </Instance>
-    <Instance Declaration="#11=M:[CustomMessaging]CustomMessaging.Publishers.SettingsPublisher::Publish([CustomMessaging]CustomMessaging.DTO.SettingsDTO)" Id="674bbbe3461a8e8b">
+    <Instance Declaration="#11=M:[CustomMessaging]CustomMessaging.Listeners.StatusListener::Start()" Id="674bbbe3fe8c9730">
       <Target>
-        <JoinPoint Advising="#1" Description="#3" Ordinal="8" LinesAvoided="4" />
+        <JoinPoint Description="#3" Ordinal="8" />
       </Target>
     </Instance>
-    <Instance Declaration="#12=M:[CustomMessaging]CustomMessaging.Publishers.StatusPublisher::Publish([CustomMessaging]CustomMessaging.DTO.StatusDTO)" Id="674bbbe32577f65f">
+    <Instance Declaration="#12=M:[CustomMessaging]CustomMessaging.Listeners.StatusListener::Dispose()" Id="674bbbe3cb7b314e">
       <Target>
-        <JoinPoint Advising="#1" Description="#3" Ordinal="9" LinesAvoided="4" />
+        <JoinPoint Description="#3" Ordinal="9" />
       </Target>
     </Instance>
   </Class>
+  <Annotation Target="#13=M:[CustomMessaging]CustomMessaging.Aspects.LogMethodAttribute::OnEntry(PostSharp.Aspects.MethodExecutionArgs)" Arguments="#14=2" Description="#15=PostSharp estimates that 2 line(s) of code are saved every time this advice is applied. Use the [LinesOfCodeAvoided] attribute on the aspect or specify the LinesOfCodeAvoided property on the advice attribute to override this value." />
+  <Annotation Target="#16=M:[CustomMessaging]CustomMessaging.Aspects.LogMethodAttribute::OnSuccess(PostSharp.Aspects.MethodExecutionArgs)" Arguments="#14" Description="#15" />
+  <Annotation Target="#17=M:[CustomMessaging]CustomMessaging.Aspects.LogMethodAttribute::OnException(PostSharp.Aspects.MethodExecutionArgs)" Arguments="#14" Description="#15" />
 </Symbols>

@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Text;
+using CustomMessaging.Aspects;
+using CustomMessaging.DTO;
 using CustomMessaging.Interfaces;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using CustomMessaging.DTO;
-using CustomMessaging.Aspects;
 
 namespace CustomMessaging.Listeners
 {
-	public class SettingsListener : IListener<SettingsDTO>
+	public class SettingsListener : IListener<SettingsDto>
 	{
 		private IConnection _connection;
 		private IModel _channel;
@@ -18,7 +18,7 @@ namespace CustomMessaging.Listeners
 		[LogMethod]
 		public void Start()
 		{
-			var factory = new ConnectionFactory() { HostName = "localhost" };
+			var factory = new ConnectionFactory { HostName = "localhost" };
 
 			_connection = factory.CreateConnection();
 			_channel = _connection.CreateModel();
@@ -35,7 +35,7 @@ namespace CustomMessaging.Listeners
 			{
 				var body = ea.Body;
 				var message = Encoding.UTF8.GetString(body);
-				var settings = JsonConvert.DeserializeObject<SettingsDTO>(message);
+				var settings = JsonConvert.DeserializeObject<SettingsDto>(message);
 				if (Received != null)
 				{
 					Received(this, settings);
@@ -54,6 +54,6 @@ namespace CustomMessaging.Listeners
 			_connection.Dispose();
 		}
 
-		public event EventHandler<SettingsDTO> Received;
+		public event EventHandler<SettingsDto> Received;
 	}
 }

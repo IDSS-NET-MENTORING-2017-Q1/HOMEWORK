@@ -5,7 +5,7 @@ using System.IO;
 using System.Threading;
 using CustomMessaging.Aspects;
 
-namespace Scanner.Classes
+namespace ScannerManager.Classes
 {
 	public class FileManager
 	{
@@ -169,7 +169,7 @@ namespace Scanner.Classes
 		protected string GenerateFileName(string originalName)
 		{
 			var extension = Path.GetExtension(originalName);
-			return Guid.NewGuid().ToString() + extension;
+			return Guid.NewGuid() + extension;
 		}
 
 		[LogMethod]
@@ -203,7 +203,7 @@ namespace Scanner.Classes
 		[LogMethod]
 		public void ClearTemp()
 		{
-			foreach (string fileName in GetTempFiles())
+			foreach (var fileName in GetTempFiles())
 			{
 				File.Delete(fileName);
 			}

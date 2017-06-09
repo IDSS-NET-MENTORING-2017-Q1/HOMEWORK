@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using CustomMessaging.Aspects;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
-using System;
-using CustomMessaging.Aspects;
 
-namespace Scanner.Classes
+namespace ScannerManager.Classes
 {
 	public class DocumentManager
 	{
@@ -15,7 +15,7 @@ namespace Scanner.Classes
 		{
 			Guid guid;
 			var value = Path.GetFileNameWithoutExtension(fileName);
-			bool result = Guid.TryParse(value, out guid);
+			var result = Guid.TryParse(value, out guid);
 			return result;
 		}
 
@@ -24,7 +24,7 @@ namespace Scanner.Classes
 		{
 			var document = new PdfDocument();
 
-			foreach (string fileName in sourceFiles)
+			foreach (var fileName in sourceFiles)
 			{
 				if (!ValidateName(fileName))
 				{
@@ -34,9 +34,9 @@ namespace Scanner.Classes
 				var page = document.AddPage();
 				var graphics = XGraphics.FromPdfPage(page);
 
-				using (FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read))
+				using (var fs = new FileStream(fileName, FileMode.Open, FileAccess.Read))
 				{
-					using (Image image = Image.FromStream(fs))
+					using (var image = Image.FromStream(fs))
 					{
 						var xImage = XImage.FromGdiPlusImage(image);
 						graphics.DrawImage(xImage, 0, 0, page.Width, page.Height);

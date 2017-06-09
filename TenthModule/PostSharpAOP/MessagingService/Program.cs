@@ -1,69 +1,69 @@
 ﻿using System;
-using CustomMessaging.DTO;
-using System.IO;
 using System.Configuration;
-using Newtonsoft.Json;
 using System.Diagnostics;
+using System.IO;
 using System.Threading;
+using CustomMessaging.DTO;
 using CustomMessaging.Listeners;
 using CustomMessaging.Publishers;
+using Newtonsoft.Json;
 
 namespace MessagingService
 {
-	class Program
+	internal class Program
 	{
-		static string settingsPath;
-		static string statusesPath;
-		static string outputPath;
+		private static string _settingsPath;
+		private static string _statusesPath;
+		private static string _outputPath;
 
-		static DocumentListener documentListener = new DocumentListener();
-		static StatusListener statusListener = new StatusListener();
-		static SettingsPublisher settingsPublisher = new SettingsPublisher();
-		static FileSystemWatcher watcher = new FileSystemWatcher();
+		private static readonly DocumentListener DocumentListener = new DocumentListener();
+		private static readonly StatusListener StatusListener = new StatusListener();
+		private static readonly SettingsPublisher SettingsPublisher = new SettingsPublisher();
+		private static readonly FileSystemWatcher Watcher = new FileSystemWatcher();
 
-		static void Main(string[] args)
+		private static void Main(string[] args)
 		{
 			var basePath = AppDomain.CurrentDomain.BaseDirectory;
-			settingsPath = ConfigurationManager.AppSettings["settingsFile"];
-			statusesPath = ConfigurationManager.AppSettings["statusesFile"];
-			outputPath = ConfigurationManager.AppSettings["outputPath"];
+			_settingsPath = ConfigurationManager.AppSettings["settingsFile"];
+			_statusesPath = ConfigurationManager.AppSettings["statusesFile"];
+			_outputPath = ConfigurationManager.AppSettings["outputPath"];
 
-			if (string.IsNullOrWhiteSpace(settingsPath) || !File.Exists(settingsPath))
+			if (string.IsNullOrWhiteSpace(_settingsPath) || !File.Exists(_settingsPath))
 			{
 				return;
 			}
-			if (string.IsNullOrWhiteSpace(statusesPath))
+			if (string.IsNullOrWhiteSpace(_statusesPath))
 			{
-				statusesPath = Path.Combine(basePath, "statuses.txt");
+				_statusesPath = Path.Combine(basePath, "statuses.txt");
 			}
-			if (string.IsNullOrWhiteSpace(outputPath))
+			if (string.IsNullOrWhiteSpace(_outputPath))
 			{
-				outputPath = Path.Combine(basePath, "out");
+				_outputPath = Path.Combine(basePath, "out");
 			}
-			if (!Directory.Exists(outputPath))
+			if (!Directory.Exists(_outputPath))
 			{
-				Directory.CreateDirectory(outputPath);
+				Directory.CreateDirectory(_outputPath);
 			}
 
-			documentListener.OutputPath = outputPath;
+			DocumentListener.OutputPath = _outputPath;
 
-			using (documentListener)
-			using (statusListener)
+			using (DocumentListener)
+			using (StatusListener)
 			{
-				documentListener.Start();
-				statusListener.Start();
+				DocumentListener.Start();
+				StatusListener.Start();
 
-				statusListener.Received += StatusListener_Received;
+				StatusListener.Received += StatusListener_Received;
 
-				watcher.Path = Path.GetDirectoryName(settingsPath);
-				watcher.Filter = "*.json";
-				watcher.Changed += Watcher_Changed;
-				watcher.EnableRaisingEvents = true;
+				Watcher.Path = Path.GetDirectoryName(_settingsPath);
+				Watcher.Filter = "*.json";
+				Watcher.Changed += Watcher_Changed;
+				Watcher.EnableRaisingEvents = true;
 
 				Console.WriteLine("Press [enter] to exit...");
 				Console.ReadLine();
 				
-				watcher.EnableRaisingEvents = false;
+				Watcher.EnableRaisingEvents = false;
 			}
 		}
 
@@ -100,27 +100,27 @@ namespace MessagingService
 
 		private static void Watcher_Changed(object sender, FileSystemEventArgs e)
 		{
-			if (e.FullPath != settingsPath)
+			if (e.FullPath != _settingsPath)
 			{
 				return;
 			}
 
-			if (!TryOpen(settingsPath, 3, 5000))
+			if (!TryOpen(_settingsPath, 3, 5000))
 				return;
 
-			var settingsText = File.ReadAllText(settingsPath);
+			var settingsText = File.ReadAllText(_settingsPath);
 
-			var settings = JsonConvert.DeserializeObject<SettingsDTO>(settingsText);
-			settingsPublisher.Publish(settings);
+			var settings = JsonConvert.DeserializeObject<SettingsDto>(settingsText);
+			SettingsPublisher.Publish(settings);
 		}
 
-		private static void StatusListener_Received(object sender, StatusDTO e)
+		private static void StatusListener_Received(object sender, StatusDto e)
 		{
-			using (var writer = File.AppendText(statusesPath))
+			using (var writer = File.AppendText(_statusesPath))
 			{
-				writer.WriteLine(string.Format("Status Received on: {0}", DateTime.Now));
-				writer.WriteLine(string.Format("Service name: {0}", e.ServiceName));
-				writer.WriteLine(string.Format("Status: {0}", e.Value));
+				writer.WriteLine("Status Received on: {0}", DateTime.Now);
+				writer.WriteLine("Service name: {0}", e.ServiceName);
+				writer.WriteLine("Status: {0}", e.Value);
 			}
 		}
 	}

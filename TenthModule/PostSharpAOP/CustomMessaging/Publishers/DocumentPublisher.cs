@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
-using CustomMessaging.Interfaces;
-using System.Text;
-using RabbitMQ.Client;
-using Newtonsoft.Json;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using System;
-using CustomMessaging.DTO;
+using System.Text;
 using CustomMessaging.Aspects;
+using CustomMessaging.DTO;
+using CustomMessaging.Interfaces;
+using Newtonsoft.Json;
+using RabbitMQ.Client;
 
 namespace CustomMessaging.Publishers
 {
@@ -17,7 +17,7 @@ namespace CustomMessaging.Publishers
 		{
 			var documentGuid = Guid.NewGuid().ToString();
 
-			var factory = new ConnectionFactory() { HostName = "localhost" };
+			var factory = new ConnectionFactory { HostName = "localhost" };
 			using (var connection = factory.CreateConnection())
 			using (var channel = connection.CreateModel())
 			{
@@ -26,7 +26,8 @@ namespace CustomMessaging.Publishers
 				var buffer = value;
 				while (buffer.Count() > 128)
 				{
-					var partition = new DocumentPartitionDTO() {
+					var partition = new DocumentPartitionDto
+					{
 						Content = buffer.Take(128),
 						DocumentGuid = documentGuid,
 						EndOfDocument = false
@@ -45,7 +46,7 @@ namespace CustomMessaging.Publishers
 
 				if (buffer.Count() > 0)
 				{
-					var partition = new DocumentPartitionDTO()
+					var partition = new DocumentPartitionDto
 					{
 						Content = buffer,
 						DocumentGuid = documentGuid,

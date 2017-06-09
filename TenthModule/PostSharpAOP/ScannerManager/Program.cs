@@ -1,30 +1,29 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using CustomMessaging.Listeners;
+using CustomMessaging.Publishers;
+using Newtonsoft.Json;
 using NLog;
 using NLog.Config;
 using NLog.Targets;
+using ScannerManager.Classes;
 using Topshelf;
-using System.Collections.Generic;
-using Newtonsoft.Json;
-using Scanner.Classes;
-using System.Diagnostics;
-using CustomMessaging.DTO;
-using System.Linq;
-using CustomMessaging.Publishers;
-using CustomMessaging.Listeners;
 
-namespace Scanner
+namespace ScannerManager
 {
-	class Program
+	internal class Program
 	{
-		static bool IsUnc(string sourcePath)
+		private static bool IsUnc(string sourcePath)
 		{
 			var uri = new Uri(sourcePath);
 			return uri.IsUnc;
 		}
 
-		static void Main(string[] args)
+		private static void Main(string[] args)
 		{
 			var logPath = ConfigurationManager.AppSettings["logPath"];
 			if (string.IsNullOrWhiteSpace(logPath))
@@ -47,6 +46,8 @@ namespace Scanner
 					return;
 				}
 			}
+
+			if (paths == null) return;
 
 			var fileManagers = paths.Where(o => !IsUnc(o.InputPath)).Select(o => new FileManager(
 				o.InputPath,
@@ -88,9 +89,9 @@ namespace Scanner
 							.SetResetPeriod(1);
 					});
 
-					conf.Service<ScannerManager>(callback =>
+					conf.Service<Classes.ScannerManager>(callback =>
 					{
-						callback.ConstructUsing(() => new ScannerManager(
+						callback.ConstructUsing(() => new Classes.ScannerManager(
 							fileManagers, 
 							documentManager, 
 							barcodeManager, 

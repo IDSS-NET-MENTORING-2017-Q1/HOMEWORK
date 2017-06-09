@@ -38,15 +38,12 @@
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="NLog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>..\packages\NLog.2.0.0.2000\lib\net40\NLog.dll</HintPath>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.4.10\lib\net45\NLog.dll</HintPath>
     </Reference>
     <Reference Include="PostSharp, Version=4.3.33.0, Culture=neutral, PublicKeyToken=b13fd38b8f9c99d7, processorArchitecture=MSIL">
       <HintPath>..\packages\PostSharp.4.3.33\lib\net35-client\PostSharp.dll</HintPath>
       <Private>True</Private>
-    </Reference>
-    <Reference Include="PostSharp.Patterns.Common, Version=4.3.33.0, Culture=neutral, PublicKeyToken=e7f631e6ce13f078, processorArchitecture=MSIL">
-      <HintPath>..\packages\PostSharp.Patterns.Common.4.3.33\lib\net45\PostSharp.Patterns.Common.dll</HintPath>
     </Reference>
     <Reference Include="PostSharp.Patterns.Diagnostics, Version=4.3.33.0, Culture=neutral, PublicKeyToken=e7f631e6ce13f078, processorArchitecture=MSIL">
       <HintPath>..\packages\PostSharp.Patterns.Diagnostics.4.3.33\lib\net40\PostSharp.Patterns.Diagnostics.dll</HintPath>
@@ -65,7 +62,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Aspects\Formatter.cs" />
-    <Compile Include="Aspects\Logger.cs" />
     <Compile Include="Aspects\LogMethodAttribute.cs" />
     <Compile Include="DTO\DocumentPartitionDTO.cs" />
     <Compile Include="Publishers\DocumentPublisher.cs" />

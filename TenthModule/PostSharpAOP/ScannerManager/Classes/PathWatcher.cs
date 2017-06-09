@@ -4,33 +4,33 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
-using CustomMessaging.DTO;
-using CustomMessaging.Interfaces;
-
-using SystemTimer = System.Timers.Timer;
-using CustomMessaging.Enums;
+using System.Timers;
 using CustomMessaging.Aspects;
+using CustomMessaging.DTO;
+using CustomMessaging.Enums;
+using CustomMessaging.Interfaces;
+using SystemTimer = System.Timers.Timer;
 
-namespace Scanner.Classes
+namespace ScannerManager.Classes
 {
 	public class PathWatcher
 	{
-		private StatusDTO _status;
+		private readonly StatusDto _status;
 
 		private int _waitInterval = 10000;
 		private int _statusInterval = 10000;
 
-		private SystemTimer _statusTimer;
-		private ManualResetEvent _stopRequested = new ManualResetEvent(false);
-		private AutoResetEvent _fileCreated = new AutoResetEvent(false);
-		private FileSystemWatcher _watcher;
-		private Thread _worker;
+		private readonly SystemTimer _statusTimer;
+		private readonly ManualResetEvent _stopRequested = new ManualResetEvent(false);
+		private readonly AutoResetEvent _fileCreated = new AutoResetEvent(false);
+		private readonly FileSystemWatcher _watcher;
+		private readonly Thread _worker;
 
 		private FileManager _fileManager;
 		private BarcodeManager _barcodeManager;
 		private DocumentManager _documentManager;
 		private IPublisher<IEnumerable<byte>> _documentPublisher;
-		private IPublisher<StatusDTO> _statusPublisher;
+		private IPublisher<StatusDto> _statusPublisher;
 
 		public int WaitInterval
 		{
@@ -104,7 +104,7 @@ namespace Scanner.Classes
 			}
 		}
 
-		public IPublisher<StatusDTO> StatusPublisher
+		public IPublisher<StatusDto> StatusPublisher
 		{
 			get { return _statusPublisher; }
 			set { _statusPublisher = value; }
@@ -112,7 +112,7 @@ namespace Scanner.Classes
 
 		public PathWatcher(string inputPath)
 		{
-			_status = new StatusDTO
+			_status = new StatusDto
 			{
 				Value = ServiceStatuses.Waiting,
 				ServiceName = Guid.NewGuid().ToString()
@@ -234,7 +234,7 @@ namespace Scanner.Classes
 		}
 
 		[LogMethod]
-		void StatusTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+		private void StatusTimer_Elapsed(object sender, ElapsedEventArgs e)
 		{
 			_statusPublisher.Publish(_status);
 		}

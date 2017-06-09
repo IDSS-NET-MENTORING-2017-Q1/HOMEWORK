@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Text;
+using CustomMessaging.Aspects;
+using CustomMessaging.DTO;
 using CustomMessaging.Interfaces;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using System.Linq;
-using System.Diagnostics;
-using CustomMessaging.DTO;
-using CustomMessaging.Aspects;
 
 namespace CustomMessaging.Listeners
 {
@@ -27,13 +27,13 @@ namespace CustomMessaging.Listeners
 			set { _outputPath = value; }
 		}
 		
-		private readonly List<DocumentPartitionDTO> _partitions;
+		private readonly List<DocumentPartitionDto> _partitions;
 
 		public DocumentListener() : this(null) { }
 
 		public DocumentListener(string outputPath)
 		{
-			_partitions = new List<DocumentPartitionDTO>();
+			_partitions = new List<DocumentPartitionDto>();
 
 			if (string.IsNullOrWhiteSpace(outputPath))
 			{
@@ -57,7 +57,7 @@ namespace CustomMessaging.Listeners
 		[LogMethod]
 		protected void MakePdf(string guid)
 		{
-			List<byte> result = new List<byte>();
+			var result = new List<byte>();
 			foreach (var partition in _partitions.Where(o => o.DocumentGuid == guid))
 			{
 				result.AddRange(partition.Content);
@@ -74,7 +74,7 @@ namespace CustomMessaging.Listeners
 		[LogMethod]
 		public void Start()
 		{
-			var factory = new ConnectionFactory() { HostName = "localhost" };
+			var factory = new ConnectionFactory { HostName = "localhost" };
 
 			_connection = factory.CreateConnection();
 			_channel = _connection.CreateModel();
@@ -91,11 +91,11 @@ namespace CustomMessaging.Listeners
 			{
 				var body = ea.Body;
 				var message = Encoding.UTF8.GetString(body);
-				DocumentPartitionDTO partition;
+				DocumentPartitionDto partition;
 
 				try
 				{
-					partition = JsonConvert.DeserializeObject<DocumentPartitionDTO>(message);
+					partition = JsonConvert.DeserializeObject<DocumentPartitionDto>(message);
 				}
 				catch (Exception ex)
 				{

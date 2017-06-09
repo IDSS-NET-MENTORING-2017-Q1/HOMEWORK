@@ -1,6 +1,6 @@
-﻿using PostSharp.Aspects;
-using System;
+﻿using System;
 using System.Text;
+using PostSharp.Aspects;
 
 namespace CustomMessaging.Aspects
 {

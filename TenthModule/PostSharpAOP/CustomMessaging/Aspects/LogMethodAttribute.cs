@@ -1,11 +1,16 @@
-﻿using PostSharp.Aspects;
+﻿using System;
 using System.Reflection;
 using System.Text;
+using NLog;
+using PostSharp.Aspects;
 
 namespace CustomMessaging.Aspects
 {
+	[Serializable]
 	public class LogMethodAttribute : OnMethodBoundaryAspect
 	{
+		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
 		/// <summary>
 		///     Method invoked before the target method is executed.
 		/// </summary>
@@ -16,9 +21,8 @@ namespace CustomMessaging.Aspects
 
 			stringBuilder.Append("Entering ");
 			AppendCallInformation(args, stringBuilder);
-			Logger.WriteLine(stringBuilder.ToString());
 
-			Logger.Indent();
+			Logger.Info(stringBuilder.ToString());
 		}
 
 
@@ -28,8 +32,6 @@ namespace CustomMessaging.Aspects
 		/// <param name="args">Method execution context.</param>
 		public override void OnSuccess(MethodExecutionArgs args)
 		{
-			Logger.Unindent();
-
 			var stringBuilder = new StringBuilder();
 
 			stringBuilder.Append("Exiting ");
@@ -41,7 +43,7 @@ namespace CustomMessaging.Aspects
 				stringBuilder.Append(args.ReturnValue);
 			}
 
-			Logger.WriteLine(stringBuilder.ToString());
+			Logger.Info(stringBuilder.ToString());
 		}
 
 		/// <summary>
@@ -50,8 +52,6 @@ namespace CustomMessaging.Aspects
 		/// <param name="args">Method execution context.</param>
 		public override void OnException(MethodExecutionArgs args)
 		{
-			Logger.Unindent();
-
 			var stringBuilder = new StringBuilder();
 
 			stringBuilder.Append("Exiting ");
@@ -63,7 +63,7 @@ namespace CustomMessaging.Aspects
 				stringBuilder.Append(args.Exception.GetType().Name);
 			}
 
-			Logger.WriteLine(stringBuilder.ToString());
+			Logger.Info(stringBuilder.ToString());
 		}
 
 		private static void AppendCallInformation(MethodExecutionArgs args, StringBuilder stringBuilder)

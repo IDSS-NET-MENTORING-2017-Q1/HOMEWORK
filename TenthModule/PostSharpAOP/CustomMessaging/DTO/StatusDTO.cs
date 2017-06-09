@@ -2,7 +2,7 @@
 
 namespace CustomMessaging.DTO
 {
-	public class StatusDTO
+	public class StatusDto
 	{
 		public ServiceStatuses Value { get; set; }
 		public string ServiceName { get; set; }

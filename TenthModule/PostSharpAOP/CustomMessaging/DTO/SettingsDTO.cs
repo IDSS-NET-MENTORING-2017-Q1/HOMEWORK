@@ -1,6 +1,6 @@
 ﻿namespace CustomMessaging.DTO
 {
-	public class SettingsDTO
+	public class SettingsDto
 	{
 		public int Timeout { get; set; }
 		public string EndOfDocument { get; set; }
