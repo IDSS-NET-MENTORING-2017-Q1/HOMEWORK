@@ -109,7 +109,6 @@ C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\TenthMo
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\TenthModule\UnityAOP\MessagingService\bin\Debug\Topshelf.NLog.dll
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\TenthModule\UnityAOP\MessagingService\bin\Debug\CustomMessaging.pdb
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\TenthModule\UnityAOP\MessagingService\bin\Debug\ScannerManager.pdb
-C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\TenthModule\UnityAOP\MessagingService\bin\Debug\ScannerManager.exe.config
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\TenthModule\UnityAOP\MessagingService\bin\Debug\Microsoft.Practices.ServiceLocation.pdb
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\TenthModule\UnityAOP\MessagingService\bin\Debug\Microsoft.Practices.ServiceLocation.xml
 C:\Users\Semen_Shchedrin\Documents\Visual Studio 2013\Projects\Mentoring\TenthModule\UnityAOP\MessagingService\bin\Debug\Microsoft.Practices.Unity.xml

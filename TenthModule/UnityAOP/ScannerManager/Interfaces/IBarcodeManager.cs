@@ -1,4 +1,4 @@
-﻿namespace Scanner.Interfaces
+﻿namespace ScannerManager.Interfaces
 {
 	public interface IBarcodeManager
 	{

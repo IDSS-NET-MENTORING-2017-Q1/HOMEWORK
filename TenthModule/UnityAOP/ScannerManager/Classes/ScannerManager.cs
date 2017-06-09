@@ -1,18 +1,17 @@
-﻿using System.Collections.Generic;
-
+﻿using System;
+using System.Collections.Generic;
 using CustomMessaging.DTO;
 using CustomMessaging.Interfaces;
-using Scanner.Interfaces;
 using CustomMessaging.Unity;
-using System;
 using Microsoft.Practices.Unity;
+using ScannerManager.Interfaces;
 
-namespace Scanner.Classes
+namespace ScannerManager.Classes
 {
 	[LogFileName("scanner_manager_logs")]
 	public class ScannerManager : IScannerManager, IIdentifiable
 	{
-		private ICollection<IPathWatcher> _pathWatchers = new List<IPathWatcher>();
+		private readonly ICollection<IPathWatcher> _pathWatchers = new List<IPathWatcher>();
 		private Guid _objectGuid = Guid.NewGuid();
 
 		public string ObjectGuid
@@ -60,7 +59,7 @@ namespace Scanner.Classes
 			}
 		}
 
-		void SettingsListener_Received(object sender, SettingsDTO e)
+		private void SettingsListener_Received(object sender, SettingsDTO e)
 		{
 			foreach (var pathWatcher in _pathWatchers)
 			{

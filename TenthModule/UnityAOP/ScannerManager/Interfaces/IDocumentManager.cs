@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 
-namespace Scanner.Interfaces
+namespace ScannerManager.Interfaces
 {
 	public interface IDocumentManager
 	{

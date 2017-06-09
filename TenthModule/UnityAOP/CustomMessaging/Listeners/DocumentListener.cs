@@ -64,7 +64,7 @@ namespace CustomMessaging.Listeners
 
 		protected void MakePdf(string guid)
 		{
-			List<byte> result = new List<byte>();
+			var result = new List<byte>();
 			foreach (var partition in _partitions.Where(o => o.DocumentGuid == guid))
 			{
 				result.AddRange(partition.Content);

@@ -1,12 +1,12 @@
-﻿using CustomMessaging.Interfaces;
-using CustomMessaging.Unity;
-using Scanner.Interfaces;
-using System;
+﻿using System;
 using System.Drawing;
 using System.IO;
+using CustomMessaging.Interfaces;
+using CustomMessaging.Unity;
+using ScannerManager.Interfaces;
 using ZXing;
 
-namespace Scanner.Classes
+namespace ScannerManager.Classes
 {
 	[LogFileName("barcode_manager_logs")]
 	public class BarcodeManager : IBarcodeManager, IIdentifiable
@@ -46,9 +46,9 @@ namespace Scanner.Classes
 				return false;
 			}
 
-			using (FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read))
+			using (var fs = new FileStream(fileName, FileMode.Open, FileAccess.Read))
 			{
-				using (Bitmap bitmap = Bitmap.FromStream(fs) as Bitmap)
+				using (var bitmap = Image.FromStream(fs) as Bitmap)
 				{
 					var reader = new BarcodeReader { AutoRotate = true };
 					var decodeResult = reader.Decode(bitmap);

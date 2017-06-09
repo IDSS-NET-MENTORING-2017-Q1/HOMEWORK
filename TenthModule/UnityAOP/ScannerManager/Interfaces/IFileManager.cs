@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Scanner.Interfaces
+namespace ScannerManager.Interfaces
 {
 	public interface IFileManager
 	{

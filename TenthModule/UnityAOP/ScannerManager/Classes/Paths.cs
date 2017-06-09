@@ -1,4 +1,4 @@
-﻿namespace Scanner.Classes
+﻿namespace ScannerManager.Classes
 {
 	public class Paths
 	{

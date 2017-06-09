@@ -34,10 +34,12 @@ namespace CustomMessaging.Publishers
 				channel.ExchangeDeclare(exchange: "documents_exchange", type: "fanout");
 
 				var buffer = value;
-				while (buffer.Count() > 128)
+				var bufferArray = buffer as byte[] ?? buffer.ToArray();
+
+				while (bufferArray.Count() > 128)
 				{
 					var partition = new DocumentPartitionDTO() {
-						Content = buffer.Take(128),
+						Content = bufferArray.Take(128),
 						DocumentGuid = documentGuid,
 						EndOfDocument = false
 					};
@@ -50,14 +52,14 @@ namespace CustomMessaging.Publishers
 										 basicProperties: null,
 										 body: body);
 
-					buffer = buffer.Skip(128);
+					buffer = bufferArray.Skip(128);
 				}
 
-				if (buffer.Count() > 0)
+				if (!bufferArray.Any()) return;
 				{
 					var partition = new DocumentPartitionDTO()
 					{
-						Content = buffer,
+						Content = bufferArray,
 						DocumentGuid = documentGuid,
 						EndOfDocument = true
 					};
@@ -66,9 +68,9 @@ namespace CustomMessaging.Publishers
 					var body = Encoding.UTF8.GetBytes(message);
 
 					channel.BasicPublish(exchange: "documents_exchange",
-										 routingKey: "",
-										 basicProperties: null,
-										 body: body);
+						routingKey: "",
+						basicProperties: null,
+						body: body);
 				}
 			}
 		}

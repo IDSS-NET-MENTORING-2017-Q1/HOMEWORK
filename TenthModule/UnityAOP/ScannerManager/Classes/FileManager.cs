@@ -1,13 +1,13 @@
-﻿using CustomMessaging.Interfaces;
-using CustomMessaging.Unity;
-using Scanner.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
+using CustomMessaging.Interfaces;
+using CustomMessaging.Unity;
+using ScannerManager.Interfaces;
 
-namespace Scanner.Classes
+namespace ScannerManager.Classes
 {
 	[LogFileName("file_manager_logs")]
 	public class FileManager : IFileManager, IIdentifiable
@@ -192,7 +192,7 @@ namespace Scanner.Classes
 
 		public void ClearTemp()
 		{
-			foreach (string fileName in GetTempFiles())
+			foreach (var fileName in GetTempFiles())
 			{
 				File.Delete(fileName);
 			}

@@ -1,15 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using CustomMessaging.Interfaces;
+using CustomMessaging.Unity;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
-using System;
-using Scanner.Interfaces;
-using CustomMessaging.Unity;
-using CustomMessaging.Interfaces;
-using System.Diagnostics;
+using ScannerManager.Interfaces;
 
-namespace Scanner.Classes
+namespace ScannerManager.Classes
 {
 	[LogFileName("document_manager_logs")]
 	public class DocumentManager : IDocumentManager, IIdentifiable
@@ -28,7 +28,7 @@ namespace Scanner.Classes
 		{
 			Guid guid;
 			var value = Path.GetFileNameWithoutExtension(fileName);
-			bool result = Guid.TryParse(value, out guid);
+			var result = Guid.TryParse(value, out guid);
 			return result;
 		}
 
@@ -36,7 +36,7 @@ namespace Scanner.Classes
 		{
 			var document = new PdfDocument();
 
-			foreach (string fileName in sourceFiles)
+			foreach (var fileName in sourceFiles)
 			{
 				if (!ValidateName(fileName))
 				{
@@ -46,7 +46,7 @@ namespace Scanner.Classes
 				var page = document.AddPage();
 				var graphics = XGraphics.FromPdfPage(page);
 
-				using (FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read))
+				using (var fs = new FileStream(fileName, FileMode.Open, FileAccess.Read))
 				{
 					Image image = null;
 					try

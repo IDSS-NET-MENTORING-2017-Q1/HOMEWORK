@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using CustomMessaging.DTO;
 using CustomMessaging.Interfaces;
-using Scanner.Interfaces;
 
-namespace Scanner.Interfaces
+namespace ScannerManager.Interfaces
 {
 	public interface IPathWatcher
 	{

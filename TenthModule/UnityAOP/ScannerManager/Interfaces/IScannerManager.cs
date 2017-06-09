@@ -2,7 +2,7 @@
 using CustomMessaging.DTO;
 using CustomMessaging.Interfaces;
 
-namespace Scanner.Interfaces
+namespace ScannerManager.Interfaces
 {
 	public interface IScannerManager
 	{

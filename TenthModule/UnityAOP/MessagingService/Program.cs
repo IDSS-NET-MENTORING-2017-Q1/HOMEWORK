@@ -14,18 +14,18 @@ using Microsoft.Practices.Unity.InterceptionExtension;
 
 namespace MessagingService
 {
-	class Program
+	internal class Program
 	{
-		static string settingsPath;
-		static string statusesPath;
-		static string outputPath;
+		private static string settingsPath;
+		private static string statusesPath;
+		private static string outputPath;
 
-		static IDocumentListener documentListener;
-		static IListener<StatusDTO> statusListener;
-		static IPublisher<SettingsDTO> settingsPublisher;
-		static FileSystemWatcher watcher = new FileSystemWatcher();
+		private static IDocumentListener documentListener;
+		private static IListener<StatusDTO> statusListener;
+		private static IPublisher<SettingsDTO> settingsPublisher;
+		private static readonly FileSystemWatcher watcher = new FileSystemWatcher();
 
-		static void Main(string[] args)
+		private static void Main(string[] args)
 		{
 			var basePath = AppDomain.CurrentDomain.BaseDirectory;
 			settingsPath = ConfigurationManager.AppSettings["settingsFile"];

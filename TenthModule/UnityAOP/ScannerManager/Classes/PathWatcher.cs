@@ -5,19 +5,18 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using CustomMessaging.DTO;
-using CustomMessaging.Interfaces;
-
-using SystemTimer = System.Timers.Timer;
 using CustomMessaging.Enums;
-using Scanner.Interfaces;
+using CustomMessaging.Interfaces;
 using CustomMessaging.Unity;
+using ScannerManager.Interfaces;
+using SystemTimer = System.Timers.Timer;
 
-namespace Scanner.Classes
+namespace ScannerManager.Classes
 {
 	[LogFileName("path_watcher_logs")]
 	public class PathWatcher : IPathWatcher, IIdentifiable
 	{
-		private StatusDTO _status;
+		private readonly StatusDTO _status;
 		private Guid _objectGuid = Guid.NewGuid();
 
 		public string ObjectGuid
@@ -31,11 +30,11 @@ namespace Scanner.Classes
 		private int _waitInterval = 10000;
 		private int _statusInterval = 10000;
 
-		private SystemTimer _statusTimer;
-		private ManualResetEvent _stopRequested = new ManualResetEvent(false);
-		private AutoResetEvent _fileCreated = new AutoResetEvent(false);
-		private FileSystemWatcher _watcher;
-		private Thread _worker;
+		private readonly SystemTimer _statusTimer;
+		private readonly ManualResetEvent _stopRequested = new ManualResetEvent(false);
+		private readonly AutoResetEvent _fileCreated = new AutoResetEvent(false);
+		private readonly FileSystemWatcher _watcher;
+		private readonly Thread _worker;
 
 		private IFileManager _fileManager;
 		private IBarcodeManager _barcodeManager;
@@ -151,20 +150,22 @@ namespace Scanner.Classes
 		private void PublishPdf()
 		{
 			var sourceFiles = _fileManager.GetTempFiles();
-			if (sourceFiles.Count() <= 0)
+			var sourceFilesArray = sourceFiles as string[] ?? sourceFiles.ToArray();
+
+			if (!sourceFilesArray.Any())
 			{
 				return;
 			}
 
 			Debug.WriteLine("Generating resulting PDF...");
 
-			using (var content = _documentManager.GeneratePdf(sourceFiles))
+			using (var content = _documentManager.GeneratePdf(sourceFilesArray))
 			{
 				if (content != null)
 				{
 					_documentPublisher.Publish(content.ToArray());
 				}
-			};
+			}
 		}
 
 		private void WorkProcess()
@@ -253,7 +254,7 @@ namespace Scanner.Classes
 			_fileCreated.Set();
 		}
 
-		void StatusTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+		private void StatusTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
 		{
 			_statusPublisher.Publish(_status);
 		}

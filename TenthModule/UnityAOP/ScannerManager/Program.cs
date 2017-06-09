@@ -1,35 +1,35 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using CustomMessaging.DTO;
+using CustomMessaging.Interfaces;
+using CustomMessaging.Listeners;
+using CustomMessaging.Publishers;
+using CustomMessaging.Unity;
+using Microsoft.Practices.Unity;
+using Microsoft.Practices.Unity.InterceptionExtension;
+using Newtonsoft.Json;
 using NLog;
 using NLog.Config;
 using NLog.Targets;
+using ScannerManager.Classes;
+using ScannerManager.Interfaces;
 using Topshelf;
-using System.Collections.Generic;
-using Newtonsoft.Json;
-using Scanner.Classes;
-using System.Diagnostics;
-using CustomMessaging.DTO;
-using System.Linq;
-using CustomMessaging.Publishers;
-using CustomMessaging.Listeners;
-using Microsoft.Practices.Unity;
-using CustomMessaging.Interfaces;
-using Microsoft.Practices.Unity.InterceptionExtension;
-using CustomMessaging.Unity;
-using Scanner.Interfaces;
 
-namespace Scanner
+namespace ScannerManager
 {
-	class Program
+	internal class Program
 	{
-		static bool IsUnc(string sourcePath)
+		private static bool IsUnc(string sourcePath)
 		{
 			var uri = new Uri(sourcePath);
 			return uri.IsUnc;
 		}
 
-		static IUnityContainer ConfigureContainer()
+		private static IUnityContainer ConfigureContainer()
 		{
 			var container = new UnityContainer();
 			container.AddNewExtension<Interception>();
@@ -41,7 +41,7 @@ namespace Scanner
 				new InterceptionBehavior<LoggingInterceptionBehavior>());
 			container.RegisterType<IPathWatcher, PathWatcher>(new Interceptor<InterfaceInterceptor>(),
 				new InterceptionBehavior<LoggingInterceptionBehavior>());
-			container.RegisterType<IScannerManager, ScannerManager>(new Interceptor<InterfaceInterceptor>(),
+			container.RegisterType<IScannerManager, Classes.ScannerManager>(new Interceptor<InterfaceInterceptor>(),
 				new InterceptionBehavior<LoggingInterceptionBehavior>());
 			container.RegisterType<IBarcodeManager, BarcodeManager>(new Interceptor<InterfaceInterceptor>(),
 				new InterceptionBehavior<LoggingInterceptionBehavior>());
@@ -52,7 +52,7 @@ namespace Scanner
 			return container;
 		}
 
-		static void Main(string[] args)
+		private static void Main(string[] args)
 		{
 			var logPath = ConfigurationManager.AppSettings["logPath"];
 			if (string.IsNullOrWhiteSpace(logPath))
@@ -90,6 +90,8 @@ namespace Scanner
 
 			var logFactory = new LogFactory(logConfig);
 			var container = ConfigureContainer();
+
+			if (paths == null) return;
 
 			var fileManagers = paths.Where(o => !IsUnc(o.InputPath)).Select(o => container.Resolve<IFileManager>(
 				new ParameterOverride("inputPath", o.InputPath),
