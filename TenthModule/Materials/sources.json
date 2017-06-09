@@ -1,0 +1,17 @@
+[
+  {
+    "InputPath": "C:\\Users\\sches_000\\Documents\\WS\\firstIn",
+    "TempPath": "C:\\Users\\sches_000\\Documents\\WS\\firstTemp",
+    "CorruptedPath": "C:\\Users\\sches_000\\Documents\\WS\\firstCorrupted"
+  },
+  {
+    "InputPath": "C:\\Users\\sches_000\\Documents\\WS\\secondIn",
+    "TempPath": "C:\\Users\\sches_000\\Documents\\WS\\secondTemp",
+    "CorruptedPath": "C:\\Users\\sches_000\\Documents\\WS\\secondCorrupted"
+  },
+  {
+    "InputPath": "C:\\Users\\sches_000\\Documents\\WS\\thirdIn",
+    "TempPath": "C:\\Users\\sches_000\\Documents\\WS\\thirdTemp",
+    "CorruptedPath": "C:\\Users\\sches_000\\Documents\\WS\\thirdCorrupted"
+  }
+]
